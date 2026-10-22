@@ -67,17 +67,27 @@ class Smoke:
                     seen.append(t)
         return seen
 
-    def find(self, label, exact=True):
+    def find(self, label, exact=True, sidebar=False):
         root = self.dump()
+        matches = []
         for n in self.nodes(root):
             for key in ("text", "content-desc"):
                 t = (n.get(key) or "").strip()
                 if (t == label) if exact else (label.lower() in t.lower()):
-                    return n
-        return None
+                    if self.bounds(n):
+                        matches.append(n)
+        if sidebar:
+            # Geniş düzende kenar çubuğu: ekranın sol çeyreği, menü çubuğunun altı.
+            w, h = self.screen()
+            matches = [n for n in matches if self.bounds(n)[0] < w * 0.25 and self.bounds(n)[1] > h * 0.09]
+        return matches[0] if matches else None
 
-    def tap_label(self, label, exact=True):
-        n = self.find(label, exact)
+    def screen(self):
+        m = re.search(r"(\d+)x(\d+)", adb("shell", "wm", "size").splitlines()[-1])
+        return (int(m.group(1)), int(m.group(2))) if m else (1080, 2400)
+
+    def tap_label(self, label, exact=True, sidebar=False):
+        n = self.find(label, exact, sidebar)
         if n is None:
             self.log(f"  ! '{label}' bulunamadı")
             return False
@@ -162,11 +172,16 @@ def main():
     adb("shell", "wm", "density", "280")
     time.sleep(4)
     s.snap("tablet-home")
-    for label in ("Search", "Transfers", "Wishlist", "Chat", "Users", "Browse", "Shares", "Settings", "About"):
-        if s.tap_label(label):
-            s.snap(f"tablet-{label.lower()}")
+    for label in ("Search", "Transfers", "Wishlist", "Chat", "Users", "Browse", "User info", "Shares", "About", "Settings"):
+        if s.tap_label(label, sidebar=True):
+            s.snap("tablet-" + label.lower().replace(" ", "-"))
+            if label == "Settings":
+                for i in range(1, 4):
+                    adb("shell", "input", "swipe", "1400", "1300", "1400", "500", "400")
+                    time.sleep(1.2)
+                    s.snap(f"tablet-settings-scroll{i}")
     # Arama sekmesi: bağlı değilken arama kutusuna yaz ve gönder
-    if s.tap_label("Search"):
+    if s.tap_label("Search", sidebar=True):
         fields = s.edit_fields()
         if fields:
             s.type_into(fields[0], "aphex twin")

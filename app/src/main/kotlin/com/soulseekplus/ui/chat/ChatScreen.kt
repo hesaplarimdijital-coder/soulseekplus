@@ -202,7 +202,7 @@ private fun ListPane(
     val res = appResources()
     val dimens = DeskTheme.dimens
     LazyColumn(modifier.fillMaxWidth(), contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = dimens.gapS)) {
-        item { SectionCaption(stringResource(R.string.chat_rooms)) }
+        item { SectionCaption(stringResource(R.string.chat_rooms), Modifier.padding(start = dimens.pagePadding, end = dimens.pagePadding, top = dimens.gapS)) }
         if (rooms.isEmpty()) {
             item {
                 Text(
@@ -225,7 +225,7 @@ private fun ListPane(
                 onClose = { vm.leaveRoom(room.name) },
             )
         }
-        item { SectionCaption(stringResource(R.string.chat_private)) }
+        item { SectionCaption(stringResource(R.string.chat_private), Modifier.padding(start = dimens.pagePadding, end = dimens.pagePadding, top = dimens.gapS)) }
         if (privates.isEmpty()) {
             item {
                 Text(
