@@ -1002,6 +1002,9 @@ class TransferManager(
         if (lists.isBanned(user)) return Admission.Rejected(TransferReason.BANNED)
         if (settings.value.uploadToBuddiesOnly && !lists.isBuddy(user)) return Admission.Rejected("${TransferReason.BANNED} (buddies only)")
         if (queue.isQueued(user, path) || queue.isActive(user, path)) return Admission.AlreadyQueued
+        // Kuyruk sınırları dosya çözümlemesinden ÖNCE (protokol §7 adım 1 sırası). Aksi hâlde sınırı dolmuş bir eşin
+        // her QueueUpload'ı yine de pahalı paylaşım/SAF sorgusu tetikler (istek seli).
+        queueLimitRejection(user)?.let { return it }
         val resolution = withContext(io) { shares.resolveUpload(user, path) }
         if (queue.isQueued(user, path) || queue.isActive(user, path)) return Admission.AlreadyQueued
         return when (resolution) {
@@ -1016,20 +1019,26 @@ class TransferManager(
                     }
                 }
                 if (size < 0) return Admission.Rejected(TransferReason.FILE_READ_ERROR)
-                if (!isBuddy(user)) {
-                    val s = settings.value
-                    if (s.maxQueuedFilesPerUser > 0 && queue.queuedCount(user) >= s.maxQueuedFilesPerUser) {
-                        return Admission.Rejected(TransferReason.TOO_MANY_FILES)
-                    }
-                    if (s.maxQueuedMiBPerUser > 0 && queue.queuedBytes(user) >= s.maxQueuedMiBPerUser.toLong() * 1024 * 1024) {
-                        return Admission.Rejected(TransferReason.TOO_MANY_MEGABYTES)
-                    }
-                }
+                // Askıya alınma sırasında başka istekler kuyruğa girmiş olabilir: yeniden denetle.
+                queueLimitRejection(user)?.let { return it }
                 if (queue.isQueued(user, path) || queue.isActive(user, path)) return Admission.AlreadyQueued
                 enqueueUploadRecord(user, path, resolution.file, size)
                 Admission.Accepted
             }
         }
+    }
+
+    /** Kullanıcı başına kuyruk sınırı aşıldıysa ret nedeni (arkadaşlar muaf). */
+    private fun queueLimitRejection(user: String): Admission.Rejected? {
+        if (isBuddy(user)) return null
+        val s = settings.value
+        if (s.maxQueuedFilesPerUser > 0 && queue.queuedCount(user) >= s.maxQueuedFilesPerUser) {
+            return Admission.Rejected(TransferReason.TOO_MANY_FILES)
+        }
+        if (s.maxQueuedMiBPerUser > 0 && queue.queuedBytes(user) >= s.maxQueuedMiBPerUser.toLong() * 1024 * 1024) {
+            return Admission.Rejected(TransferReason.TOO_MANY_MEGABYTES)
+        }
+        return null
     }
 
     private fun enqueueUploadRecord(user: String, path: String, file: SharedFile, size: Long) {
