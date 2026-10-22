@@ -88,9 +88,9 @@ class AppNotifications(
             channel.description = context.getString(description)
             nm.createNotificationChannel(channel)
         }
-        channel(CHANNEL_MESSAGES, R.string.notif_channel_messages, R.string.notif_channel_messages_desc, NotificationManager.IMPORTANCE_HIGH)
-        channel(CHANNEL_WISHLIST, R.string.notif_channel_wishlist, R.string.notif_channel_wishlist_desc, NotificationManager.IMPORTANCE_DEFAULT)
-        channel(CHANNEL_TRANSFERS, R.string.notif_channel_transfers, R.string.notif_channel_transfers_desc, NotificationManager.IMPORTANCE_LOW)
+        channel(CHANNEL_MESSAGES, R.string.appnotif_channel_messages, R.string.appnotif_channel_messages_desc, NotificationManager.IMPORTANCE_HIGH)
+        channel(CHANNEL_WISHLIST, R.string.appnotif_channel_wishlist, R.string.appnotif_channel_wishlist_desc, NotificationManager.IMPORTANCE_DEFAULT)
+        channel(CHANNEL_TRANSFERS, R.string.appnotif_channel_transfers, R.string.appnotif_channel_transfers_desc, NotificationManager.IMPORTANCE_LOW)
     }
 
     // ------------------------------------------------------------------ olaylar
@@ -114,7 +114,7 @@ class AppNotifications(
         }
 
         val sender = Person.Builder().setName(event.username).setKey(event.username).build()
-        val me = Person.Builder().setName(context.getString(R.string.notif_me)).build()
+        val me = Person.Builder().setName(context.getString(R.string.appnotif_me)).build()
         val style = NotificationCompat.MessagingStyle(me)
         for (line in lines) style.addMessage(line.text, line.timestampMillis, sender)
 
@@ -138,7 +138,7 @@ class AppNotifications(
         val id = idFor(ID_ROOM, event.room)
         val notification = NotificationCompat.Builder(context, CHANNEL_MESSAGES)
             .setSmallIcon(R.drawable.ic_stat_soulseek)
-            .setContentTitle(context.getString(R.string.notif_mention_title, event.message.username, event.room))
+            .setContentTitle(context.getString(R.string.appnotif_mention_title, event.message.username, event.room))
             .setContentText(event.message.text)
             .setStyle(NotificationCompat.BigTextStyle().bigText(event.message.text))
             .setCategory(NotificationCompat.CATEGORY_MESSAGE)
@@ -157,9 +157,9 @@ class AppNotifications(
         val id = idFor(ID_WISHLIST, event.query)
         val notification = NotificationCompat.Builder(context, CHANNEL_WISHLIST)
             .setSmallIcon(R.drawable.ic_stat_soulseek)
-            .setContentTitle(context.getString(R.string.notif_wishlist_title, event.query))
-            .setContentText(context.getString(R.string.notif_wishlist_text, event.newCount))
-            .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.notif_wishlist_text, event.newCount) + "\n" + samples))
+            .setContentTitle(context.getString(R.string.appnotif_wishlist_title, event.query))
+            .setContentText(context.getString(R.string.appnotif_wishlist_text, event.newCount))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(context.getString(R.string.appnotif_wishlist_text, event.newCount) + "\n" + samples))
             .setCategory(NotificationCompat.CATEGORY_RECOMMENDATION)
             .setAutoCancel(true)
             .setContentIntent(open(id, LaunchTargets.TARGET_WISHLIST))
@@ -193,11 +193,11 @@ class AppNotifications(
         val title: String
         val text: String
         if (batch.size == 1) {
-            title = context.getString(R.string.notif_download_done)
+            title = context.getString(R.string.appnotif_download_done)
             text = batch[0].fileName
         } else {
-            title = context.getString(R.string.notif_downloads_done)
-            text = context.getString(R.string.notif_downloads_done_count, batch.size)
+            title = context.getString(R.string.appnotif_downloads_done)
+            text = context.getString(R.string.appnotif_downloads_done_count, batch.size)
         }
         val notification = NotificationCompat.Builder(context, CHANNEL_TRANSFERS)
             .setSmallIcon(R.drawable.ic_stat_soulseek)
