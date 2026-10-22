@@ -169,12 +169,21 @@ class Smoke:
         return sorted(fields, key=lambda n: (self.bounds(n) or (0, 0))[1])
 
     def type_into(self, node, text, submit=False):
-        self.tap_node(node, wait=0.6)
-        adb("shell", "input", "keyevent", "KEYCODE_MOVE_END")
-        for _ in range(40):
-            adb("shell", "input", "keyevent", "KEYCODE_DEL")
-        adb("shell", "input", "text", text.replace(" ", "%s"))
-        time.sleep(0.6)
+        """Alana yazar ve yazının gerçekten girdiğini doğrular (yavaş emülatörde tuşlar kaybolabilir); 3 deneme."""
+        target_y = (self.bounds(node) or (0, 0))[1]
+        for attempt in range(3):
+            self.tap_node(node, wait=0.8)
+            adb("shell", "input", "keyevent", "KEYCODE_MOVE_END")
+            adb("shell", "input", "keyevent", "--longpress", *(["KEYCODE_DEL"] * 40))
+            adb("shell", "input", "text", text.replace(" ", "%s"))
+            time.sleep(0.8)
+            fields = self.edit_fields()
+            current = min(fields, key=lambda n: abs((self.bounds(n) or (0, 0))[1] - target_y), default=None)
+            if current is not None and text in (current.get("text") or ""):
+                break
+            self.log(f"  ~ '{text}' yazılamadı, yeniden deneniyor ({attempt + 1})")
+            if current is not None:
+                node = current
         if submit:
             adb("shell", "input", "keyevent", "KEYCODE_ENTER")
             time.sleep(0.8)
