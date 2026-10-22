@@ -133,8 +133,10 @@ jobs:
       - name: Start demo Soulseek network
         run: |
           chmod +x gradlew
-          nohup ./gradlew :core:demoNetwork --console=plain > demo-network.log 2>&1 &
-          for i in $(seq 1 180); do
+          ./gradlew :core:writeDemoClasspath --console=plain
+          ./gradlew --stop
+          nohup java -Xmx384m -cp "$(cat core/build/demo-classpath.txt)" com.soulseekplus.core.engine.DemoNetworkKt > demo-network.log 2>&1 &
+          for i in $(seq 1 90); do
             if grep -q "DEMO: server listening" demo-network.log; then echo "demo network up"; exit 0; fi
             sleep 2
           done
@@ -154,8 +156,9 @@ jobs:
           arch: x86_64
           profile: pixel_6
           disable-animations: true
+          emulator-boot-timeout: 900
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: adb forward tcp:2234 tcp:2234 && python3 tools/smoke.py "$(ls apk/*.apk | head -1)" smoke-out --demo > smoke.log 2>&1 || echo "SMOKE_FAILED" >> smoke.log
+          script: bash tools/ci-smoke.sh "$(ls apk/*.apk | head -1)"
 
       - name: Publish smoke results to ci/smoke
         if: always()
@@ -167,7 +170,9 @@ jobs:
           cp -r smoke-out/. "$out/" 2>/dev/null || true
           cp smoke.log "$out/" 2>/dev/null || echo "no smoke log" > "$out/smoke.log"
           cp demo-network.log "$out/" 2>/dev/null || true
-          status=success; grep -q SMOKE_FAILED "$out/smoke.log" && status=failure
+          status=success
+          grep -q SMOKE_FAILED "$out/smoke.log" && status=failure
+          [ -f "$out/report.txt" ] || status=failure
           echo "sha=${GITHUB_SHA} run=${GITHUB_RUN_NUMBER} status=${status}" > "$out/STATUS"
           cd "$out"
           git init -q && git checkout -q --orphan ci/smoke

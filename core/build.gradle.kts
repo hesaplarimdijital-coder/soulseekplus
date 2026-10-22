@@ -22,3 +22,12 @@ tasks.register<JavaExec>("demoNetwork") {
     classpath = sourceSets["test"].runtimeClasspath
     mainClass.set("com.soulseekplus.core.engine.DemoNetworkKt")
 }
+
+// CI: demo ağını Gradle daemon'u olmadan düz bir JVM'de çalıştırmak için test çalışma zamanı sınıf yolunu yazar.
+tasks.register("writeDemoClasspath") {
+    dependsOn("testClasses")
+    val output = layout.buildDirectory.file("demo-classpath.txt")
+    val classpath = sourceSets["test"].runtimeClasspath
+    outputs.file(output)
+    doLast { output.get().asFile.writeText(classpath.asPath) }
+}
