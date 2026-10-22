@@ -418,6 +418,7 @@ class PeerNetwork(
                 ?: throw SocketTimeoutException("Connection to $username timed out")
             val conn = attempt.take() ?: throw IOException("Connection to $username failed")
             delivered = true
+            logger.debug(TAG, "$username ile $type bağlantısı kuruldu (${conn.label})")
             return conn
         } finally {
             if (!delivered) {
@@ -691,26 +692,35 @@ class PeerNetwork(
         }
         val conn = newConnection(socket, "in")
         try {
-            val init = withTimeout(timeouts.initReadMillis) {
+            // withTimeoutOrNull: dış kapsamın iptali ile kendi zaman aşımımız karışmasın (TimeoutCancellationException
+            // bir CancellationException'dır; withTimeout ile yakalanınca dış iptal sanılırdı).
+            var timedOut = true
+            val init = withTimeoutOrNull(timeouts.initReadMillis) {
                 val length = conn.readUInt32()
                 if (length < 1 || length > Frame.MAX_INIT_MESSAGE) throw ProtocolException("Geçersiz başlangıç uzunluğu $length")
                 val code = conn.readUInt8()
-                InitMessages.decode(code, conn.readBytes((length - 1).toInt()))
-            } ?: throw ProtocolException("Bilinmeyen başlangıç mesajı")
+                val decoded = InitMessages.decode(code, conn.readBytes((length - 1).toInt()))
+                timedOut = false
+                decoded
+            }
+            if (init == null) {
+                logger.debug(TAG, if (timedOut) "Gelen bağlantı başlangıç mesajı göndermedi (zaman aşımı)" else "Gelen bağlantı: bilinmeyen başlangıç mesajı")
+                conn.close()
+                return
+            }
             when (init) {
                 is PierceFireWall -> withContext(logic) { onPierce(conn, init.token) }
                 is PeerInit -> {
                     if (!DistributedMessages.isValidUsername(init.username) || !ConnType.isValid(init.type)) {
                         throw ProtocolException("Geçersiz PeerInit")
                     }
+                    logger.debug(TAG, "Gelen bağlantı: ${init.username} (${init.type})")
                     withContext(logic) { onPeerInit(conn, init) }
                 }
             }
         } catch (e: CancellationException) {
             conn.close()
             throw e
-        } catch (e: TimeoutCancellationException) {
-            conn.close()
         } catch (e: Exception) {
             logger.debug(TAG, "Gelen bağlantı reddedildi: ${e.message}")
             conn.close()

@@ -1149,7 +1149,11 @@ class SoulseekEngine private constructor(
     private fun onSearchResponse(username: String, m: FileSearchResponseMessage) {
         if (userLists.value.isIgnored(username)) return
         if (username == sessionUsername) return
-        if (!searchTokens.contains(m.token)) return
+        if (!searchTokens.contains(m.token)) {
+            logger.debug(TAG, "Arama yanıtı bilinmeyen token ile geldi ($username, token=${m.token}), atlandı")
+            return
+        }
+        logger.debug(TAG, "Arama yanıtı: $username, token=${m.token}, ${m.files.size} dosya")
         _searchResponses.tryEmit(
             SearchResponse(
                 username = username,

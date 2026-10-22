@@ -27,8 +27,9 @@ import kotlin.random.Random
 
 /*
  * Emülatör uçtan uca testi için demo Soulseek ağı: sahte sunucu + paylaşım yapan demo eşler (gerçek SoulseekEngine ve
- * ShareIndex). Emülatördeki uygulama sunucuya 10.0.2.2:<port> ile bağlanır; sunucu ona eşleri 10.0.2.2 olarak, eşlere
- * emülatörü 127.0.0.1 olarak bildirir (CI, `adb forward tcp:2234 tcp:2234` ile emülatörün dinleme portunu açar).
+ * ShareIndex). Emülatördeki uygulama sunucuya 10.0.2.2:<port> ile bağlanır; sunucu ona eşleri 10.0.2.2 olarak bildirir.
+ * Emülatöre ana makineden doğrudan ulaşılamaz (NAT arkasındaki telefon gibi): eşler dolaylı yolu (ConnectToPeer +
+ * PierceFirewall) kullanır.
  *
  * Çalıştırma: ./gradlew :core:demoNetwork  (DEMO_PORT, varsayılan 2242)
  * Yerel öz denetim: argüman "--selftest" — aynı makinede bir istemci motoru arar, göz atar ve dosya indirir.
