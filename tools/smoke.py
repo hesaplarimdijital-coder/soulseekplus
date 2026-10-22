@@ -50,7 +50,7 @@ class Smoke:
         self.failures.append(what)
         self.log("  ! " + what)
 
-    def dump(self):
+    def _raw_dump(self):
         for _ in range(3):
             adb("shell", "uiautomator", "dump", "/sdcard/ui.xml", timeout=30)
             raw = adb("shell", "cat", "/sdcard/ui.xml")
@@ -61,6 +61,25 @@ class Smoke:
                     pass
             time.sleep(1)
         return None
+
+    def dump(self):
+        """Arayüz ağacı. Emülatörün kendi "... isn't responding" (sistem ANR) pencerelerini "Wait" ile kapatır."""
+        for _ in range(4):
+            root = self._raw_dump()
+            if root is None:
+                return None
+            anr = any("isn't responding" in (n.get("text") or "") for n in root.iter("node"))
+            if not anr:
+                return root
+            wait = [n for n in root.iter("node") if (n.get("text") or "") == "Wait" and self.bounds(n)]
+            self.log("  ~ sistem ANR penceresi kapatıldı")
+            if wait:
+                x, y = self.bounds(wait[0])
+                adb("shell", "input", "tap", str(x), str(y))
+            else:
+                adb("shell", "input", "keyevent", "KEYCODE_BACK")
+            time.sleep(2)
+        return self._raw_dump()
 
     @staticmethod
     def bounds(node):
@@ -371,6 +390,11 @@ def main():
     apk, out = sys.argv[1], sys.argv[2]
     demo = "--demo" in sys.argv[3:]
     s = Smoke(out)
+    # Açılıştan hemen sonra sistem uygulamaları (başlatıcı vb.) yavaş; oturmasını bekle, ekranı aç ve kilidi kaldır.
+    adb("shell", "input", "keyevent", "KEYCODE_WAKEUP")
+    adb("shell", "wm", "dismiss-keyguard")
+    time.sleep(25)
+    s.dump()
     adb("install", "-r", "-g", apk, check=True, timeout=300)
     adb("shell", "pm", "grant", PKG, "android.permission.POST_NOTIFICATIONS")
     adb("logcat", "-c")
