@@ -91,6 +91,17 @@ class SearchFilterEngineTest {
     }
 
     @Test
+    fun catastrophicRegexOverManyRowsStaysFast() {
+        // Her satırda adım bütçesini tüketen ifade (~1-2 ms/satır); 5000 satırda eskiden saniyeler sürüyordu.
+        val rows = (1..5000).map { hit(user = "u$it", path = "a".repeat(40) + "!$it") }
+        val f = noLockFilter.copy(useRegex = true, include = "(.*a){20}")
+        val start = System.currentTimeMillis()
+        val out = SearchFilterEngine.apply(rows, f)
+        assertTrue("süre: ${System.currentTimeMillis() - start} ms", System.currentTimeMillis() - start < 2000)
+        assertTrue(out.hits.isEmpty())
+    }
+
+    @Test
     fun bitrateLetsLosslessPass() {
         val f = noLockFilter.copy(minBitrate = 320)
         assertTrue(matches(f, hit(path = "a\\b.mp3", bitrate = 320)))
