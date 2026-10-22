@@ -414,6 +414,9 @@ class DistributedNetwork(
         branchRoot = root
         candidates.remove(candidate.username)
         closeCandidates(except = candidate)
+        // Ebeveyn aynı zamanda çocuğumuzsa (Nicotine+ _child_peers.pop) onu çocuklardan çıkar; aksi hâlde ondan gelen
+        // her arama ona geri iletilir (iletme döngüsü).
+        children.remove(candidate.username)?.close()
         host.sendToServer(HaveNoParent(false))
         host.sendToServer(BranchRootRequest(root))
         host.sendToServer(BranchLevelRequest(branchLevel))
