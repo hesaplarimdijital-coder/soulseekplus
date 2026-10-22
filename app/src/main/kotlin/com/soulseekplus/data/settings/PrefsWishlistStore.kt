@@ -57,7 +57,17 @@ class PrefsWishlistStore(context: Context) : WishlistStore {
         prefs.edit().putString(KEY_ITEMS, array.toString()).apply()
     }
 
+    /**
+     * Bekleyen yazmalar: depo, istek listesi kilidi tutulurken çağrılır; disk yazması burada yapılmaz, sorgu başına en
+     * son liste tek iş parçacıklı yürütücüde birleştirilerek yazılır (art arda gelen yanıtlar tek yazmaya iner).
+     */
+    private val pending = java.util.concurrent.ConcurrentHashMap<String, List<String>>()
+    private val writer = java.util.concurrent.Executors.newSingleThreadExecutor { r ->
+        Thread(r, "wishlist-store").apply { isDaemon = true; priority = Thread.MIN_PRIORITY }
+    }
+
     override fun loadSeenKeys(query: String): List<String> {
+        pending[query]?.let { return it }
         val file = fileFor(query)
         if (!file.isFile) return emptyList()
         return try {
@@ -68,6 +78,16 @@ class PrefsWishlistStore(context: Context) : WishlistStore {
     }
 
     override fun saveSeenKeys(query: String, keys: List<String>) {
+        val first = pending.put(query, keys.toList()) == null
+        if (first) {
+            writer.execute {
+                val latest = pending.remove(query) ?: return@execute
+                writeSeenKeys(query, latest)
+            }
+        }
+    }
+
+    private fun writeSeenKeys(query: String, keys: List<String>) {
         try {
             if (!dir.isDirectory && !dir.mkdirs()) return
             val target = fileFor(query)
@@ -83,7 +103,9 @@ class PrefsWishlistStore(context: Context) : WishlistStore {
     }
 
     override fun deleteSeenKeys(query: String) {
-        fileFor(query).delete()
+        pending.remove(query)
+        // Sıra korunur: daha önce kuyruğa giren yazma bu silmeden sonra dosyayı geri yaratmaz.
+        writer.execute { fileFor(query).delete() }
     }
 
     private fun fileFor(query: String): File {
