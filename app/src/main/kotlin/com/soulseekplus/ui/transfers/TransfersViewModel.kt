@@ -20,8 +20,10 @@ class TransfersViewModel(application: Application) : AndroidViewModel(applicatio
     private val container = SoulseekApp.container(application)
 
     var direction by mutableStateOf(TransferDirection.DOWNLOAD)
+        private set
     var category by mutableStateOf(TransferCategory.ALL)
     var groupMode by mutableStateOf(TransferGroupMode.NONE)
+        private set
     var sort by mutableStateOf(TransferSort())
     var query by mutableStateOf("")
 
@@ -34,13 +36,13 @@ class TransfersViewModel(application: Application) : AndroidViewModel(applicatio
         collapsed = if (key in collapsed) collapsed - key else collapsed + key
     }
 
-    fun setGroupMode(mode: TransferGroupMode) {
+    fun changeGroupMode(mode: TransferGroupMode) {
         groupMode = mode
         collapsed = emptySet()
         selected = emptySet()
     }
 
-    fun setDirection(value: TransferDirection) {
+    fun changeDirection(value: TransferDirection) {
         direction = value
         selected = emptySet()
     }

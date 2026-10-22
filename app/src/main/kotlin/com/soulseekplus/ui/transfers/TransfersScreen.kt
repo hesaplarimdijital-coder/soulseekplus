@@ -108,7 +108,7 @@ fun TransfersScreen(vm: TransfersViewModel, container: AppContainer, actions: Ap
                         TransferDirection.UPLOAD to res.getString(R.string.transfers_uploads),
                     ),
                     selected = vm.direction,
-                    onSelect = { vm.setDirection(it) },
+                    onSelect = { vm.changeDirection(it) },
                 )
                 SegmentedChoice(
                     options = listOf(
@@ -117,7 +117,7 @@ fun TransfersScreen(vm: TransfersViewModel, container: AppContainer, actions: Ap
                         TransferGroupMode.FOLDER to res.getString(R.string.transfers_group_folder),
                     ),
                     selected = vm.groupMode,
-                    onSelect = { vm.setGroupMode(it) },
+                    onSelect = { vm.changeGroupMode(it) },
                 )
                 ToggleChip(res.getString(R.string.action_select), vm.selectMode, { vm.selectMode = !vm.selectMode }, icon = DeskIcons.Check)
             }
