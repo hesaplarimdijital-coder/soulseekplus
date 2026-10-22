@@ -75,7 +75,7 @@ object SimpleHttp {
         }
     }
 
-    internal fun readResponse(input: InputStream): Response {
+    fun readResponse(input: InputStream): Response {
         val statusLine = readLine(input) ?: throw IOException("Empty HTTP response")
         val parts = statusLine.split(' ', limit = 3)
         if (parts.size < 2 || !parts[0].startsWith("HTTP/")) throw IOException("Bad status line: $statusLine")
