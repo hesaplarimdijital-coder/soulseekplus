@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="service_channel_name">Connection status</string>
+    <string name="service_channel_description">Shows the connection state and transfer speeds while Soulseek+ keeps running in the background.</string>
+
+    <string name="service_title_connected">Connected as %1$s</string>
+    <string name="service_title_connecting">Connecting…</string>
+    <string name="service_title_reconnecting">Reconnecting (attempt %1$d)</string>
+    <string name="service_title_disconnected">Disconnected</string>
+
+    <string name="service_text_idle">No active transfers</string>
+    <plurals name="service_downloading">
+        <item quantity="one">Downloading %1$d file · %2$s/s</item>
+        <item quantity="other">Downloading %1$d files · %2$s/s</item>
+    </plurals>
+    <plurals name="service_uploading">
+        <item quantity="one">Uploading %1$d file · %2$s/s</item>
+        <item quantity="other">Uploading %1$d files · %2$s/s</item>
+    </plurals>
+    <plurals name="service_downloads_waiting">
+        <item quantity="one">%1$d download waiting</item>
+        <item quantity="other">%1$d downloads waiting</item>
+    </plurals>
+
+    <string name="service_action_disconnect">Disconnect</string>
+    <string name="service_action_connect">Connect</string>
+    <string name="service_action_open">Open</string>
+</resources>
