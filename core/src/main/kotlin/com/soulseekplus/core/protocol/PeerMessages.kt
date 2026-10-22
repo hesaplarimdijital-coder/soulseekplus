@@ -182,11 +182,18 @@ data class SearchResponseHeader(val username: String, val token: Int)
 
 object PeerMessages {
 
-    /** FileSearchResponse ve FolderContentsResponse için açılmış veri sınırı. */
-    const val MAX_RESULT_INFLATED = 128 * 1024 * 1024
+    /**
+     * FileSearchResponse ve FolderContentsResponse için açılmış veri sınırı. Nicotine+ 128 MiB kullanır; mobil yığında
+     * (ve istenmeden gelen, aynı anda birçok bağlantıdan akan arama yanıtlarında) bu OOM demektir. Gerçek bir yanıt
+     * birkaç yüz KiB'tır; 32 MiB ~200 bin dosya girdisine yeter.
+     */
+    const val MAX_RESULT_INFLATED = 32 * 1024 * 1024
 
-    /** Paylaşım listesi için açılmış veri sınırı (2 GiB - 1). */
-    const val MAX_SHARES_INFLATED = Int.MAX_VALUE
+    /**
+     * Paylaşım listesi için açılmış veri sınırı. Nicotine+ 2 GiB kabul eder; Android yığınında bu, kötü niyetli bir eşin
+     * (zlib bombası) uygulamayı OOM ile düşürmesine izin verir. 256 MiB ~1-2 milyon dosyalık paylaşıma yeter.
+     */
+    const val MAX_SHARES_INFLATED = 256 * 1024 * 1024
 
     /** İzin verilen en büyük gelen "P" mesajı (kod dahil değil), koda göre (bkz. protokol §1). */
     fun maxIncomingSize(code: Int): Int = when (code) {
