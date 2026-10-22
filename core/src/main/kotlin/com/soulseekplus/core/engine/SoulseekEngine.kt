@@ -253,6 +253,7 @@ class SoulseekEngine private constructor(
     private val knownStatus = HashSet<String>()
     private val peerCountry = BoundedMap<String, String>(MAX_COUNTRY_CACHE)
     private val recentPmIds = BoundedMap<Int, Boolean>(MAX_RECENT_PMS)
+    private val lastBrowseNanos = BoundedMap<String, Long>(MAX_BROWSE_TRACKED)
     private var excludedPhrases: List<String> = emptyList()
 
     private val infoWaiters = WaiterTable<String, UserInfo>()
@@ -1302,6 +1303,12 @@ class SoulseekEngine private constructor(
     }
 
     private fun serveBrowse(username: String, conn: Connection) {
+        // Nicotine+: aynı kullanıcıdan 0,4 sn içinde gelen tekrar istek yok sayılır. Aksi hâlde tek bir eş, tüm paylaşım
+        // listesini (100 bin+ dosya, sıkıştırma) tekrar tekrar kodlatarak sınırlı sunum yuvalarını tüketebilir.
+        val now = System.nanoTime()
+        val last = lastBrowseNanos[username]
+        if (last != null && now - last < BROWSE_REPEAT_NANOS) return
+        lastBrowseNanos[username] = now
         emit(ClientEvent.SharesBrowsedBy(username))
         val banned = userLists.value.isBanned(username)
         serveAsync(
@@ -1475,6 +1482,8 @@ class SoulseekEngine private constructor(
         private const val MAX_ACTIVE_SEARCHES = 1_000
         private const val MAX_COUNTRY_CACHE = 4_096
         private const val MAX_RECENT_PMS = 512
+        private const val MAX_BROWSE_TRACKED = 256
+        private const val BROWSE_REPEAT_NANOS = 400_000_000L
         private const val MAX_USERNAME_LENGTH = 64
         private const val MAX_INCOMING_QUERY = 512
         private const val MAX_SEARCH_IN_FLIGHT = 32
