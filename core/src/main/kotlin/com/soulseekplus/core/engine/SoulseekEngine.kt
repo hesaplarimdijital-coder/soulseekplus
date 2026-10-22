@@ -1217,7 +1217,6 @@ class SoulseekEngine private constructor(
     private fun handlePeerMessage(username: String, message: PeerMessage, conn: Connection) {
         try {
             rememberCountry(username, conn.remoteIp)
-            if (message !is FileSearchResponseMessage) logger.debug(TAG, "Eş mesajı ${message.code} <- $username (${conn.label})")
             when (message) {
                 is FileSearchResponseMessage -> onSearchResponse(username, message)
                 is SharedFileListRequest -> serveBrowse(username, conn)
@@ -1267,7 +1266,6 @@ class SoulseekEngine private constructor(
 
     /** Yanıtı isteğin geldiği bağlantıdan gönderir; kapanmışsa eşin güncel bağlantısına (gerekirse yeniden kurarak) bırakır. */
     private fun reply(username: String, conn: Connection, frame: ByteArray) {
-        logger.debug(TAG, "Yanıt -> $username (${frame.size} bayt, bağlantı kapalı=${conn.isClosed})")
         if (!conn.isClosed && conn.send(frame)) {
             conn.hasPostInitActivity = true
             return

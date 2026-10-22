@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="service_channel_name">Bağlantı durumu</string>
+    <string name="service_channel_description">Soulseek+ arka planda çalışırken bağlantı durumunu ve aktarım hızlarını gösterir.</string>
+
+    <string name="service_title_connected">%1$s olarak bağlı</string>
+    <string name="service_title_connecting">Bağlanılıyor…</string>
+    <string name="service_title_reconnecting">Yeniden bağlanılıyor (deneme %1$d)</string>
+    <string name="service_title_disconnected">Bağlı değil</string>
+
+    <string name="service_text_idle">Etkin aktarım yok</string>
+    <plurals name="service_downloading">
+        <item quantity="one">%1$d dosya indiriliyor · %2$s/sn</item>
+        <item quantity="other">%1$d dosya indiriliyor · %2$s/sn</item>
+    </plurals>
+    <plurals name="service_uploading">
+        <item quantity="one">%1$d dosya gönderiliyor · %2$s/sn</item>
+        <item quantity="other">%1$d dosya gönderiliyor · %2$s/sn</item>
+    </plurals>
+    <plurals name="service_downloads_waiting">
+        <item quantity="one">%1$d indirme sırada bekliyor</item>
+        <item quantity="other">%1$d indirme sırada bekliyor</item>
+    </plurals>
+
+    <string name="service_action_disconnect">Bağlantıyı kes</string>
+    <string name="service_action_connect">Bağlan</string>
+    <string name="service_action_open">Aç</string>
+</resources>
