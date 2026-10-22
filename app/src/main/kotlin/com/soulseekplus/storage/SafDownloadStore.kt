@@ -21,7 +21,7 @@ import java.util.Locale
 /**
  * [DownloadStore]'un Storage Access Framework uygulaması (kullanıcının seçtiği ağaç URI'si altında).
  *
- * - Dosya önce `<ad>.part` olarak yazılır; [complete] son adına taşır (çakışmada " (1)", " (2)" ... eklenir).
+ * - Dosya önce `<ad>.<özet>.part` olarak yazılır; [complete] son adına taşır (çakışmada " (1)", " (2)" ... eklenir).
  * - Uzak taraftan gelen klasör/dosya adları [PathSanitizer] ile temizlenir; `..` ve ayırıcılar ad parçası olamaz.
  * - Tüm SAF çağrıları IO dağıtıcısında yapılır. SAF sağlayıcıları çeşitli RuntimeException'lar fırlatabildiği için
  *   hepsi [IOException]'a çevrilir (motor yerel dosya hatası olarak ele alır).
@@ -173,7 +173,16 @@ class SafDownloadStore(
 
     private fun finalName(transfer: Transfer): String = PathSanitizer.segment(transfer.fileName)
 
-    private fun partName(transfer: Transfer): String = finalName(transfer) + PART_SUFFIX
+    /**
+     * `<ad>.<özet>.part`: özet kullanıcı adı + uzak yoldan türetilir; böylece farklı kullanıcılardan gelen aynı adlı
+     * dosyalar aynı klasöre inerken birbirinin kısmi dosyasına yazmaz ve devam ofseti doğru dosyadan okunur.
+     */
+    private fun partName(transfer: Transfer): String {
+        val digest = java.security.MessageDigest.getInstance("SHA-1")
+            .digest((transfer.username + "\u0000" + transfer.virtualPath).toByteArray(Charsets.UTF_8))
+        val tag = digest.take(4).joinToString("") { "%02x".format(it.toInt() and 0xFF) }
+        return finalName(transfer) + "." + tag + PART_SUFFIX
+    }
 
     /** [root] altında [subfolder] (`/` ayrılmış) klasörünü bulur; [create] ise eksik parçaları oluşturur. */
     private fun resolveDir(root: DocumentFile, subfolder: String?, create: Boolean): DocumentFile? {
