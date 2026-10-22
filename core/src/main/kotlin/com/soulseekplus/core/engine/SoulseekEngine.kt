@@ -117,7 +117,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -134,7 +133,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.withTimeoutOrNull
 import java.io.IOException
 import java.util.concurrent.Executors
@@ -1052,9 +1050,9 @@ class SoulseekEngine private constructor(
                 if (folderWaiters.remove(token) != null) waiter.result.completeExceptionally(peerFailure(name, failure))
             }
             try {
-                withTimeout(tuning.folderTimeoutMillis) { waiter.result.await() }
-            } catch (e: TimeoutCancellationException) {
-                throw SoulseekException("Timed out waiting for folder contents from $name")
+                // withTimeoutOrNull: çağıranın kendi zaman aşımı/iptali SoulseekException'a dönüştürülmez.
+                withTimeoutOrNull(tuning.folderTimeoutMillis) { waiter.result.await() }
+                    ?: throw SoulseekException("Timed out waiting for folder contents from $name")
             } finally {
                 folderWaiters.remove(token)
             }
@@ -1106,9 +1104,9 @@ class SoulseekEngine private constructor(
             }
         }
         try {
-            withTimeout(timeoutMillis) { waiter.await() }
-        } catch (e: TimeoutCancellationException) {
-            throw SoulseekException("Timed out waiting for response from $user")
+            val box = withTimeoutOrNull(timeoutMillis) { Box(waiter.await()) }
+                ?: throw SoulseekException("Timed out waiting for response from $user")
+            box.value
         } finally {
             if (table.remove(user, waiter)) solicited.clear(user, responseCode)
         }
@@ -1216,6 +1214,9 @@ class SoulseekEngine private constructor(
             }
         }
     }
+
+    /** withTimeoutOrNull ile null sonucu zaman aşımından ayırmak için. */
+    private class Box<T>(val value: T)
 
     private class SearchContext(val freeSlots: Boolean, val speed: Long, val queue: Long)
 
