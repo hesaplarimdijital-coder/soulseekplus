@@ -564,4 +564,10 @@
     <string name="transfers_play">Play</string>
     <string name="transfers_open_file">Open with…</string>
     <string name="transfers_no_app">No app can open this file.</string>
+    <!-- Telefon (dar pencere) düzeni -->
+    <string name="compact_filters_n">Filters (%1$d active)</string>
+    <string name="compact_view_options">View options</string>
+    <string name="compact_group_by">Group by</string>
+    <string name="compact_sort_by">Sort by</string>
+    <string name="compact_scope">Search in: %1$s</string>
 </resources>

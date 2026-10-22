@@ -56,6 +56,10 @@ import com.soulseekplus.ui.users.UsersScreen
 import com.soulseekplus.ui.wishlist.WishlistScreen
 import com.soulseekplus.ui.wishlist.WishlistViewModel
 import desktopkit.DesktopKitRoot
+import desktopkit.theme.InputMode
+import desktopkit.theme.DeskType
+import desktopkit.theme.DeskFonts
+import androidx.compose.ui.platform.LocalConfiguration
 import desktopkit.components.DeskIcons
 import desktopkit.input.CommonShortcuts
 import desktopkit.input.ShortcutScope
@@ -91,7 +95,14 @@ interface ShortcutHost {
 @Composable
 fun SoulseekRoot(appViewModel: AppViewModel, onHostChanged: (ShortcutHost?) -> Unit, onAccountSaved: () -> Unit) {
     val prefs = rememberDeskPreferences()
-    DesktopKitRoot(prefs) { widthClass ->
+    // Tablet / DeX (≥ 600 dp) için tüm yazı stilleri 1 sp büyük; telefon ölçüleri aynen kalır.
+    // Düzen ve yoğunluk değişmez, yalnızca yazı boyutu.
+    val wide = LocalConfiguration.current.screenWidthDp >= WidthClass.Medium.minWidthDp
+    val typeStep = if (wide) WIDE_TYPE_STEP_SP else 0f
+    val type = remember(typeStep) {
+        { mode: InputMode, fonts: DeskFonts -> DeskType.forMode(mode, fonts, pointerStep = typeStep, touchStep = typeStep) }
+    }
+    DesktopKitRoot(prefs, type = type) { widthClass ->
         val container = appViewModel.container
         val client by container.settings.clientSettings.collectAsStateWithLifecycle()
         Box(Modifier.fillMaxSize().background(DeskTheme.colors.background)) {
@@ -103,6 +114,9 @@ fun SoulseekRoot(appViewModel: AppViewModel, onHostChanged: (ShortcutHost?) -> U
         }
     }
 }
+
+/** Geniş pencerelerde (tablet, DeX) yazı stillerine eklenen boyut. */
+private const val WIDE_TYPE_STEP_SP = 1f
 
 /** [AppActions]'ın kök gerçekleştirmesi: her şey [AppViewModel.request] üzerinden tek toplayıcıya gider. */
 private class RootActions(private val app: AppViewModel) : AppActions {

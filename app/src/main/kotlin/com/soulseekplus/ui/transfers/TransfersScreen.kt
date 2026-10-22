@@ -63,17 +63,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /** Hesaplanmış görünüm: tablo satırları, kategori sayıları ve süzülmüş liste. */
-private data class TransferView(
+internal data class TransferView(
     val rows: List<TransferRow>,
     val counts: Map<TransferCategory, Int>,
     val total: Int,
     val downloadsActive: Int,
 )
 
-private val EmptyView = TransferView(emptyList(), emptyMap(), 0, 0)
+internal val EmptyView = TransferView(emptyList(), emptyMap(), 0, 0)
 
 @Composable
 fun TransfersScreen(vm: TransfersViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
+    // Telefon (dar pencere): ayrı, kompakt düzen. Geniş pencerelerin düzeni aşağıda ve değişmez.
+    if (currentWidthClass() == WidthClass.Compact) {
+        CompactTransfersScreen(vm, container, actions, modifier)
+        return
+    }
     val res = appResources()
     val dimens = DeskTheme.dimens
     val all by container.client.transfers.collectAsStateWithLifecycle()
@@ -152,9 +157,9 @@ fun TransfersScreen(vm: TransfersViewModel, container: AppContainer, actions: Ap
     }
 }
 
-private fun Int?.orZero() = this ?: 0
+internal fun Int?.orZero() = this ?: 0
 
-private fun categoryLabel(c: TransferCategory): Int = when (c) {
+internal fun categoryLabel(c: TransferCategory): Int = when (c) {
     TransferCategory.ALL -> R.string.cat_all
     TransferCategory.ACTIVE -> R.string.cat_active
     TransferCategory.WAITING -> R.string.cat_waiting
@@ -199,71 +204,82 @@ private fun TransfersTable(vm: TransfersViewModel, container: AppContainer, acti
         sort = if (sortIndex >= 0) TableSort(sortIndex, vm.sort.ascending) else null,
         onSortChange = { s -> cols.getOrNull(s.column)?.let { vm.sort = TransferSort(it.column, s.ascending) } },
         rowMenuLabel = res.getString(R.string.action_more),
-        rowMenu = { row, _ ->
-            val keys: Set<Any> = if (row.key in vm.selected) vm.selected else setOf(row.key)
-            val items = vm.resolve(keys)
-            val single = items.singleOrNull()
-            val out = ArrayList<MenuEntry>()
-            out += MenuEntry.Item(
-                res.getString(R.string.transfers_pause),
-                { vm.pause(items) },
-                shortcut = AppShortcuts.label(AppShortcuts.PAUSE_SELECTED, res),
-                icon = DeskIcons.Pause,
-                enabled = items.any(TransfersViewModel::canPause),
-            )
-            out += MenuEntry.Item(
-                res.getString(R.string.transfers_resume),
-                { vm.resume(items) },
-                shortcut = AppShortcuts.label(AppShortcuts.RESUME_SELECTED, res),
-                icon = DeskIcons.Resume,
-                enabled = items.any(TransfersViewModel::canResume),
-            )
-            out += MenuEntry.Item(
-                res.getString(R.string.transfers_retry),
-                { vm.resume(items) },
-                icon = SoulIcons.Retry,
-                enabled = items.any { it.state == TransferState.FAILED || it.state == TransferState.USER_OFFLINE },
-            )
-            out += MenuEntry.Item(
-                res.getString(R.string.transfers_refresh_queue),
-                { vm.refreshQueue(items) },
-                icon = DeskIcons.Queue,
-                enabled = items.any { it.state == TransferState.QUEUED_REMOTE },
-            )
-            out += MenuEntry.Separator
-            out += MenuEntry.Item(
-                res.getString(R.string.transfers_cancel),
-                { vm.cancel(items, deletePartial = false) },
-                icon = DeskIcons.Close,
-                enabled = items.any(TransfersViewModel::canCancel),
-            )
-            if (items.any { it.direction == TransferDirection.DOWNLOAD && TransfersViewModel.canCancel(it) }) {
-                out += MenuEntry.Item(
-                    res.getString(R.string.transfers_cancel_delete),
-                    { vm.cancel(items, deletePartial = true) },
-                    icon = DeskIcons.Delete,
-                    destructive = true,
-                )
-            }
-            out += MenuEntry.Item(res.getString(R.string.transfers_remove), { vm.remove(items) }, icon = DeskIcons.Delete, enabled = items.isNotEmpty())
-            if (single != null) {
-                if (TransfersViewModel.canPlay(single)) {
-                    out += MenuEntry.Separator
-                    out += MenuEntry.Item(res.getString(R.string.transfers_play), { vm.play(single) }, icon = DeskIcons.Play)
-                    out += MenuEntry.Item(res.getString(R.string.transfers_open_file), { openFile(context, single, actions) }, icon = DeskIcons.OpenWindow)
-                }
-                out += MenuEntry.Separator
-                out += ua.copyFileName(single.fileName)
-                out += ua.copyFileLink(single.username, single.virtualPath)
-                if (single.folder.isNotEmpty()) {
-                    out += MenuEntry.Item(res.getString(R.string.menu_browse_folder), { actions.browseUser(single.username, single.folder) }, icon = SoulIcons.BrowseUser)
-                }
-                out += MenuEntry.Separator
-                out += ua.userEntries(single.username)
-            }
-            out
-        },
+        rowMenu = { row, _ -> buildTransferMenu(row, vm, res, context, actions, ua) },
     )
+}
+
+
+/** Transfer satırının (ya da seçimin) bağlam menüsü; tablo ve telefon listesi ortak kullanır. */
+internal fun buildTransferMenu(
+    row: TransferRow,
+    vm: TransfersViewModel,
+    res: android.content.res.Resources,
+    context: Context,
+    actions: AppActions,
+    ua: com.soulseekplus.ui.common.UserActions,
+): List<MenuEntry> {
+    val keys: Set<Any> = if (row.key in vm.selected) vm.selected else setOf(row.key)
+    val items = vm.resolve(keys)
+    val single = items.singleOrNull()
+    val out = ArrayList<MenuEntry>()
+    out += MenuEntry.Item(
+        res.getString(R.string.transfers_pause),
+        { vm.pause(items) },
+        shortcut = AppShortcuts.label(AppShortcuts.PAUSE_SELECTED, res),
+        icon = DeskIcons.Pause,
+        enabled = items.any(TransfersViewModel::canPause),
+    )
+    out += MenuEntry.Item(
+        res.getString(R.string.transfers_resume),
+        { vm.resume(items) },
+        shortcut = AppShortcuts.label(AppShortcuts.RESUME_SELECTED, res),
+        icon = DeskIcons.Resume,
+        enabled = items.any(TransfersViewModel::canResume),
+    )
+    out += MenuEntry.Item(
+        res.getString(R.string.transfers_retry),
+        { vm.resume(items) },
+        icon = SoulIcons.Retry,
+        enabled = items.any { it.state == TransferState.FAILED || it.state == TransferState.USER_OFFLINE },
+    )
+    out += MenuEntry.Item(
+        res.getString(R.string.transfers_refresh_queue),
+        { vm.refreshQueue(items) },
+        icon = DeskIcons.Queue,
+        enabled = items.any { it.state == TransferState.QUEUED_REMOTE },
+    )
+    out += MenuEntry.Separator
+    out += MenuEntry.Item(
+        res.getString(R.string.transfers_cancel),
+        { vm.cancel(items, deletePartial = false) },
+        icon = DeskIcons.Close,
+        enabled = items.any(TransfersViewModel::canCancel),
+    )
+    if (items.any { it.direction == TransferDirection.DOWNLOAD && TransfersViewModel.canCancel(it) }) {
+        out += MenuEntry.Item(
+            res.getString(R.string.transfers_cancel_delete),
+            { vm.cancel(items, deletePartial = true) },
+            icon = DeskIcons.Delete,
+            destructive = true,
+        )
+    }
+    out += MenuEntry.Item(res.getString(R.string.transfers_remove), { vm.remove(items) }, icon = DeskIcons.Delete, enabled = items.isNotEmpty())
+    if (single != null) {
+        if (TransfersViewModel.canPlay(single)) {
+            out += MenuEntry.Separator
+            out += MenuEntry.Item(res.getString(R.string.transfers_play), { vm.play(single) }, icon = DeskIcons.Play)
+            out += MenuEntry.Item(res.getString(R.string.transfers_open_file), { openFile(context, single, actions) }, icon = DeskIcons.OpenWindow)
+        }
+        out += MenuEntry.Separator
+        out += ua.copyFileName(single.fileName)
+        out += ua.copyFileLink(single.username, single.virtualPath)
+        if (single.folder.isNotEmpty()) {
+            out += MenuEntry.Item(res.getString(R.string.menu_browse_folder), { actions.browseUser(single.username, single.folder) }, icon = SoulIcons.BrowseUser)
+        }
+        out += MenuEntry.Separator
+        out += ua.userEntries(single.username)
+    }
+    return out
 }
 
 private fun openFile(context: Context, transfer: Transfer, actions: AppActions) {

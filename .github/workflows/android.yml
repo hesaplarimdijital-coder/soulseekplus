@@ -122,6 +122,24 @@ jobs:
           name: soulseekplus-apk
           path: apk
 
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # Demo ağı: sahte sunucu (2242) + paylaşım yapan demo eşler. Emülatör 10.0.2.2:2242'ye bağlanır.
+      - name: Start demo Soulseek network
+        run: |
+          chmod +x gradlew
+          nohup ./gradlew :core:demoNetwork --console=plain > demo-network.log 2>&1 &
+          for i in $(seq 1 180); do
+            if grep -q "DEMO: server listening" demo-network.log; then echo "demo network up"; exit 0; fi
+            sleep 2
+          done
+          cat demo-network.log; exit 1
+
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -137,7 +155,7 @@ jobs:
           profile: pixel_6
           disable-animations: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: python3 tools/smoke.py "$(ls apk/*.apk | head -1)" smoke-out > smoke.log 2>&1 || echo "SMOKE_FAILED" >> smoke.log
+          script: adb forward tcp:2234 tcp:2234 && python3 tools/smoke.py "$(ls apk/*.apk | head -1)" smoke-out --demo > smoke.log 2>&1 || echo "SMOKE_FAILED" >> smoke.log
 
       - name: Publish smoke results to ci/smoke
         if: always()
@@ -148,6 +166,7 @@ jobs:
           rm -rf "$out" && mkdir -p "$out"
           cp -r smoke-out/. "$out/" 2>/dev/null || true
           cp smoke.log "$out/" 2>/dev/null || echo "no smoke log" > "$out/smoke.log"
+          cp demo-network.log "$out/" 2>/dev/null || true
           status=success; grep -q SMOKE_FAILED "$out/smoke.log" && status=failure
           echo "sha=${GITHUB_SHA} run=${GITHUB_RUN_NUMBER} status=${status}" > "$out/STATUS"
           cd "$out"

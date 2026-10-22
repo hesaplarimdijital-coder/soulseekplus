@@ -14,3 +14,11 @@ dependencies {
     api(libs.coroutines.core)
     testImplementation(libs.junit)
 }
+
+// Emülatör uçtan uca testi için demo Soulseek ağı (sahte sunucu + paylaşım yapan demo eşler, test kaynaklarında).
+tasks.register<JavaExec>("demoNetwork") {
+    group = "verification"
+    description = "Runs the demo Soulseek network used by the emulator smoke test."
+    classpath = sourceSets["test"].runtimeClasspath
+    mainClass.set("com.soulseekplus.core.engine.DemoNetworkKt")
+}

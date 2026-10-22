@@ -22,6 +22,7 @@ import com.soulseekplus.core.protocol.PrivateMessageNotification
 import com.soulseekplus.core.protocol.PrivilegedUsersNotification
 import com.soulseekplus.core.protocol.PrivilegesResponse
 import com.soulseekplus.core.protocol.ReloggedNotification
+import com.soulseekplus.core.protocol.RoomListResponse
 import com.soulseekplus.core.protocol.RoomMessageNotification
 import com.soulseekplus.core.protocol.SearchRequestNotification
 import com.soulseekplus.core.protocol.ServerCode
@@ -50,13 +51,16 @@ import java.util.concurrent.atomic.AtomicInteger
  * İstemciden gelen mesajlar gerçek uygulamadan bağımsız olarak elle (MessageReader ile) çözülür; böylece motorun tel biçimi
  * burada ayrıca doğrulanır.
  */
-class FakeSlskServer : AutoCloseable {
+class FakeSlskServer(
+    bindHost: String = "127.0.0.1",
+    bindPort: Int = 0,
+) : AutoCloseable {
 
     class Received(val user: String?, val code: Int, val payload: ByteArray) {
         fun reader() = MessageReader(payload)
     }
 
-    private val server = ServerSocket(0, 50, InetAddress.getByName("127.0.0.1"))
+    private val server = ServerSocket(bindPort, 50, InetAddress.getByName(bindHost)).apply { reuseAddress = true }
     val port: Int = server.localPort
 
     val received = CopyOnWriteArrayList<Received>()
@@ -79,6 +83,20 @@ class FakeSlskServer : AutoCloseable {
     fun push(to: String, message: ServerMessage) {
         clients[to]?.send(message)
     }
+
+    /** true: bilinmeyen kullanıcı adıyla gelen ilk giriş hesabı oluşturur (gerçek sunucu gibi). */
+    @Volatile
+    var autoRegister = false
+
+    /**
+     * [requester]'a bildirilen [target] IP'si. Varsayılan her şey için 127.0.0.1; emülatör senaryosunda emülatördeki istemci
+     * ana makinedeki eşlere 10.0.2.2 üzerinden ulaşır.
+     */
+    @Volatile
+    var advertisedIp: (requester: String?, target: String) -> String = { _, _ -> "127.0.0.1" }
+
+    /** Sunucunun bildirdiği oda listesi (RoomList isteğine yanıt): oda → kullanıcı sayısı. */
+    val roomList = ConcurrentHashMap<String, Int>()
 
     /** true: GetPeerAddress port 0 döndürür, eşler yalnızca dolaylı (ConnectToPeer) bağlanabilir. */
     @Volatile
@@ -117,6 +135,8 @@ class FakeSlskServer : AutoCloseable {
     }
 
     fun isOnline(user: String): Boolean = clients.containsKey(user)
+
+    fun onlineUsers(): Set<String> = clients.keys.toSet()
 
     fun countOf(user: String?, code: Int): Int = received.count { it.user == user && it.code == code }
 
@@ -198,7 +218,7 @@ class FakeSlskServer : AutoCloseable {
                     val t = clients[target]
                     send(
                         if (t == null) PeerAddressResponse(target, "0.0.0.0", 0)
-                        else PeerAddressResponse(target, "127.0.0.1", if (hidePorts) 0 else t.waitPort),
+                        else PeerAddressResponse(target, advertisedIp(user, target), if (hidePorts) 0 else t.waitPort),
                     )
                 }
                 ServerCode.CONNECT_TO_PEER -> {
@@ -208,7 +228,7 @@ class FakeSlskServer : AutoCloseable {
                     val me = user ?: return
                     val t = clients[target]
                     if (t == null) send(CantConnectToPeerNotification(token, target))
-                    else t.send(ConnectToPeerNotification(me, type, "127.0.0.1", waitPort, token, false))
+                    else t.send(ConnectToPeerNotification(me, type, advertisedIp(target, me), waitPort, token, false))
                 }
                 ServerCode.WATCH_USER -> {
                     val target = r.string()
@@ -263,11 +283,18 @@ class FakeSlskServer : AutoCloseable {
                     val me = user ?: return
                     rooms[room]?.forEach { it.send(RoomMessageNotification(room, me, text)) }
                 }
+                ServerCode.ROOM_LIST -> send(
+                    RoomListResponse(
+                        (rooms.keys + roomList.keys).distinct().sorted().map { name ->
+                            com.soulseekplus.core.model.RoomInfo(name, maxOf(rooms[name]?.size ?: 0, roomList[name] ?: 0))
+                        },
+                    ),
+                )
                 ServerCode.CHECK_PRIVILEGES -> send(PrivilegesResponse(0))
                 ServerCode.HAVE_NO_PARENT -> {
                     val candidate = parentCandidate
                     val t = if (candidate != null && candidate != user) clients[candidate] else null
-                    if (r.bool() && t != null) send(PossibleParentsNotification(listOf(PossibleParent(candidate!!, "127.0.0.1", t.waitPort))))
+                    if (r.bool() && t != null) send(PossibleParentsNotification(listOf(PossibleParent(candidate!!, advertisedIp(user, candidate), t.waitPort))))
                 }
                 else -> Unit
             }
@@ -292,6 +319,7 @@ class FakeSlskServer : AutoCloseable {
             loginAttempts.getOrPut(name) { AtomicInteger() }.incrementAndGet()
             if (version != 160L || minor != 3L) errors.add("login version $version.$minor")
             if (hash != md5(name + password)) errors.add("login hash mismatch for $name")
+            if (autoRegister) accounts.putIfAbsent(name, password)
             if (accounts[name] != password) {
                 send(LoginRejected("INVALIDPASS"))
                 runCatching { socket.close() }

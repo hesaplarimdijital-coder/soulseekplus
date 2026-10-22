@@ -564,4 +564,10 @@
     <string name="transfers_play">Çal</string>
     <string name="transfers_open_file">Şununla aç…</string>
     <string name="transfers_no_app">Bu dosyayı açabilecek uygulama yok.</string>
+    <!-- Telefon (dar pencere) düzeni -->
+    <string name="compact_filters_n">Filtreler (%1$d etkin)</string>
+    <string name="compact_view_options">Görünüm seçenekleri</string>
+    <string name="compact_group_by">Grupla</string>
+    <string name="compact_sort_by">Sırala</string>
+    <string name="compact_scope">Arama yeri: %1$s</string>
 </resources>

@@ -87,6 +87,11 @@ private const val MIB = 1024L * 1024L
 /** Arama ekranı: sorgu çubuğu, sekmeler, hızlı çipler, gelişmiş süzgeç, gruplu sonuç tablosu. */
 @Composable
 fun SearchScreen(vm: SearchViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
+    // Telefon (dar pencere): ayrı, kompakt düzen. Geniş pencerelerin düzeni aşağıda ve değişmez.
+    if (currentWidthClass() == WidthClass.Compact) {
+        CompactSearchScreen(vm, container, actions, modifier)
+        return
+    }
     val res = appResources()
     val tabs by vm.repo.tabs.collectAsStateWithLifecycle()
     val selectedId by vm.repo.selectedTabId.collectAsStateWithLifecycle()
@@ -324,7 +329,7 @@ private fun TabContent(tab: SearchTabState, vm: SearchViewModel, container: AppC
 }
 
 @Composable
-private fun DeskProgressLine() {
+internal fun DeskProgressLine() {
     com.soulseekplus.ui.DeskProgressBar(null, Modifier.fillMaxWidth(), height = 2.dp)
 }
 
@@ -332,7 +337,7 @@ private fun DeskProgressLine() {
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-private fun FilterBar(tab: SearchTabState, reset: Int, vm: SearchViewModel) {
+internal fun FilterBar(tab: SearchTabState, reset: Int, vm: SearchViewModel) {
     val res = appResources()
     val dimens = DeskTheme.dimens
     val filter = tab.filter
@@ -447,7 +452,7 @@ private fun ResultTable(
 }
 
 @Composable
-private fun rememberRows(tab: SearchTabState, ui: TabUi, expandByDefault: Boolean): List<ResultRow> {
+internal fun rememberRows(tab: SearchTabState, ui: TabUi, expandByDefault: Boolean): List<ResultRow> {
     val compute: () -> List<ResultRow> = {
         SearchGrouping.rows(tab.visibleHits, tab.groupMode, ui.sort) { key ->
             if (expandByDefault) key !in ui.toggledGroups else key in ui.toggledGroups
@@ -547,7 +552,7 @@ private fun fileCell(row: ResultRow, mode: GroupMode, res: android.content.res.R
 
 // ---------------------------------------------------------------------- bağlam menüsü ve seçim çubuğu
 
-private fun buildMenu(
+internal fun buildMenu(
     row: ResultRow,
     ui: TabUi,
     tab: SearchTabState,
