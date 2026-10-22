@@ -133,7 +133,11 @@ fun SettingsScreen(
                     stringResource(R.string.settings_port_mapping),
                     client.portMappingEnabled,
                     { v -> settings.update { it.copy(portMappingEnabled = v) } },
-                    subtitle = res.portMappingText(portMapping),
+                    subtitle = if (client.portMappingEnabled && portMapping == com.soulseekplus.core.model.PortMappingState.Disabled) {
+                        stringResource(R.string.port_waiting)
+                    } else {
+                        res.portMappingText(portMapping)
+                    },
                 )
                 SwitchRow(
                     stringResource(R.string.settings_wifi_only),

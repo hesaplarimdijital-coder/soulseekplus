@@ -148,6 +148,7 @@
     <string name="level_group">Grup</string>
     <string name="level_group_named">Grup: %1$s</string>
     <string name="port_disabled">Port eşleme kapalı</string>
+    <string name="port_waiting">Bağlanınca açılır</string>
     <string name="port_discovering">Yönlendirici aranıyor…</string>
     <string name="port_mapped">%1$s: %2$d portu açık</string>
     <string name="port_failed">Port eşleme başarısız</string>

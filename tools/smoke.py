@@ -195,6 +195,18 @@ def main():
     time.sleep(3)
     s.snap("tablet-slsk-link")
 
+    # --- Türkçe arayüz (uygulamaya özel dil, API 33+)
+    adb("shell", "cmd", "locale", "set-app-locales", PKG, "--locales", "tr-TR")
+    time.sleep(2)
+    adb("shell", "am", "force-stop", PKG)
+    adb("shell", "am", "start", "-W", "-n", ACTIVITY, timeout=120)
+    time.sleep(6)
+    s.snap("tablet-tr-home")
+    for label in ("Transferler", "Ayarlar"):
+        if s.tap_label(label, sidebar=True):
+            s.snap("tablet-tr-" + label.lower())
+    adb("shell", "cmd", "locale", "set-app-locales", PKG, "--locales", "en-US")
+
     adb("shell", "wm", "size", "reset")
     adb("shell", "wm", "density", "reset")
 

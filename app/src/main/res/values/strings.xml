@@ -148,6 +148,7 @@
     <string name="level_group">Group</string>
     <string name="level_group_named">Group: %1$s</string>
     <string name="port_disabled">Port mapping off</string>
+    <string name="port_waiting">Opens when you connect</string>
     <string name="port_discovering">Looking for router…</string>
     <string name="port_mapped">%1$s: port %2$d open</string>
     <string name="port_failed">Port mapping failed</string>
