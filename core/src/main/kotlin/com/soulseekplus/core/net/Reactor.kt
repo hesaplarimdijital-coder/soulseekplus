@@ -2,9 +2,8 @@ package com.soulseekplus.core.net
 
 import com.soulseekplus.core.api.Logger
 import kotlinx.coroutines.CancellableContinuation
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.withTimeoutOrNull
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.SocketTimeoutException
@@ -144,11 +143,9 @@ class Reactor(private val logger: Logger = Logger.NONE, threadName: String = "sl
             channel.socket().tcpNoDelay = true
             if (keepAlive) channel.socket().keepAlive = true
             val socket = AsyncSocket(this, channel)
-            try {
-                withTimeout(timeoutMillis) { socket.connectTo(address) }
-            } catch (e: TimeoutCancellationException) {
-                throw SocketTimeoutException("Bağlantı zaman aşımı: $address")
-            }
+            // withTimeoutOrNull: dış bir zaman aşımı/iptal SocketTimeoutException'a dönüştürülmeden yayılır.
+            withTimeoutOrNull(timeoutMillis) { socket.connectTo(address) }
+                ?: throw SocketTimeoutException("Bağlantı zaman aşımı: $address")
             success = true
             return socket
         } finally {

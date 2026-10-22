@@ -32,6 +32,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.withTimeoutOrNull
 import java.io.EOFException
 import java.io.IOException
 import java.net.InetAddress
@@ -185,6 +186,9 @@ class PeerNetwork(
     }
 
     private class CachedAddress(val address: PeerAddress, val expiresAtNanos: Long)
+
+    /** [lookupAddress] içinde "çevrimdışı" (null) sonucunu zaman aşımından (withTimeoutOrNull → null) ayırmak için. */
+    private class LookupResult(val address: PeerAddress?)
 
     private val entries = HashMap<String, PeerEntry>()
     private val attempts = HashMap<Int, Attempt>()
@@ -361,10 +365,14 @@ class PeerNetwork(
             d
         }
         try {
-            return withTimeout(timeouts.addressLookupMillis) { waiter.await() }
-        } catch (e: TimeoutCancellationException) {
-            if (addressWaiters[username] === waiter) addressWaiters.remove(username)
-            throw SocketTimeoutException("Address lookup timed out for $username")
+            // withTimeoutOrNull: yalnızca kendi zaman aşımımız null verir; çağıranın dış zaman aşımı (ör. yükleme
+            // başlangıç süresi) TimeoutCancellationException olarak aynen yayılır, IOException'a dönüşmez.
+            val found = withTimeoutOrNull(timeouts.addressLookupMillis) { LookupResult(waiter.await()) }
+            if (found == null) {
+                if (addressWaiters[username] === waiter) addressWaiters.remove(username)
+                throw SocketTimeoutException("Address lookup timed out for $username")
+            }
+            return found.address
         } catch (e: IOException) {
             if (addressWaiters[username] === waiter) addressWaiters.remove(username)
             throw e
@@ -406,11 +414,8 @@ class PeerNetwork(
                 host.sendToServer(request)
                 if (directPossible) startDirect(attempt, address)
             }
-            try {
-                withTimeout(timeouts.indirectMillis) { attempt.signal.await() }
-            } catch (e: TimeoutCancellationException) {
-                throw SocketTimeoutException("Connection to $username timed out")
-            }
+            withTimeoutOrNull(timeouts.indirectMillis) { attempt.signal.await() }
+                ?: throw SocketTimeoutException("Connection to $username timed out")
             val conn = attempt.take() ?: throw IOException("Connection to $username failed")
             delivered = true
             return conn
