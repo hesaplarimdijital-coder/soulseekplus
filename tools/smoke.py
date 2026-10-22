@@ -72,7 +72,11 @@ class Smoke:
             if not anr:
                 return root
             wait = [n for n in root.iter("node") if (n.get("text") or "") == "Wait" and self.bounds(n)]
-            self.log("  ~ sistem ANR penceresi kapatıldı")
+            who = next((n.get("text") for n in root.iter("node") if "isn't responding" in (n.get("text") or "")), "")
+            self.log(f"  ~ sistem ANR penceresi kapatıldı: {who}")
+            if not getattr(self, "_top_logged", False):
+                self._top_logged = True
+                self.log(adb("shell", "top", "-b", "-n", "1", "-m", "12"))
             if wait:
                 x, y = self.bounds(wait[0])
                 adb("shell", "input", "tap", str(x), str(y))
