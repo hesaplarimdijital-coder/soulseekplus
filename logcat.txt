@@ -1,0 +1,897 @@
+I/AiAiEcho( 1688): AppFetcherImplV2 updateApps package:[com.soulseekplus], userId:[0], reason:[package is added.].
+D/ImsResolver( 1083): maybeAddedImsService, packageName: com.soulseekplus
+D/CarrierSvcBindHelper( 1083): onPackageModified: com.soulseekplus
+V/SplashScreenExceptionList(  534): SplashScreen checking exception for package com.soulseekplus (target sdk:35) -> false
+I/ActivityTaskManager(  534): START u0 {flg=0x10000000 cmp=com.soulseekplus/.ui.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+V/WindowManagerShell(  865): Transition requested: android.os.BinderProxy@36d2a8d TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { flg=0x10000000 cmp=com.soulseekplus/.ui.MainActivity } baseActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} topActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} origActivity=null realActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} numActivities=1 lastActiveTime=63447 supportsMultiWindow=true resizeMode=2 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@e804442} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{e755c53 com.soulseekplus.ui.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+I/ActivityManager(  534): Start proc 5604:com.soulseekplus/u0a192 for next-top-activity {com.soulseekplus/com.soulseekplus.ui.MainActivity}
+I/AiAiEcho( 1688): AppFetcherImpl onPackageChanged com.soulseekplus.
+D/ImsResolver( 1083): maybeAddedImsService, packageName: com.soulseekplus
+I/AiAiEcho( 1688): AppIndexer Package:[com.soulseekplus] UserProfile:[0] Enabled:[true].
+I/AiAiEcho( 1688): AppFetcherImplV2 updateApps package:[com.soulseekplus], userId:[0], reason:[package is updated.].
+D/nativeloader( 5604): Configuring clns-6 for other apk /data/app/~~oQt6y7f0uLEiauUI6q9yjg==/com.soulseekplus-11y5nFTPT9AhP0_wIgIDBQ==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~oQt6y7f0uLEiauUI6q9yjg==/com.soulseekplus-11y5nFTPT9AhP0_wIgIDBQ==/lib/x86_64:/data/app/~~oQt6y7f0uLEiauUI6q9yjg==/com.soulseekplus-11y5nFTPT9AhP0_wIgIDBQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.soulseekplus
+V/GraphicsEnvironment( 5604): ANGLE GameManagerService for com.soulseekplus: false
+V/GraphicsEnvironment( 5604): com.soulseekplus is not listed in per-application setting
+V/WindowManager(  534): Sent Transition #7 createdAt=10-22 20:08:52.094 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { flg=0x10000000 cmp=com.soulseekplus/.ui.MainActivity } baseActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} topActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} origActivity=null realActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} numActivities=1 lastActiveTime=63447 supportsMultiWindow=true resizeMode=2 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{12be23 Task{f640305 #8 type=standard A=10192:com.soulseekplus}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 128 - 0, 0) topActivityInfo=ActivityInfo{ffbcf20 com.soulseekplus.ui.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+V/WindowManager(  534):     info={id=7 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{12be23 Task{f640305 #8 type=standard A=10192:com.soulseekplus}}} m=OPEN f=NONE leash=Surface(name=Task=8)/@0xf8323dd sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{a1320d9 Task{badd218 #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x843288a sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+W/UriGrantsManagerService(  534): No permission grants found for com.soulseekplus
+I/Slsk+/ShareIndex( 5604): Paylaşım dizini kuruldu: 0 klasör, 0 dosya, 0 kelime (0 ms)
+I/FontLog ( 5018): Package com.soulseekplus has no metadata [CONTEXT service_id=132 ]
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@f7c24f, mPriority=-1, mIsAnimationCallback=false}
+I/BlockstoreStorage( 5086): Clearing Blockstore Data for package com.soulseekplus [CONTEXT service_id=258 ]
+I/ImeTracker(  534): com.soulseekplus:220c930: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:220c930: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/ActivityTaskManager(  534): Displayed com.soulseekplus/.ui.MainActivity for user 0: +1s369ms
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+W/InputManager-JNI(  534): Input channel object '5e3ac8e Splash Screen com.soulseekplus (client)' was disposed without first being removed with the input manager!
+D/ProfileInstaller( 5604): Installing profile for com.soulseekplus
+D/AndroidRuntime( 5807): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5807): Using default boot image
+I/AndroidRuntime( 5807): Leaving lock profiling enabled
+D/AndroidRuntime( 5807): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5807): Shutting down VM
+D/AndroidRuntime( 5840): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 5840): Using default boot image
+I/AndroidRuntime( 5840): Leaving lock profiling enabled
+D/AndroidRuntime( 5840): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 5840): Shutting down VM
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+I/ImeTracker( 5604): com.soulseekplus:f71f4172: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+I/ImeTracker( 5604): com.soulseekplus:bf86017a: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/AndroidIME( 1614): AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x8001(Normal) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@4f5391d, mPriority=0, mIsAnimationCallback=false}
+I/ImeTracker(  534): com.soulseekplus:f71f4172: onFailed at PHASE_WM_SHOW_IME_RUNNER
+I/ImeTracker( 5604): com.soulseekplus:bf86017a: onShown
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.soulseekplus>
+D/AndroidRuntime( 6010): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6010): Using default boot image
+I/AndroidRuntime( 6010): Leaving lock profiling enabled
+D/AndroidRuntime( 6010): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6010): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:9358c730: onRequestShow at ORIGIN_SERVER_START_INPUT reason ATTACH_NEW_INPUT
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8081(Password) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+I/ImeTracker( 5604): com.soulseekplus:521aea39: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:521aea39: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/AndroidIME( 1614): AbstractIme.onActivate():86 PasswordIme.onActivate() : EditorInfo = inputType=0x8081(Password) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker( 5604): com.soulseekplus:51289968: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8081(Password) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+I/AndroidIME( 1614): AbstractIme.onActivate():86 PasswordIme.onActivate() : EditorInfo = inputType=0x8081(Password) imeOptions=0x2000006 privateImeOptions=null actionName=DONE actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker(  534): com.soulseekplus:9358c730: onFailed at PHASE_WM_SHOW_IME_RUNNER
+I/ImeTracker( 5604): com.soulseekplus:51289968: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/AndroidRuntime( 6114): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6114): Using default boot image
+I/AndroidRuntime( 6114): Leaving lock profiling enabled
+D/AndroidRuntime( 6114): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6114): Shutting down VM
+I/ImeTracker( 5604): com.soulseekplus:5c16332a: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:5c16332a: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker( 5604): com.soulseekplus:d3b62bf: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/ImeTracker( 5604): com.soulseekplus:d3b62bf: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/AndroidRuntime( 6264): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6264): Using default boot image
+I/AndroidRuntime( 6264): Leaving lock profiling enabled
+D/AndroidRuntime( 6264): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6264): Shutting down VM
+D/AndroidRuntime( 6285): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6285): Using default boot image
+I/AndroidRuntime( 6285): Leaving lock profiling enabled
+D/AndroidRuntime( 6285): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6285): Shutting down VM
+I/ImeTracker( 5604): com.soulseekplus:538fc954: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:538fc954: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker( 5604): com.soulseekplus:1a53f199: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/ImeTracker( 5604): com.soulseekplus:1a53f199: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/AndroidRuntime( 6339): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6339): Using default boot image
+I/AndroidRuntime( 6339): Leaving lock profiling enabled
+D/AndroidRuntime( 6339): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6339): Shutting down VM
+I/ImeTracker( 5604): com.soulseekplus:f4faebc4: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:f4faebc4: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker( 5604): com.soulseekplus:17bdc02e: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/ImeTracker( 5604): com.soulseekplus:17bdc02e: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/AndroidRuntime( 6402): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6402): Using default boot image
+I/AndroidRuntime( 6402): Leaving lock profiling enabled
+D/AndroidRuntime( 6402): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6402): Shutting down VM
+I/ImeTracker( 5604): com.soulseekplus:f683933b: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:f683933b: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker( 5604): com.soulseekplus:2e216337: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/ImeTracker( 5604): com.soulseekplus:2e216337: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+D/AndroidRuntime( 6469): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6469): Using default boot image
+I/AndroidRuntime( 6469): Leaving lock profiling enabled
+D/AndroidRuntime( 6469): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6469): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:9f22cd68: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_SOFT_INPUT_BY_BACK_KEY
+I/ImeTracker( 5604): com.soulseekplus:d117e75d: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker(  534): com.soulseekplus:d117e75d: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/ImeTracker( 5604): com.soulseekplus:9f22cd68: onHidden
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@aebe7e7, mPriority=-1, mIsAnimationCallback=false}
+D/AndroidRuntime( 6499): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6499): Using default boot image
+I/AndroidRuntime( 6499): Leaving lock profiling enabled
+D/AndroidRuntime( 6499): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6499): Shutting down VM
+I/ImeTracker( 5604): com.soulseekplus:eb107c85: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8081(Password) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=10 initialSelEnd=10 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8081(Password) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=10 initialSelEnd=10 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+I/ImeTracker( 5604): com.soulseekplus:fe880e10: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/AndroidIME( 1614): AbstractIme.onActivate():86 PasswordIme.onActivate() : EditorInfo = inputType=0x8081(Password) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=10 initialSelEnd=10 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=false, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker(  534): com.soulseekplus:eb107c85: onFailed at PHASE_WM_SHOW_IME_RUNNER
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@1a946bf, mPriority=0, mIsAnimationCallback=false}
+I/ImeTracker( 5604): com.soulseekplus:fe880e10: onShown
+D/AndroidRuntime( 6523): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6523): Using default boot image
+I/AndroidRuntime( 6523): Leaving lock profiling enabled
+D/AndroidRuntime( 6523): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6523): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:e40180a9: onRequestShow at ORIGIN_SERVER_START_INPUT reason ATTACH_NEW_INPUT
+I/ImeTracker( 5604): com.soulseekplus:2b799920: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:2b799920: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=12 initialSelEnd=12 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+I/AndroidIME( 1614): AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x8001(Normal) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=12 initialSelEnd=12 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker( 5604): com.soulseekplus:d272ac47: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=12 initialSelEnd=12 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}]}, true)
+I/AndroidIME( 1614): AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x8001(Normal) imeOptions=0x2000005 privateImeOptions=null actionName=NEXT actionLabel=null actionId=0 initialSelStart=12 initialSelEnd=12 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker( 5604): com.soulseekplus:e40180a9: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/ImeTracker( 5604): com.soulseekplus:d272ac47: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.soulseekplus>
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.soulseekplus>
+D/AndroidRuntime( 6569): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6569): Using default boot image
+I/AndroidRuntime( 6569): Leaving lock profiling enabled
+D/AndroidRuntime( 6569): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6569): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:527e30b8: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_SOFT_INPUT_BY_BACK_KEY
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c269229, mPriority=-1, mIsAnimationCallback=false}
+I/ImeTracker( 5604): com.soulseekplus:f211767b: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker(  534): com.soulseekplus:f211767b: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/ImeTracker( 5604): com.soulseekplus:527e30b8: onHidden
+D/AndroidRuntime( 6603): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6603): Using default boot image
+I/AndroidRuntime( 6603): Leaving lock profiling enabled
+D/AndroidRuntime( 6603): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6603): Shutting down VM
+D/AndroidRuntime( 6623): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6623): Using default boot image
+I/AndroidRuntime( 6623): Leaving lock profiling enabled
+D/AndroidRuntime( 6623): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6623): Shutting down VM
+I/ActivityManager(  534): Background started FGS: Allowed [callingPackage: com.soulseekplus; callingUid: 10192; uidState: TOP ; uidBFSL: [BFSL]; intent: Intent { cmp=com.soulseekplus/.service.SoulseekService }; code:PROC_STATE_TOP; tempAllowListReason:<null>; targetSdkVersion:35; callerTargetSdkVersion:35; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+D/ConnectivityService(  534): requestNetwork for uid/pid:10192/5604 activeRequest: null callbackRequest: 152 [NetworkRequest [ REQUEST id=153, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+D/WifiNetworkFactory(  534): got request NetworkRequest [ REQUEST id=153, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]
+D/UntrustedWifiNetworkFactory(  534): got request NetworkRequest [ REQUEST id=153, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]
+D/OemPaidWifiNetworkFactory(  534): got request NetworkRequest [ REQUEST id=153, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]
+D/MultiInternetWifiNetworkFactory(  534): got request NetworkRequest [ REQUEST id=153, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]
+I/ImeTracker( 5604): com.soulseekplus:89c90234: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:89c90234: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.soulseekplus>
+W/DefaultDispatch( 5604): type=1400 audit(0.0:100): avc:  denied  { read } for  name="route" dev="proc" ino=4026532045 scontext=u:r:untrusted_app:s0:c192,c256,c512,c768 tcontext=u:object_r:proc_net:s0 tclass=file permissive=0 app=com.soulseekplus
+D/Slsk+/PortMapper( 5604): NAT-PMP 10.0.2.1: Poll timed out
+D/AndroidRuntime( 6697): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6697): Using default boot image
+I/AndroidRuntime( 6697): Leaving lock profiling enabled
+D/AndroidRuntime( 6697): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6697): Shutting down VM
+D/AndroidRuntime( 6717): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6717): Using default boot image
+I/AndroidRuntime( 6717): Leaving lock profiling enabled
+D/AndroidRuntime( 6717): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6717): Shutting down VM
+D/AndroidRuntime( 6742): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6742): Using default boot image
+I/AndroidRuntime( 6742): Leaving lock profiling enabled
+D/AndroidRuntime( 6742): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6742): Shutting down VM
+D/AndroidRuntime( 6766): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6766): Using default boot image
+I/AndroidRuntime( 6766): Leaving lock profiling enabled
+D/AndroidRuntime( 6766): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6766): Shutting down VM
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+I/ImeTracker( 5604): com.soulseekplus:8eed119c: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+I/ImeTracker( 5604): com.soulseekplus:4a2051a7: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/AndroidIME( 1614): AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker(  534): com.soulseekplus:8eed119c: onFailed at PHASE_WM_SHOW_IME_RUNNER
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@3c1c4a9, mPriority=0, mIsAnimationCallback=false}
+I/ImeTracker( 5604): com.soulseekplus:4a2051a7: onShown
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.soulseekplus>
+D/AndroidRuntime( 6805): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6805): Using default boot image
+I/AndroidRuntime( 6805): Leaving lock profiling enabled
+D/AndroidRuntime( 6805): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6805): Shutting down VM
+D/Slsk+/Engine( 5604): Arama yanıtı: slow_lofi, token=371315, 9 dosya
+D/Slsk+/Engine( 5604): Arama yanıtı: vinyl_archive, token=371315, 22 dosya
+D/Slsk+/Engine( 5604): Arama yanıtı: metal_cave, token=371315, 22 dosya
+D/Slsk+/PeerNetwork( 5604): metal_cave P bağlantısı kapandı: null
+D/Slsk+/PeerNetwork( 5604): vinyl_archive P bağlantısı kapandı: null
+I/ImeTracker(  534): com.soulseekplus:8222862d: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_SOFT_INPUT_BY_BACK_KEY
+I/ImeTracker( 5604): com.soulseekplus:94a70ef7: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker(  534): com.soulseekplus:94a70ef7: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/ImeTracker( 5604): com.soulseekplus:8222862d: onHidden
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@d75c68, mPriority=-1, mIsAnimationCallback=false}
+D/AndroidRuntime( 6846): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6846): Using default boot image
+I/AndroidRuntime( 6846): Leaving lock profiling enabled
+D/AndroidRuntime( 6846): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6846): Shutting down VM
+D/AndroidRuntime( 6867): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6867): Using default boot image
+I/AndroidRuntime( 6867): Leaving lock profiling enabled
+D/AndroidRuntime( 6867): Calling main entry com.android.commands.uiautomator.Launcher
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.soulseekplus>
+D/AndroidRuntime( 6867): Shutting down VM
+D/AndroidRuntime( 6887): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6887): Using default boot image
+I/AndroidRuntime( 6887): Leaving lock profiling enabled
+D/AndroidRuntime( 6887): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6887): Shutting down VM
+D/AndroidRuntime( 6916): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6916): Using default boot image
+I/AndroidRuntime( 6916): Leaving lock profiling enabled
+D/AndroidRuntime( 6916): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6916): Shutting down VM
+D/AndroidRuntime( 6935): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6935): Using default boot image
+I/AndroidRuntime( 6935): Leaving lock profiling enabled
+D/AndroidRuntime( 6935): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6935): Shutting down VM
+D/AndroidRuntime( 6959): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 6959): Using default boot image
+I/AndroidRuntime( 6959): Leaving lock profiling enabled
+D/AndroidRuntime( 6959): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 6959): Shutting down VM
+D/AndroidRuntime( 7001): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7001): Using default boot image
+I/AndroidRuntime( 7001): Leaving lock profiling enabled
+D/AndroidRuntime( 7001): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7001): Shutting down VM
+D/AndroidRuntime( 7020): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7020): Using default boot image
+I/AndroidRuntime( 7020): Leaving lock profiling enabled
+D/AndroidRuntime( 7020): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7020): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:8ca9c07c: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:8ca9c07c: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+D/AndroidRuntime( 7053): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7053): Using default boot image
+I/AndroidRuntime( 7053): Leaving lock profiling enabled
+D/AndroidRuntime( 7053): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7053): Shutting down VM
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=8 initialSelEnd=8 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+D/AndroidRuntime( 7077): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7077): Using default boot image
+I/AndroidRuntime( 7077): Leaving lock profiling enabled
+D/AndroidRuntime( 7077): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7077): Shutting down VM
+D/AndroidRuntime( 7112): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7112): Using default boot image
+I/AndroidRuntime( 7112): Leaving lock profiling enabled
+D/AndroidRuntime( 7112): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7112): Shutting down VM
+D/AndroidRuntime( 7131): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7131): Using default boot image
+I/AndroidRuntime( 7131): Leaving lock profiling enabled
+D/AndroidRuntime( 7131): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7131): Shutting down VM
+D/AndroidRuntime( 7157): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7157): Using default boot image
+I/AndroidRuntime( 7157): Leaving lock profiling enabled
+D/AndroidRuntime( 7157): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7157): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:5032f31b: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:5032f31b: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+D/AndroidRuntime( 7187): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7187): Using default boot image
+I/AndroidRuntime( 7187): Leaving lock profiling enabled
+D/AndroidRuntime( 7187): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7187): Shutting down VM
+D/AndroidRuntime( 7205): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7205): Using default boot image
+I/AndroidRuntime( 7205): Leaving lock profiling enabled
+D/AndroidRuntime( 7205): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7205): Shutting down VM
+D/CoreBackPreview(  534): Window{899118b u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@86b69bd, mPriority=-1, mIsAnimationCallback=false}
+D/CoreBackPreview(  534): Window{899118b u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@521cbb2, mPriority=0, mIsAnimationCallback=true}
+I/ImeTracker(  534): com.soulseekplus:153b0dca: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:153b0dca: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+D/AndroidRuntime( 7234): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7234): Using default boot image
+I/AndroidRuntime( 7234): Leaving lock profiling enabled
+D/AndroidRuntime( 7234): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7234): Shutting down VM
+D/AndroidRuntime( 7258): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7258): Using default boot image
+I/AndroidRuntime( 7258): Leaving lock profiling enabled
+D/AndroidRuntime( 7258): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7258): Shutting down VM
+D/CoreBackPreview(  534): Window{899118b u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback null
+W/InputManager-JNI(  534): Input channel object '899118b com.soulseekplus/com.soulseekplus.ui.MainActivity (client)' was disposed without first being removed with the input manager!
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=8 initialSelEnd=8 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+D/AndroidRuntime( 7286): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7286): Using default boot image
+I/AndroidRuntime( 7286): Leaving lock profiling enabled
+D/AndroidRuntime( 7286): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7286): Shutting down VM
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@3d46a8f, mPriority=0, mIsAnimationCallback=true}
+I/ImeTracker( 5604): com.soulseekplus:7c8e093f: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:7c8e093f: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+D/AndroidRuntime( 7311): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7311): Using default boot image
+I/AndroidRuntime( 7311): Leaving lock profiling enabled
+D/AndroidRuntime( 7311): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7311): Shutting down VM
+D/AndroidRuntime( 7335): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7335): Using default boot image
+I/AndroidRuntime( 7335): Leaving lock profiling enabled
+D/AndroidRuntime( 7335): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7335): Shutting down VM
+D/AndroidRuntime( 7363): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7363): Using default boot image
+I/AndroidRuntime( 7363): Leaving lock profiling enabled
+D/AndroidRuntime( 7363): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7363): Shutting down VM
+D/AndroidRuntime( 7387): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7387): Using default boot image
+I/AndroidRuntime( 7387): Leaving lock profiling enabled
+D/AndroidRuntime( 7387): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7387): Shutting down VM
+D/AndroidRuntime( 7406): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7406): Using default boot image
+I/AndroidRuntime( 7406): Leaving lock profiling enabled
+D/AndroidRuntime( 7406): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7406): Shutting down VM
+V/WindowManagerShell(  865): Transition requested: android.os.BinderProxy@2c8382a TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { flg=0x10000000 cmp=com.soulseekplus/.ui.MainActivity } baseActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} topActivity=ComponentInfo{com.google.android.documentsui/com.android.documentsui.picker.PickActivity} origActivity=null realActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} numActivities=2 lastActiveTime=345619 supportsMultiWindow=true resizeMode=2 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@ad8e61b} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{85863b8 com.android.documentsui.picker.PickActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+V/WindowManagerShell(  865): onTransitionReady android.os.BinderProxy@2c8382a: {id=8 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{26101e7 u0 com.google.android.documentsui/com.android.documentsui.picker.PickActivity)/@0x454b591 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1080, 2400) d=-1->0 r=-1->0:-1},{null m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity)/@0x689acf6 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+V/WindowManagerShell(  865): Transition doesn't have explicit remote, search filters for match for {id=8 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{26101e7 u0 com.google.android.documentsui/com.android.documentsui.picker.PickActivity)/@0x454b591 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1080, 2400) d=-1->0 r=-1->0:-1},{null m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity)/@0x689acf6 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+V/WindowManagerShell(  865): start default transition animation, info = {id=8 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{26101e7 u0 com.google.android.documentsui/com.android.documentsui.picker.PickActivity)/@0x454b591 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1080, 2400) d=-1->0 r=-1->0:-1},{null m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity)/@0x689acf6 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+V/WindowManager(  534): Sent Transition #8 createdAt=10-22 20:13:34.311 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=true baseIntent=Intent { flg=0x10000000 cmp=com.soulseekplus/.ui.MainActivity } baseActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} topActivity=ComponentInfo{com.google.android.documentsui/com.android.documentsui.picker.PickActivity} origActivity=null realActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} numActivities=2 lastActiveTime=345619 supportsMultiWindow=true resizeMode=2 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{12be23 Task{f640305 #8 type=standard A=10192:com.soulseekplus}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=ActivityInfo{b09c518 com.android.documentsui.picker.PickActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+V/WindowManager(  534):     info={id=8 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=OPEN f=FILLS_TASK leash=Surface(name=ActivityRecord{26101e7 u0 com.google.android.documentsui/com.android.documentsui.picker.PickActivity)/@0x43674f5 sb=Rect(0, 0 - 0, 0) eb=Rect(0, 0 - 1080, 2400) d=-1->0 r=-1->0:-1},{null m=TO_BACK f=FILLS_TASK leash=Surface(name=ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity)/@0xe2d6d01 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@93af8e2, mPriority=-1, mIsAnimationCallback=false}
+D/AndroidRuntime( 7563): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7563): Using default boot image
+I/AndroidRuntime( 7563): Leaving lock profiling enabled
+D/AndroidRuntime( 7563): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7563): Shutting down VM
+D/AndroidRuntime( 7585): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7585): Using default boot image
+I/AndroidRuntime( 7585): Leaving lock profiling enabled
+D/AndroidRuntime( 7585): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7585): Shutting down VM
+D/AndroidRuntime( 7604): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7604): Using default boot image
+I/AndroidRuntime( 7604): Leaving lock profiling enabled
+D/AndroidRuntime( 7604): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7604): Shutting down VM
+D/AndroidRuntime( 7631): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7631): Using default boot image
+I/AndroidRuntime( 7631): Leaving lock profiling enabled
+D/AndroidRuntime( 7631): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7631): Shutting down VM
+D/AndroidRuntime( 7660): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7660): Using default boot image
+I/AndroidRuntime( 7660): Leaving lock profiling enabled
+D/AndroidRuntime( 7660): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7660): Shutting down VM
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@ecf0b41, mPriority=0, mIsAnimationCallback=true}
+V/WindowManagerShell(  865): onTransitionReady android.os.BinderProxy@f61a787: {id=9 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=CLOSE f=FILLS_TASK leash=Surface(name=ActivityRecord{26101e7 u0 com.google.android.documentsui/com.android.documentsui.picker.PickActivity)/@0x709a6b4 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{null m=TO_FRONT f=FILLS_TASK leash=Surface(name=ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity)/@0x31f02dd sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+V/WindowManagerShell(  865): Transition doesn't have explicit remote, search filters for match for {id=9 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=CLOSE f=FILLS_TASK leash=Surface(name=ActivityRecord{26101e7 u0 com.google.android.documentsui/com.android.documentsui.picker.PickActivity)/@0x709a6b4 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{null m=TO_FRONT f=FILLS_TASK leash=Surface(name=ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity)/@0x31f02dd sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+V/WindowManagerShell(  865): start default transition animation, info = {id=9 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=CLOSE f=FILLS_TASK leash=Surface(name=ActivityRecord{26101e7 u0 com.google.android.documentsui/com.android.documentsui.picker.PickActivity)/@0x709a6b4 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{null m=TO_FRONT f=FILLS_TASK leash=Surface(name=ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity)/@0x31f02dd sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+V/WindowManager(  534):     info={id=9 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=CLOSE f=FILLS_TASK leash=Surface(name=ActivityRecord{26101e7 u0 com.google.android.documentsui/com.android.documentsui.picker.PickActivity)/@0x43674f5 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0},{null m=TO_FRONT f=FILLS_TASK leash=Surface(name=ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity)/@0xe2d6d01 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+I/ImeTracker(  534): com.soulseekplus:285ea6eb: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:285ea6eb: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+D/AndroidRuntime( 7734): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7734): Using default boot image
+I/AndroidRuntime( 7734): Leaving lock profiling enabled
+D/AndroidRuntime( 7734): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7734): Shutting down VM
+D/AndroidRuntime( 7758): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7758): Using default boot image
+I/AndroidRuntime( 7758): Leaving lock profiling enabled
+D/AndroidRuntime( 7758): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7758): Shutting down VM
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@d11f2ff, mPriority=-1, mIsAnimationCallback=false}
+D/AndroidRuntime( 7782): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7782): Using default boot image
+I/AndroidRuntime( 7782): Leaving lock profiling enabled
+D/AndroidRuntime( 7782): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7782): Shutting down VM
+I/ImeTracker( 5604): com.soulseekplus:3e8d9ab9: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=8 initialSelEnd=8 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=8 initialSelEnd=8 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=8 initialSelEnd=8 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+I/ImeTracker( 5604): com.soulseekplus:5f19f2fd: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/AndroidIME( 1614): AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=8 initialSelEnd=8 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker(  534): com.soulseekplus:3e8d9ab9: onFailed at PHASE_WM_SHOW_IME_RUNNER
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@7d3c42e, mPriority=0, mIsAnimationCallback=false}
+I/ImeTracker( 5604): com.soulseekplus:5f19f2fd: onShown
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.soulseekplus>
+D/AndroidRuntime( 7825): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7825): Using default boot image
+I/AndroidRuntime( 7825): Leaving lock profiling enabled
+D/AndroidRuntime( 7825): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7825): Shutting down VM
+D/Slsk+/Engine( 5604): Arama yanıtı: slow_lofi, token=371316, 13 dosya
+I/ImeTracker(  534): com.soulseekplus:457884c9: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_SOFT_INPUT_BY_BACK_KEY
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@9d8c713, mPriority=-1, mIsAnimationCallback=false}
+I/ImeTracker( 5604): com.soulseekplus:5672833e: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker(  534): com.soulseekplus:5672833e: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/ImeTracker( 5604): com.soulseekplus:457884c9: onHidden
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.soulseekplus>
+D/AndroidRuntime( 7867): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7867): Using default boot image
+I/AndroidRuntime( 7867): Leaving lock profiling enabled
+D/AndroidRuntime( 7867): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7867): Shutting down VM
+D/AndroidRuntime( 7886): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7886): Using default boot image
+I/AndroidRuntime( 7886): Leaving lock profiling enabled
+D/AndroidRuntime( 7886): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7886): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:5d56b2fc: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:5d56b2fc: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+D/AndroidRuntime( 7915): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7915): Using default boot image
+I/AndroidRuntime( 7915): Leaving lock profiling enabled
+D/AndroidRuntime( 7915): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7915): Shutting down VM
+D/AndroidRuntime( 7933): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7933): Using default boot image
+I/AndroidRuntime( 7933): Leaving lock profiling enabled
+D/AndroidRuntime( 7933): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7933): Shutting down VM
+D/Slsk+/PeerNetwork( 5604): slow_lofi ile P bağlantısı kuruldu (P>slow_lofi)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=16 initialSelEnd=16 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+D/AndroidRuntime( 7963): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7963): Using default boot image
+I/AndroidRuntime( 7963): Leaving lock profiling enabled
+D/AndroidRuntime( 7963): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7963): Shutting down VM
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@b189243, mPriority=0, mIsAnimationCallback=true}
+I/ImeTracker( 5604): com.soulseekplus:a0649779: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:a0649779: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+D/AndroidRuntime( 7992): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 7992): Using default boot image
+I/AndroidRuntime( 7992): Leaving lock profiling enabled
+D/AndroidRuntime( 7992): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 7992): Shutting down VM
+D/AndroidRuntime( 8013): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8013): Using default boot image
+I/AndroidRuntime( 8013): Leaving lock profiling enabled
+D/AndroidRuntime( 8013): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8013): Shutting down VM
+D/AndroidRuntime( 8038): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8038): Using default boot image
+I/AndroidRuntime( 8038): Leaving lock profiling enabled
+D/AndroidRuntime( 8038): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8038): Shutting down VM
+D/AndroidRuntime( 8057): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8057): Using default boot image
+I/AndroidRuntime( 8057): Leaving lock profiling enabled
+D/AndroidRuntime( 8057): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8057): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:39ed2568: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:39ed2568: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+D/AndroidRuntime( 8088): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8088): Using default boot image
+I/AndroidRuntime( 8088): Leaving lock profiling enabled
+D/AndroidRuntime( 8088): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8088): Shutting down VM
+I/ImeTracker(  534): com.soulseekplus:f50953a: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:f50953a: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+D/AndroidRuntime( 8116): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8116): Using default boot image
+I/AndroidRuntime( 8116): Leaving lock profiling enabled
+D/AndroidRuntime( 8116): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8116): Shutting down VM
+D/AndroidRuntime( 8145): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8145): Using default boot image
+I/AndroidRuntime( 8145): Leaving lock profiling enabled
+D/AndroidRuntime( 8145): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8145): Shutting down VM
+D/AndroidRuntime( 8164): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8164): Using default boot image
+I/AndroidRuntime( 8164): Leaving lock profiling enabled
+D/AndroidRuntime( 8164): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8164): Shutting down VM
+D/AndroidRuntime( 8193): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8193): Using default boot image
+I/AndroidRuntime( 8193): Leaving lock profiling enabled
+D/AndroidRuntime( 8193): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8193): Shutting down VM
+D/AndroidRuntime( 8222): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8222): Using default boot image
+I/AndroidRuntime( 8222): Leaving lock profiling enabled
+D/AndroidRuntime( 8222): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8222): Shutting down VM
+D/AndroidRuntime( 8245): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8245): Using default boot image
+I/AndroidRuntime( 8245): Leaving lock profiling enabled
+D/AndroidRuntime( 8245): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8245): Shutting down VM
+D/AndroidRuntime( 8268): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8268): Using default boot image
+I/AndroidRuntime( 8268): Leaving lock profiling enabled
+D/AndroidRuntime( 8268): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8268): Shutting down VM
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000002 privateImeOptions=null actionName=GO actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, false)
+I/ImeTracker( 5604): com.soulseekplus:93ed683a: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000002 privateImeOptions=null actionName=GO actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000002 privateImeOptions=null actionName=GO actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+I/ImeTracker( 5604): com.soulseekplus:d3318849: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/AndroidIME( 1614): AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x8001(Normal) imeOptions=0x2000002 privateImeOptions=null actionName=GO actionLabel=null actionId=0 initialSelStart=0 initialSelEnd=0 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker(  534): com.soulseekplus:93ed683a: onFailed at PHASE_WM_SHOW_IME_RUNNER
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@773b224, mPriority=0, mIsAnimationCallback=false}
+I/ImeTracker( 5604): com.soulseekplus:d3318849: onShown
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.soulseekplus>
+D/AndroidRuntime( 8310): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8310): Using default boot image
+I/AndroidRuntime( 8310): Leaving lock profiling enabled
+D/AndroidRuntime( 8310): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8310): Shutting down VM
+D/Slsk+/PeerNetwork( 5604): jazz_corner ile P bağlantısı kuruldu (P>jazz_corner)
+I/ImeTracker(  534): com.soulseekplus:92733d91: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_SOFT_INPUT_BY_BACK_KEY
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@692210b, mPriority=0, mIsAnimationCallback=true}
+I/ImeTracker( 5604): com.soulseekplus:75e2cd6e: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker(  534): com.soulseekplus:75e2cd6e: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/ImeTracker( 5604): com.soulseekplus:92733d91: onHidden
+D/AndroidRuntime( 8349): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8349): Using default boot image
+I/AndroidRuntime( 8349): Leaving lock profiling enabled
+D/AndroidRuntime( 8349): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8349): Shutting down VM
+D/AndroidRuntime( 8373): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8373): Using default boot image
+I/AndroidRuntime( 8373): Leaving lock profiling enabled
+D/AndroidRuntime( 8373): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8373): Shutting down VM
+I/ImeTracker( 5604): com.soulseekplus:41251f15: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:41251f15: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.soulseekplus>
+D/AndroidRuntime( 8402): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8402): Using default boot image
+I/AndroidRuntime( 8402): Leaving lock profiling enabled
+D/AndroidRuntime( 8402): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8402): Shutting down VM
+D/AndroidRuntime( 8426): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8426): Using default boot image
+I/AndroidRuntime( 8426): Leaving lock profiling enabled
+D/AndroidRuntime( 8426): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8426): Shutting down VM
+D/AndroidRuntime( 8450): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8450): Using default boot image
+I/AndroidRuntime( 8450): Leaving lock profiling enabled
+D/AndroidRuntime( 8450): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8450): Shutting down VM
+D/AndroidRuntime( 8480): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8480): Using default boot image
+I/AndroidRuntime( 8480): Leaving lock profiling enabled
+D/AndroidRuntime( 8480): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8480): Shutting down VM
+D/AndroidRuntime( 8504): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8504): Using default boot image
+I/AndroidRuntime( 8504): Leaving lock profiling enabled
+D/AndroidRuntime( 8504): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8504): Shutting down VM
+D/AndroidRuntime( 8528): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8528): Using default boot image
+I/AndroidRuntime( 8528): Leaving lock profiling enabled
+D/AndroidRuntime( 8528): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8528): Shutting down VM
+D/AndroidRuntime( 8557): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8557): Using default boot image
+I/AndroidRuntime( 8557): Leaving lock profiling enabled
+D/AndroidRuntime( 8557): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8557): Shutting down VM
+D/AndroidRuntime( 8581): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8581): Using default boot image
+I/AndroidRuntime( 8581): Leaving lock profiling enabled
+D/AndroidRuntime( 8581): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8581): Shutting down VM
+D/AndroidRuntime( 8606): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8606): Using default boot image
+I/AndroidRuntime( 8606): Leaving lock profiling enabled
+D/AndroidRuntime( 8606): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8606): Shutting down VM
+D/AndroidRuntime( 8657): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8657): Using default boot image
+I/AndroidRuntime( 8657): Leaving lock profiling enabled
+D/AndroidRuntime( 8657): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8657): Shutting down VM
+D/AndroidRuntime( 8680): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8680): Using default boot image
+I/AndroidRuntime( 8680): Leaving lock profiling enabled
+D/AndroidRuntime( 8680): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8680): Shutting down VM
+D/AndroidRuntime( 8705): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8705): Using default boot image
+I/AndroidRuntime( 8705): Leaving lock profiling enabled
+D/AndroidRuntime( 8705): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8705): Shutting down VM
+D/AndroidRuntime( 8733): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8733): Using default boot image
+I/AndroidRuntime( 8733): Leaving lock profiling enabled
+D/AndroidRuntime( 8733): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8733): Shutting down VM
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+V/WindowManager(  534):     info={id=10 t=CHANGE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=CHANGE f=TRANSLUCENT|FLAG_IS_SYSTEM_WINDOW p=WCT{RemoteToken{553e958 Display{#0 state=ON size=2560x1600 ROTATION_0}}} leash=Surface(name=WindowToken{5a89dec type=2024 android.os.BinderProxy@881989f})/@0x8429cca sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 2560, 1600) d=0},{null m=CHANGE f=TRANSLUCENT|FLAG_IS_SYSTEM_WINDOW p=WCT{RemoteToken{553e958 Display{#0 state=ON size=2560x1600 ROTATION_0}}} leash=Surface(name=WindowToken{79ef9da type=2024 android.os.BinderProxy@8155785})/@0xea6f035 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 2560, 1600) d=0},{null m=CHANGE f=TRANSLUCENT|FLAG_IS_SYSTEM_WINDOW p=WCT{RemoteToken{553e958 Display{#0 state=ON size=2560x1600 ROTATION_0}}} leash=Surface(name=WindowToken{5f716fc type=2000 android.os.BinderProxy@d54c0ce})/@0xf22126c sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 2560, 1600) d=0},{WCT{RemoteToken{12be23 Task{f640305 #8 type=standard A=10192:com.soulseekplus}}} m=CHANGE f=NONE p=WCT{RemoteToken{7e35ab1 DefaultTaskDisplayArea@198547257}} leash=Surface(name=Task=8)/@0xf8323dd sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 2560, 1600) d=0},{WCT{RemoteToken{7e35ab1 DefaultTaskDisplayArea@198547257}} m=CHANGE f=NONE p=WCT{RemoteToken{553e958 Display{#0 state=ON size=2560x1600 ROTATION_0}}} leash=Surface(name=DefaultTaskDisplayArea)/@0xce752f5 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 2560, 1600) d=0},{WCT{RemoteToken{553e958 Display{#0 state=ON size=2560x1600 ROTATION_0}}} m=CHANGE f=IS_DISPLAY leash=Surface(name=WindowedMagnification:0:31)/@0xea0d934 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 2560, 1600) d=0}]}
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+I/Launcher.IconCache( 1122): Database bulk icon loading failed, using fallback bulk icon loading for: ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity}
+D/AndroidRuntime( 8794): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8794): Using default boot image
+I/AndroidRuntime( 8794): Leaving lock profiling enabled
+D/AndroidRuntime( 8794): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8794): Shutting down VM
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@ea9881d, mPriority=-1, mIsAnimationCallback=false}
+D/AndroidRuntime( 8830): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8830): Using default boot image
+I/AndroidRuntime( 8830): Leaving lock profiling enabled
+D/AndroidRuntime( 8830): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8830): Shutting down VM
+D/AndroidRuntime( 8850): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8850): Using default boot image
+I/AndroidRuntime( 8850): Leaving lock profiling enabled
+D/AndroidRuntime( 8850): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8850): Shutting down VM
+D/Slsk+/PeerNetwork( 5604): jazz_corner P bağlantısı kapandı: null
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@caa96bc, mPriority=0, mIsAnimationCallback=true}
+D/AndroidRuntime( 8883): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8883): Using default boot image
+I/AndroidRuntime( 8883): Leaving lock profiling enabled
+D/AndroidRuntime( 8883): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8883): Shutting down VM
+D/AndroidRuntime( 8905): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8905): Using default boot image
+I/AndroidRuntime( 8905): Leaving lock profiling enabled
+D/AndroidRuntime( 8905): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8905): Shutting down VM
+D/AndroidRuntime( 8938): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8938): Using default boot image
+I/AndroidRuntime( 8938): Leaving lock profiling enabled
+D/AndroidRuntime( 8938): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8938): Shutting down VM
+D/AndroidRuntime( 8957): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8957): Using default boot image
+I/AndroidRuntime( 8957): Leaving lock profiling enabled
+D/AndroidRuntime( 8957): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8957): Shutting down VM
+D/AndroidRuntime( 8990): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 8990): Using default boot image
+I/AndroidRuntime( 8990): Leaving lock profiling enabled
+D/AndroidRuntime( 8990): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 8990): Shutting down VM
+D/AndroidRuntime( 9009): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9009): Using default boot image
+I/AndroidRuntime( 9009): Leaving lock profiling enabled
+D/AndroidRuntime( 9009): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9009): Shutting down VM
+D/AndroidRuntime( 9042): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9042): Using default boot image
+I/AndroidRuntime( 9042): Leaving lock profiling enabled
+D/AndroidRuntime( 9042): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9042): Shutting down VM
+D/AndroidRuntime( 9061): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9061): Using default boot image
+I/AndroidRuntime( 9061): Leaving lock profiling enabled
+D/AndroidRuntime( 9061): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9061): Shutting down VM
+D/AndroidRuntime( 9094): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9094): Using default boot image
+I/AndroidRuntime( 9094): Leaving lock profiling enabled
+D/AndroidRuntime( 9094): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9094): Shutting down VM
+D/AndroidRuntime( 9113): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9113): Using default boot image
+I/AndroidRuntime( 9113): Leaving lock profiling enabled
+D/AndroidRuntime( 9113): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9113): Shutting down VM
+D/AndroidRuntime( 9146): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9146): Using default boot image
+I/AndroidRuntime( 9146): Leaving lock profiling enabled
+D/AndroidRuntime( 9146): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9146): Shutting down VM
+D/AndroidRuntime( 9165): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9165): Using default boot image
+I/AndroidRuntime( 9165): Leaving lock profiling enabled
+D/AndroidRuntime( 9165): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9165): Shutting down VM
+D/AndroidRuntime( 9197): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9197): Using default boot image
+I/AndroidRuntime( 9197): Leaving lock profiling enabled
+D/AndroidRuntime( 9197): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9197): Shutting down VM
+D/AndroidRuntime( 9216): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9216): Using default boot image
+I/AndroidRuntime( 9216): Leaving lock profiling enabled
+D/AndroidRuntime( 9216): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9216): Shutting down VM
+D/Slsk+/PeerNetwork( 5604): slow_lofi P bağlantısı kapandı: null
+D/AndroidRuntime( 9248): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9248): Using default boot image
+I/AndroidRuntime( 9248): Leaving lock profiling enabled
+D/AndroidRuntime( 9248): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9248): Shutting down VM
+D/AndroidRuntime( 9267): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9267): Using default boot image
+I/AndroidRuntime( 9267): Leaving lock profiling enabled
+D/AndroidRuntime( 9267): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9267): Shutting down VM
+D/AndroidRuntime( 9300): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9300): Using default boot image
+I/AndroidRuntime( 9300): Leaving lock profiling enabled
+D/AndroidRuntime( 9300): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9300): Shutting down VM
+D/AndroidRuntime( 9319): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9319): Using default boot image
+I/AndroidRuntime( 9319): Leaving lock profiling enabled
+D/AndroidRuntime( 9319): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9319): Shutting down VM
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@e237b34, mPriority=-1, mIsAnimationCallback=false}
+D/AndroidRuntime( 9348): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9348): Using default boot image
+I/AndroidRuntime( 9348): Leaving lock profiling enabled
+D/AndroidRuntime( 9348): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9348): Shutting down VM
+I/ImeTracker( 5604): com.soulseekplus:bb78f122: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT_BY_INSETS_API
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=16 initialSelEnd=16 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[mParcelledData.dataSize=404]}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInputView():1995 onStartInputView(EditorInfo{inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=16 initialSelEnd=16 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}]}, false)
+I/ImeTracker( 5604): com.soulseekplus:93570e75: onRequestShow at ORIGIN_CLIENT_SHOW_SOFT_INPUT reason SHOW_SOFT_INPUT
+I/AndroidIME( 1614): AbstractIme.onActivate():86 LatinIme.onActivate() : EditorInfo = inputType=0x8001(Normal) imeOptions=0x2000003 privateImeOptions=null actionName=SEARCH actionLabel=null actionId=0 initialSelStart=16 initialSelEnd=16 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=-1 fieldName=null extras=Bundle[{android.support.text.emoji.emojiCompat_metadataVersion=9, androidx.core.view.inputmethod.EditorInfoCompat.STYLUS_HANDWRITING_ENABLED=true, android.support.text.emoji.emojiCompat_replaceAll=false}], IncognitoMode = false, DeviceLocked = false
+I/ImeTracker(  534): com.soulseekplus:bb78f122: onFailed at PHASE_WM_SHOW_IME_RUNNER
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@b8930fc, mPriority=0, mIsAnimationCallback=false}
+I/ImeTracker( 5604): com.soulseekplus:93570e75: onShown
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::0@1@com.soulseekplus>
+D/AndroidRuntime( 9420): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9420): Using default boot image
+I/AndroidRuntime( 9420): Leaving lock profiling enabled
+D/AndroidRuntime( 9420): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9420): Shutting down VM
+D/Slsk+/Engine( 5604): Arama yanıtı: slow_lofi, token=371317, 9 dosya
+D/Slsk+/Engine( 5604): Arama yanıtı: vinyl_archive, token=371317, 22 dosya
+D/Slsk+/Engine( 5604): Arama yanıtı: metal_cave, token=371317, 22 dosya
+D/Slsk+/PeerNetwork( 5604): vinyl_archive P bağlantısı kapandı: null
+D/Slsk+/PeerNetwork( 5604): metal_cave P bağlantısı kapandı: null
+D/Slsk+/PeerNetwork( 5604): slow_lofi P bağlantısı kapandı: null
+I/ImeTracker(  534): com.soulseekplus:c229b194: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_SOFT_INPUT_BY_BACK_KEY
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@993826d, mPriority=-1, mIsAnimationCallback=false}
+I/ImeTracker( 5604): com.soulseekplus:aa1e8094: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker(  534): com.soulseekplus:aa1e8094: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/ImeTracker( 5604): com.soulseekplus:c229b194: onHidden
+D/AndroidRuntime( 9462): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9462): Using default boot image
+I/AndroidRuntime( 9462): Leaving lock profiling enabled
+D/AndroidRuntime( 9462): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9462): Shutting down VM
+I/ActivityTaskManager(  534): START u0 {act=android.intent.action.VIEW dat=slsk://someuser/... flg=0x10000000 pkg=com.soulseekplus cmp=com.soulseekplus/.ui.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=3
+D/WindowManagerShell(  865): onActivityRestartAttempt: ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity}
+D/CoreBackPreview(  534): Window{c727e80 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c79a70a, mPriority=-1, mIsAnimationCallback=false}
+D/CoreBackPreview(  534): Window{c727e80 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@c6d5b7b, mPriority=0, mIsAnimationCallback=true}
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@af00d62, mPriority=0, mIsAnimationCallback=true}
+I/ImeTracker(  534): com.soulseekplus:c10e0256: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:c10e0256: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+I/ImeTracker( 5604): com.soulseekplus:d10921c3: onRequestHide at ORIGIN_CLIENT_HIDE_SOFT_INPUT reason HIDE_SOFT_INPUT_BY_INSETS_API
+I/ImeTracker( 5604): com.soulseekplus:d10921c3: onCancelled at PHASE_CLIENT_APPLY_ANIMATION
+E/FrameTracker( 5604): force finish cuj, time out: J<IME_INSETS_ANIMATION::1@1@com.soulseekplus>
+D/AndroidRuntime( 9491): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9491): Using default boot image
+I/AndroidRuntime( 9491): Leaving lock profiling enabled
+D/AndroidRuntime( 9491): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9491): Shutting down VM
+D/CoreBackPreview(  534): Window{c727e80 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback null
+W/InputManager-JNI(  534): Input channel object 'c727e80 com.soulseekplus/com.soulseekplus.ui.MainActivity (client)' was disposed without first being removed with the input manager!
+I/ImeTracker(  534): com.soulseekplus:3e4c24bb: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:3e4c24bb: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+W/PackageConfigPersister(  534): App-specific configuration not found for packageName: com.soulseekplus and userId: 0
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@d138c04, mPriority=-1, mIsAnimationCallback=false}
+D/CoreBackPreview(  534): Window{1e326b0 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback null
+W/InputManager-JNI(  534): Input channel object '1e326b0 com.soulseekplus/com.soulseekplus.ui.MainActivity (client)' was disposed without first being removed with the input manager!
+D/CoreBackPreview(  534): Window{e9d16b3 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@53813e9, mPriority=-1, mIsAnimationCallback=false}
+D/CoreBackPreview(  534): Window{e9d16b3 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@e27a86e, mPriority=0, mIsAnimationCallback=true}
+I/WindowManager(  534): finishDrawing of relaunch: Window{e9d16b3 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity} 61ms
+I/ImeTracker(  534): com.soulseekplus:f7350249: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:f7350249: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+I/ActivityManager(  534): Force stopping com.soulseekplus appid=10192 user=0: from pid 9531
+I/ActivityManager(  534): Killing 5604:com.soulseekplus/u0a192 (adj 0): stop com.soulseekplus due to from pid 9531
+W/ActivityTaskManager(  534): Force removing ActivityRecord{fd6116f u0 com.soulseekplus/.ui.MainActivity t8 f}}: app died, no saved state
+V/WindowManagerShell(  865): Transition requested: android.os.BinderProxy@4bec756 TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=false baseIntent=Intent { flg=0x10000000 cmp=com.soulseekplus/.ui.MainActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} numActivities=0 lastActiveTime=362871 supportsMultiWindow=true resizeMode=2 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@87b43d7} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+D/CarrierSvcBindHelper( 1083): onHandleForceStop: [com.soulseekplus]
+V/ActivityManager(  534): Got obituary of 5604:com.soulseekplus
+I/WindowManager(  534): WIN DEATH: Window{e9d16b3 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}
+W/InputManager-JNI(  534): Input channel object 'e9d16b3 com.soulseekplus/com.soulseekplus.ui.MainActivity (client)' was disposed without first being removed with the input manager!
+D/ConnectivityService(  534): releasing NetworkRequest [ REQUEST id=153, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ] (release request)
+I/ImeTracker(  534): com.soulseekplus:3eb514d1: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_REMOVE_CLIENT
+I/ImeTracker(  534): com.soulseekplus:3eb514d1: onCancelled at PHASE_SERVER_SHOULD_HIDE
+V/SplashScreenExceptionList(  534): SplashScreen checking exception for package com.soulseekplus (target sdk:35) -> false
+I/ActivityTaskManager(  534): Add Task{f640305 #8 type=standard A=10192:com.soulseekplus} to hidden list because adding Task{6ad5c64 #9 type=standard A=10192:com.soulseekplus}
+I/ActivityTaskManager(  534): START u0 {flg=0x10000000 cmp=com.soulseekplus/.ui.MainActivity} with LAUNCH_SINGLE_TASK from uid 2000 (BAL_ALLOW_PERMISSION) result code=0
+I/ActivityManager(  534): Start proc 9543:com.soulseekplus/u0a192 for next-top-activity {com.soulseekplus/com.soulseekplus.ui.MainActivity}
+W/WindowManager(  534): Failed to deliver inset control state change to w=Window{e9d16b3 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity EXITING}
+W/WindowManager(  534): Failed to deliver inset control state change to w=Window{e9d16b3 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity EXITING}
+D/nativeloader( 9543): Configuring clns-6 for other apk /data/app/~~oQt6y7f0uLEiauUI6q9yjg==/com.soulseekplus-11y5nFTPT9AhP0_wIgIDBQ==/base.apk. target_sdk_version=35, uses_libraries=, library_path=/data/app/~~oQt6y7f0uLEiauUI6q9yjg==/com.soulseekplus-11y5nFTPT9AhP0_wIgIDBQ==/lib/x86_64:/data/app/~~oQt6y7f0uLEiauUI6q9yjg==/com.soulseekplus-11y5nFTPT9AhP0_wIgIDBQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.soulseekplus
+V/GraphicsEnvironment( 9543): ANGLE GameManagerService for com.soulseekplus: false
+V/GraphicsEnvironment( 9543): com.soulseekplus is not listed in per-application setting
+V/WindowManager(  534): Sent Transition #13 createdAt=10-22 20:18:41.096 via request=TransitionRequestInfo { type = CLOSE, triggerTask = TaskInfo{userId=0 taskId=8 displayId=0 isRunning=false baseIntent=Intent { flg=0x10000000 cmp=com.soulseekplus/.ui.MainActivity } baseActivity=null topActivity=null origActivity=null realActivity=ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity} numActivities=0 lastActiveTime=362871 supportsMultiWindow=true resizeMode=2 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{12be23 Task{f640305 #8 type=standard A=10192:com.soulseekplus}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=null topActivityInfo=null launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=true isVisible=true isVisibleRequested=true isSleeping=false topActivityInSizeCompat=false topActivityEligibleForLetterboxEducation= false topActivityLetterboxed= false isFromDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 locusId=null displayAreaFeatureId=1 cameraCompatControlState=hidden}, remoteTransition = null, displayChange = null }
+V/WindowManager(  534):     info={id=13 t=CLOSE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{WCT{RemoteToken{ef35178 Task{6ad5c64 #9 type=standard A=10192:com.soulseekplus}}} m=OPEN f=MOVE_TO_TOP leash=Surface(name=Task=9)/@0x57c7fea sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 2560, 1600) d=0},{WCT{RemoteToken{12be23 Task{f640305 #8 type=standard A=10192:com.soulseekplus}}} m=CLOSE f=NONE leash=Surface(name=Task=8)/@0xf8323dd sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 2560, 1600) d=0}]}
+W/WindowManager(  534): Failed to deliver inset control state change to w=Window{e9d16b3 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity EXITING}
+I/Slsk+/ShareIndex( 9543): Paylaşım dizini kuruldu: 0 klasör, 0 dosya, 0 kelime (0 ms)
+W/WindowManager(  534): Exception thrown during dispatchAppVisibility Window{e9d16b3 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity EXITING}
+I/ActivityManager(  534): Background started FGS: Allowed [callingPackage: com.soulseekplus; callingUid: 10192; uidState: TOP ; uidBFSL: [BFSL]; intent: Intent { cmp=com.soulseekplus/.service.SoulseekService }; code:PROC_STATE_TOP; tempAllowListReason:<null>; targetSdkVersion:35; callerTargetSdkVersion:35; startForegroundCount:0; bindFromPackage:null: isBindService:false]
+D/ConnectivityService(  534): requestNetwork for uid/pid:10192/9543 activeRequest: null callbackRequest: 160 [NetworkRequest [ REQUEST id=161, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+D/WifiNetworkFactory(  534): got request NetworkRequest [ REQUEST id=161, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]
+D/UntrustedWifiNetworkFactory(  534): got request NetworkRequest [ REQUEST id=161, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]
+D/OemPaidWifiNetworkFactory(  534): got request NetworkRequest [ REQUEST id=161, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]
+D/MultiInternetWifiNetworkFactory(  534): got request NetworkRequest [ REQUEST id=161, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10192 RequestorUid: 10192 RequestorPkg: com.soulseekplus UnderlyingNetworks: Null] ]
+D/CoreBackPreview(  534): Window{ed6c93e u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@ff46b31, mPriority=-1, mIsAnimationCallback=false}
+I/ActivityTaskManager(  534): Displayed com.soulseekplus/.ui.MainActivity for user 0: +1s20ms
+W/InputManager-JNI(  534): Input channel object 'd13f5ce Splash Screen com.soulseekplus (client)' was disposed without first being removed with the input manager!
+I/ImeTracker(  534): com.soulseekplus:9a0d02a2: onRequestHide at ORIGIN_SERVER_HIDE_INPUT reason HIDE_UNSPECIFIED_WINDOW
+I/ImeTracker(  534): com.soulseekplus:9a0d02a2: onCancelled at PHASE_SERVER_SHOULD_HIDE
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, false)
+D/ProfileInstaller( 9543): Skipping profile installation for com.soulseekplus
+W/DefaultDispatch( 9543): type=1400 audit(0.0:390): avc:  denied  { read } for  name="route" dev="proc" ino=4026532045 scontext=u:r:untrusted_app:s0:c192,c256,c512,c768 tcontext=u:object_r:proc_net:s0 tclass=file permissive=0 app=com.soulseekplus
+D/Slsk+/PortMapper( 9543): NAT-PMP 10.0.2.1: Poll timed out
+D/AndroidRuntime( 9609): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9609): Using default boot image
+I/AndroidRuntime( 9609): Leaving lock profiling enabled
+D/AndroidRuntime( 9609): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9609): Shutting down VM
+D/AndroidRuntime( 9629): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9629): Using default boot image
+I/AndroidRuntime( 9629): Leaving lock profiling enabled
+D/AndroidRuntime( 9629): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9629): Shutting down VM
+D/CoreBackPreview(  534): Window{ed6c93e u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@13a8d6a, mPriority=0, mIsAnimationCallback=true}
+D/AndroidRuntime( 9665): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9665): Using default boot image
+I/AndroidRuntime( 9665): Leaving lock profiling enabled
+D/AndroidRuntime( 9665): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9665): Shutting down VM
+D/AndroidRuntime( 9684): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9684): Using default boot image
+I/AndroidRuntime( 9684): Leaving lock profiling enabled
+D/AndroidRuntime( 9684): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9684): Shutting down VM
+D/AndroidRuntime( 9721): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9721): Using default boot image
+I/AndroidRuntime( 9721): Leaving lock profiling enabled
+D/AndroidRuntime( 9721): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9721): Shutting down VM
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+V/WindowManager(  534):     info={id=14 t=CHANGE f=0x0 trk=0 r=[0@Point(0, 0)] c=[{null m=CHANGE f=TRANSLUCENT|FLAG_IS_SYSTEM_WINDOW p=WCT{RemoteToken{553e958 Display{#0 state=ON size=1080x2400 ROTATION_0}}} leash=Surface(name=WindowToken{5a89dec type=2024 android.os.BinderProxy@881989f})/@0x8429cca sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 1080, 2400) d=0},{null m=CHANGE f=TRANSLUCENT|FLAG_IS_SYSTEM_WINDOW p=WCT{RemoteToken{553e958 Display{#0 state=ON size=1080x2400 ROTATION_0}}} leash=Surface(name=WindowToken{79ef9da type=2024 android.os.BinderProxy@8155785})/@0xea6f035 sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 1080, 2400) d=0},{null m=CHANGE f=TRANSLUCENT|FLAG_IS_SYSTEM_WINDOW p=WCT{RemoteToken{553e958 Display{#0 state=ON size=1080x2400 ROTATION_0}}} leash=Surface(name=WindowToken{70b9364 type=2024 android.os.BinderProxy@f9998f7})/@0xeb4eead sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 1080, 2400) d=0},{null m=CHANGE f=TRANSLUCENT|FLAG_IS_SYSTEM_WINDOW p=WCT{RemoteToken{553e958 Display{#0 state=ON size=1080x2400 ROTATION_0}}} leash=Surface(name=WindowToken{5f716fc type=2000 android.os.BinderProxy@d54c0ce})/@0xf22126c sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{ef35178 Task{6ad5c64 #9 type=standard A=10192:com.soulseekplus}}} m=CHANGE f=NONE p=WCT{RemoteToken{7e35ab1 DefaultTaskDisplayArea@198547257}} leash=Surface(name=Task=9)/@0x57c7fea sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{7e35ab1 DefaultTaskDisplayArea@198547257}} m=CHANGE f=NONE p=WCT{RemoteToken{553e958 Display{#0 state=ON size=1080x2400 ROTATION_0}}} leash=Surface(name=DefaultTaskDisplayArea)/@0xce752f5 sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 1080, 2400) d=0},{WCT{RemoteToken{553e958 Display{#0 state=ON size=1080x2400 ROTATION_0}}} m=CHANGE f=IS_DISPLAY leash=Surface(name=WindowedMagnification:0:31)/@0xea0d934 sb=Rect(0, 0 - 2560, 1600) eb=Rect(0, 0 - 1080, 2400) d=0}]}
+I/GoogleInputMethodService( 1614): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.soulseekplus fieldId=0 fieldName=null extras=null}, true)
+I/Launcher.IconCache( 1122): Database bulk icon loading failed, using fallback bulk icon loading for: ComponentInfo{com.soulseekplus/com.soulseekplus.ui.MainActivity}
+D/AndroidRuntime( 9781): >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+I/AndroidRuntime( 9781): Using default boot image
+I/AndroidRuntime( 9781): Leaving lock profiling enabled
+D/AndroidRuntime( 9781): Calling main entry com.android.commands.uiautomator.Launcher
+D/AndroidRuntime( 9781): Shutting down VM
+D/CoreBackPreview(  534): Window{ed6c93e u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@78b52ba, mPriority=-1, mIsAnimationCallback=false}
+D/CoreBackPreview(  534): Window{ed6c93e u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback null
+W/InputManager-JNI(  534): Input channel object 'ed6c93e com.soulseekplus/com.soulseekplus.ui.MainActivity (client)' was disposed without first being removed with the input manager!
+D/CoreBackPreview(  534): Window{2183d61 u0 com.soulseekplus/com.soulseekplus.ui.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@e1b9d47, mPriority=-1, mIsAnimationCallback=false}
