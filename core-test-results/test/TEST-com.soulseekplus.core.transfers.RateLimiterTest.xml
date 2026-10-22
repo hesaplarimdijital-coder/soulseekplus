@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.transfers.RateLimiterTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:20" hostname="runnervm8k3b6" time="0.005">
+  <properties/>
+  <testcase name="unlimitedNeverWaits" classname="com.soulseekplus.core.transfers.RateLimiterTest" time="0.001"/>
+  <testcase name="idleTimeBuildsOnlyABoundedBurst" classname="com.soulseekplus.core.transfers.RateLimiterTest" time="0.0"/>
+  <testcase name="pathSanitizerBlocksTraversalAndIllegalCharacters" classname="com.soulseekplus.core.transfers.RateLimiterTest" time="0.003"/>
+  <testcase name="limitCanBeChangedAndRemovedLive" classname="com.soulseekplus.core.transfers.RateLimiterTest" time="0.0"/>
+  <testcase name="chunkSizeShrinksWithTheLimit" classname="com.soulseekplus.core.transfers.RateLimiterTest" time="0.0"/>
+  <testcase name="acquireReturnsImmediatelyWhenTokensAreAvailable" classname="com.soulseekplus.core.transfers.RateLimiterTest" time="0.001"/>
+  <testcase name="speedMeterAveragesOverTheWindow" classname="com.soulseekplus.core.transfers.RateLimiterTest" time="0.0"/>
+  <testcase name="reservationsAreSpacedAtTheConfiguredRate" classname="com.soulseekplus.core.transfers.RateLimiterTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

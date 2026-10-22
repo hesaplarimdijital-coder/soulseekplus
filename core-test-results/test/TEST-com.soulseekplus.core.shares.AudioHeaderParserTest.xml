@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.shares.AudioHeaderParserTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:19" hostname="runnervm8k3b6" time="0.016">
+  <properties/>
+  <testcase name="flacRejectsGarbage" classname="com.soulseekplus.core.shares.AudioHeaderParserTest" time="0.001"/>
+  <testcase name="mp3GarbageAndUnsupported" classname="com.soulseekplus.core.shares.AudioHeaderParserTest" time="0.004"/>
+  <testcase name="mp3Mpeg2AndSkipsJunk" classname="com.soulseekplus.core.shares.AudioHeaderParserTest" time="0.0"/>
+  <testcase name="mp3WithId3AndXingVbr" classname="com.soulseekplus.core.shares.AudioHeaderParserTest" time="0.0"/>
+  <testcase name="wavFormat" classname="com.soulseekplus.core.shares.AudioHeaderParserTest" time="0.006"/>
+  <testcase name="flacHiResAndId3Prefix" classname="com.soulseekplus.core.shares.AudioHeaderParserTest" time="0.0"/>
+  <testcase name="flacStreamInfo" classname="com.soulseekplus.core.shares.AudioHeaderParserTest" time="0.0"/>
+  <testcase name="mp3ConstantBitrate" classname="com.soulseekplus.core.shares.AudioHeaderParserTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

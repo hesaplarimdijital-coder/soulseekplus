@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.transfers.UploadQueueTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:20" hostname="runnervm8k3b6" time="0.003">
+  <properties/>
+  <testcase name="fifoFollowsGlobalOrderAndSkipsActiveUsers" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.001"/>
+  <testcase name="activeEntryCannotBeQueuedAgain" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.0"/>
+  <testcase name="reportedQueueSizeDependsOnPrivilege" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.0"/>
+  <testcase name="roundRobinServesEachWaitingUserOnceBeforeRepeating" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.0"/>
+  <testcase name="roundRobinCounterIsKeptWhenUserAddsMoreFiles" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.0"/>
+  <testcase name="duplicatesAreRejectedAndRemovalCleansUp" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.0"/>
+  <testcase name="privilegedUsersAreServedFirstInBothModes" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.001"/>
+  <testcase name="clearResetsEverything" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.0"/>
+  <testcase name="slotsAreCountedPerDistinctUser" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.0"/>
+  <testcase name="roundRobinPositionGrowsWithOwnQueueAndRespectsPrivilege" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.0"/>
+  <testcase name="fifoPositionsAreOneBasedAndPrivilegedUsersSeeTheirOwnLine" classname="com.soulseekplus.core.transfers.UploadQueueTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

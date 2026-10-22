@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.search.SearchGroupingTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:18" hostname="runnervm8k3b6" time="0.023">
+  <properties/>
+  <testcase name="collapsedGroupsHideChildrenButKeepTotals" classname="com.soulseekplus.core.search.SearchGroupingTest" time="0.014"/>
+  <testcase name="userGroupingProducesHeadersAndAggregates" classname="com.soulseekplus.core.search.SearchGroupingTest" time="0.0"/>
+  <testcase name="rowKeysAreUnique" classname="com.soulseekplus.core.search.SearchGroupingTest" time="0.001"/>
+  <testcase name="flatSortsBySpeedDescendingByDefault" classname="com.soulseekplus.core.search.SearchGroupingTest" time="0.0"/>
+  <testcase name="folderGroupingGroupsPerUserAndFolder" classname="com.soulseekplus.core.search.SearchGroupingTest" time="0.0"/>
+  <testcase name="groupsOrderedBySizeUsingTotals" classname="com.soulseekplus.core.search.SearchGroupingTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.protocol.ProtocolMessagesTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:18" hostname="runnervm8k3b6" time="0.073">
+  <properties/>
+  <testcase name="searchResponseHeaderCanBePeekedWithoutFullDecode" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.0"/>
+  <testcase name="distributedMessagesRoundTrip" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="distributedSearchWithWrongIdentifierIsRejected" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="initMessagesRoundTrip" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.0"/>
+  <testcase name="fileSizeQuirkWithHighByteSetKeepsLow32Bits" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="userMessages" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="unknownServerCodeIsIgnoredAndTruncatedBodyThrows" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.0"/>
+  <testcase name="sharedFileListRoundTripIncludingLockedFolders" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.0"/>
+  <testcase name="loginResponses" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.0"/>
+  <testcase name="clientRequestsHaveExpectedCodesAndPayloads" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.007"/>
+  <testcase name="roomMessages" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="networkNotifications" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="loginRequestLayout" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.0"/>
+  <testcase name="transferMessagesRoundTrip" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.007"/>
+  <testcase name="legacyQueueUploadIsLatin1" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.007"/>
+  <testcase name="decompressionBombIsRejected" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.038"/>
+  <testcase name="userInfoRoundTrip" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="folderContentsRoundTrip" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="peerSizeLimitsFollowTheMessageType" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.0"/>
+  <testcase name="hostileListCountsAreRejectedWithoutAllocation" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.001"/>
+  <testcase name="searchResponseCompressedRoundTrip" classname="com.soulseekplus.core.protocol.ProtocolMessagesTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

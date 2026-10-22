@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.chat.ChatRepositoryTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:11" hostname="runnervm8k3b6" time="0.267">
+  <properties/>
+  <testcase name="tickersLifecycle" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.076"/>
+  <testcase name="aliasesGoThroughMutatorAndExpandFromSettings" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.011"/>
+  <testcase name="joinedRoomsKeepOrderAndUsers" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.001"/>
+  <testcase name="roomMessagesUnreadMentionsAndActions" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.013"/>
+  <testcase name="wholeWordMentionDetection" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.001"/>
+  <testcase name="activeRoomDoesNotAccumulateUnread" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.0"/>
+  <testcase name="submitUserListCommandsUseMutatorOrReportUnapplied" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.008"/>
+  <testcase name="privateMessagesFlowAndUnread" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.003"/>
+  <testcase name="submitPlainTextAndActions" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.002"/>
+  <testcase name="historyIsCapped" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.124"/>
+  <testcase name="userStatusUpdatesAcrossRooms" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.003"/>
+  <testcase name="submitJoinLeaveAndNavigation" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.008"/>
+  <testcase name="roomListAndJoinFailure" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.004"/>
+  <testcase name="ignoredUsersAreSilenced" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.0"/>
+  <testcase name="adminPrivateMessageIsSystem" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.001"/>
+  <testcase name="awayBackClearHelpUnknownUsage" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.004"/>
+  <testcase name="loginRejoinsAutoJoinAndPreviousRooms" classname="com.soulseekplus.core.chat.ChatRepositoryTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

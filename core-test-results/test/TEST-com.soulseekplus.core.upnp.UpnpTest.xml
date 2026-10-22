@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.upnp.UpnpTest" tests="17" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:20" hostname="runnervm8k3b6" time="0.879">
+  <properties/>
+  <testcase name="natPmpResponseParsing" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.001"/>
+  <testcase name="ssdpSearchRequestIsWellFormed" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.001"/>
+  <testcase name="soapBodiesCarryTheMappingParameters" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.006"/>
+  <testcase name="descriptionPicksWanServiceAndResolvesControlUrl" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.023"/>
+  <testcase name="portMapperMapsViaUpnpRenewsStateAndUnmapsOnStop" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.02"/>
+  <testcase name="natPmpTimesOutWhenNobodyAnswers" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.755"/>
+  <testcase name="portMapperFallsBackToNatPmp" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.017"/>
+  <testcase name="httpClientRefusesNonLocalHosts" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.0"/>
+  <testcase name="descriptionWithDoctypeIsRejected" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.001"/>
+  <testcase name="descriptionPrefersNewerServiceAndRejectsForeignControlHosts" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.011"/>
+  <testcase name="natPmpClientTalksToAGateway" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.007"/>
+  <testcase name="addPortMappingRetriesWithPermanentLeaseOnError725" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.023"/>
+  <testcase name="httpResponseParsingHandlesChunkedBodies" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.001"/>
+  <testcase name="natPmpRequestLayout" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.0"/>
+  <testcase name="ssdpLocationParsing" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.003"/>
+  <testcase name="soapErrorsCarryTheUpnpErrorCode" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.008"/>
+  <testcase name="procNetRouteGatewayParsing" classname="com.soulseekplus.core.upnp.UpnpTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

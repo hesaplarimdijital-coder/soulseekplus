@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.links.SlskUriTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:18" hostname="runnervm8k3b6" time="0.027">
+  <properties/>
+  <testcase name="buildsNicotineCompatibleLinks" classname="com.soulseekplus.core.links.SlskUriTest" time="0.004"/>
+  <testcase name="decodesUtf8AndKeepsPlus" classname="com.soulseekplus.core.links.SlskUriTest" time="0.0"/>
+  <testcase name="parsesUserFileAndFolder" classname="com.soulseekplus.core.links.SlskUriTest" time="0.005"/>
+  <testcase name="rejectsInvalid" classname="com.soulseekplus.core.links.SlskUriTest" time="0.003"/>
+  <testcase name="roundTrips" classname="com.soulseekplus.core.links.SlskUriTest" time="0.001"/>
+  <testcase name="findsLinksInText" classname="com.soulseekplus.core.links.SlskUriTest" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

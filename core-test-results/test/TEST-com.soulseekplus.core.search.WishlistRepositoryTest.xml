@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.search.WishlistRepositoryTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:18" hostname="runnervm8k3b6" time="1.066">
+  <properties/>
+  <testcase name="newSearchCancelsPreviousTokenAndIgnoresStaleResponses" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.02"/>
+  <testcase name="seenKeysSurviveRestartSoOnlyNewHitsCountAgain" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.003"/>
+  <testcase name="compactKeyIsStable" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.0"/>
+  <testcase name="intervalDrivesTimer" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="1.003"/>
+  <testcase name="addSearchesImmediatelyWhenLoggedIn" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.0"/>
+  <testcase name="onlyNewHitsAreCountedAndEventIsCoalesced" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.024"/>
+  <testcase name="loadsExistingItems" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.003"/>
+  <testcase name="addDoesNotSearchWhenOffline" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.001"/>
+  <testcase name="seenKeysAreBounded" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.001"/>
+  <testcase name="removeCancelsSearchAndForgetsSeen" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.0"/>
+  <testcase name="addRemoveToggleAndPersist" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.001"/>
+  <testcase name="noEnabledItemsMeansNoSearch" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.006"/>
+  <testcase name="searchNextRotatesThroughEnabledItems" classname="com.soulseekplus.core.search.WishlistRepositoryTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

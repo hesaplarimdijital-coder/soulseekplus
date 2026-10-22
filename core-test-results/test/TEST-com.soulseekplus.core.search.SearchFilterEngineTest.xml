@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.search.SearchFilterEngineTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2026-10-22T19:36:18" hostname="runnervm8k3b6" time="0.098">
+  <properties/>
+  <testcase name="catastrophicRegexOverManyRowsStaysFast" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.082"/>
+  <testcase name="losslessOnly" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.0"/>
+  <testcase name="alternativesWithPipe" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.001"/>
+  <testcase name="splitTermsHandlesQuotesAndEmpty" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.001"/>
+  <testcase name="bitrateLetsLosslessPass" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.0"/>
+  <testcase name="quotedPhraseIsOneTerm" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.0"/>
+  <testcase name="countriesWithExclusion" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.001"/>
+  <testcase name="applyKeepsOrderAndFilters" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.001"/>
+  <testcase name="wordExcludeRejectsAnyWord" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.0"/>
+  <testcase name="invalidRegexIsReportedAndIgnored" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.001"/>
+  <testcase name="sizeRange" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.0"/>
+  <testcase name="defaultFilterHidesLockedOnly" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.001"/>
+  <testcase name="slotsQueueSpeed" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.0"/>
+  <testcase name="includeAlsoMatchesUsername" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.0"/>
+  <testcase name="sampleRateAndBitDepth" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.0"/>
+  <testcase name="wordIncludeRequiresEveryWordCaseInsensitive" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.001"/>
+  <testcase name="regexIncludeAndExclude" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.002"/>
+  <testcase name="catastrophicRegexDoesNotHang" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.002"/>
+  <testcase name="extensionsIncludeExcludeAndGeneric" classname="com.soulseekplus.core.search.SearchFilterEngineTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
