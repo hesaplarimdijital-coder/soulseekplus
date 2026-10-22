@@ -72,4 +72,12 @@ class BrowseTreeTest {
         assertTrue(tree.search("   ").isEmpty())
         assertEquals(2, tree.search("flac", limit = 2).size)
     }
+
+    @Test
+    fun absurdlyDeepRemotePathDoesNotOverflowTheStack() {
+        val deep = (1..50_000).joinToString("\\") { "d" }
+        val t = BrowseTree(BrowseResult("evil", folders = listOf(folder(deep, "x.mp3"), folder("Ok", "y.mp3"))))
+        assertEquals(listOf("Ok"), t.roots.map { it.path })
+        assertNotNull(t.node("Ok"))
+    }
 }
