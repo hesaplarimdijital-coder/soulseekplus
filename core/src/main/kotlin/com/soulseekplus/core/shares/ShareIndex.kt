@@ -13,6 +13,7 @@ import com.soulseekplus.core.model.UserLists
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.lang.ref.WeakReference
 import java.util.BitSet
 
 /**
@@ -54,7 +55,7 @@ class ShareIndex(private val logger: Logger) : ShareProvider {
     @Synchronized
     fun update(snapshot: ShareSnapshot, userLists: UserLists) {
         lists = ListsView.of(userLists)
-        if (data.source !== snapshot) {
+        if (data.sourceRef.get() !== snapshot) {
             val started = System.nanoTime()
             val built = IndexData.build(snapshot)
             data = built
@@ -164,7 +165,7 @@ class ShareIndex(private val logger: Logger) : ShareProvider {
         val index = snapshot.fileByPath[normalized] ?: snapshot.fileByLower[normalized.lowercase()] ?: return UploadResolution.NotShared
         val entry = snapshot.files[index]
         if (!allowed(view, requester, entry.level, entry.group)) return UploadResolution.Denied(REASON_NOT_SHARED)
-        val source = snapshot.source.opener.open(entry.shared.path, entry.ref) ?: return UploadResolution.NotShared
+        val source = snapshot.opener.open(entry.shared.path, entry.ref) ?: return UploadResolution.NotShared
         return UploadResolution.Allowed(entry.shared, source)
     }
 
@@ -198,7 +199,9 @@ class ShareIndex(private val logger: Logger) : ShareProvider {
     }
 
     private class IndexData(
-        val source: ShareSnapshot,
+        /** Anlık görüntüyü yalnızca kimlik karşılaştırması için zayıf tutarız; dosya listesi iki kez bellekte durmasın. */
+        val sourceRef: WeakReference<ShareSnapshot>,
+        val opener: UploadOpener,
         /** Sanal yola göre sıralı. */
         val files: List<IndexedFile>,
         val folders: List<IndexedFolder>,
@@ -320,7 +323,7 @@ class ShareIndex(private val logger: Logger) : ShareProvider {
                     folderByPath[folder.path] = folder
                     folderByLower[folder.path.lowercase()] = folder
                 }
-                return IndexData(snapshot, files, folders, words, byPath, byLower, folderByPath, folderByLower)
+                return IndexData(WeakReference(snapshot), snapshot.opener, files, folders, words, byPath, byLower, folderByPath, folderByLower)
             }
         }
     }
