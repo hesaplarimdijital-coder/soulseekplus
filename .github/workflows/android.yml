@@ -135,7 +135,7 @@ jobs:
           chmod +x gradlew
           ./gradlew :core:writeDemoClasspath --console=plain
           ./gradlew --stop
-          nohup java -Xmx384m -cp "$(cat core/build/demo-classpath.txt)" com.soulseekplus.core.engine.DemoNetworkKt > demo-network.log 2>&1 &
+          DEMO_DEBUG=1 nohup java -Xmx384m -cp "$(cat core/build/demo-classpath.txt)" com.soulseekplus.core.engine.DemoNetworkKt > demo-network.log 2>&1 &
           for i in $(seq 1 90); do
             if grep -q "DEMO: server listening" demo-network.log; then echo "demo network up"; exit 0; fi
             sleep 2

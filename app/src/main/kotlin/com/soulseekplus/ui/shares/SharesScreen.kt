@@ -52,6 +52,10 @@ import desktopkit.components.SectionCaption
 import desktopkit.components.SegmentedChoice
 import desktopkit.screens.MessageScreen
 import desktopkit.screens.PageHeader
+import desktopkit.shell.currentWidthClass
+import desktopkit.shell.WidthClass
+import desktopkit.shell.TopBarAction
+import desktopkit.shell.CompactTopBar
 import desktopkit.theme.DeskTheme
 
 /** Düzenlenen ya da eklenen kök: [id] null ise yeni ekleniyor ([uri] dolu). */
@@ -76,18 +80,36 @@ fun SharesScreen(container: AppContainer, actions: AppActions, modifier: Modifie
     }
 
     Column(modifier.fillMaxSize()) {
-        PageHeader(
-            title = stringResource(R.string.nav_shares),
-            subtitle = res.getString(R.string.shares_summary, stats.files, stats.folders),
-            actions = {
-                if (progress.active) {
-                    DeskButton(stringResource(R.string.shares_cancel_scan), { repo.cancelScan() }, icon = DeskIcons.Close)
-                } else {
-                    DeskButton(stringResource(R.string.shares_rescan), { repo.rescan() }, icon = SoulIcons.Retry, enabled = roots.isNotEmpty())
-                }
-                DeskButton(stringResource(R.string.shares_add_folder), { picker.launch(null) }, icon = DeskIcons.Plus, primary = true)
-            },
-        )
+        if (currentWidthClass() == WidthClass.Compact) {
+            // Telefon: eylemler üst çubukta, başlık satırında yalnızca özet.
+            CompactTopBar(
+                actions = listOf(
+                    if (progress.active) {
+                        TopBarAction(DeskIcons.Close, res.getString(R.string.shares_cancel_scan), { repo.cancelScan() })
+                    } else {
+                        TopBarAction(SoulIcons.Retry, res.getString(R.string.shares_rescan), { repo.rescan() }, enabled = roots.isNotEmpty())
+                    },
+                    TopBarAction(DeskIcons.Plus, res.getString(R.string.shares_add_folder), { picker.launch(null) }, primary = true),
+                ),
+            )
+            PageHeader(
+                title = stringResource(R.string.nav_shares),
+                subtitle = res.getString(R.string.shares_summary, stats.files, stats.folders),
+            )
+        } else {
+            PageHeader(
+                title = stringResource(R.string.nav_shares),
+                subtitle = res.getString(R.string.shares_summary, stats.files, stats.folders),
+                actions = {
+                    if (progress.active) {
+                        DeskButton(stringResource(R.string.shares_cancel_scan), { repo.cancelScan() }, icon = DeskIcons.Close)
+                    } else {
+                        DeskButton(stringResource(R.string.shares_rescan), { repo.rescan() }, icon = SoulIcons.Retry, enabled = roots.isNotEmpty())
+                    }
+                    DeskButton(stringResource(R.string.shares_add_folder), { picker.launch(null) }, icon = DeskIcons.Plus, primary = true)
+                },
+            )
+        }
         LazyColumn(
             Modifier.weight(1f).fillMaxWidth(),
             contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = dimens.pagePadding, vertical = dimens.gapS),

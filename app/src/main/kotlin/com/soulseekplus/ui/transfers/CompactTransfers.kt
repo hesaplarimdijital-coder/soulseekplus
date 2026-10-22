@@ -112,7 +112,6 @@ internal fun CompactTransfersScreen(vm: TransfersViewModel, container: AppContai
                 ),
                 selected = vm.direction,
                 onSelect = { vm.changeDirection(it) },
-                modifier = Modifier.fillMaxWidth(),
             )
             if (searchOpen) {
                 FilterTextField(vm.query, { vm.query = it }, stringResource(R.string.transfers_filter_hint), Modifier.fillMaxWidth())

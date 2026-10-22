@@ -325,6 +325,20 @@ private fun selfTest() {
     client.search("megadeth", SearchScope.Network)
     waitFor("search responses") { responses.map { it.username }.toSet().size >= 3 }
     println("SELFTEST: ${responses.size} responses, ${responses.sumOf { it.files.size }} files from ${responses.map { it.username }.toSet()}")
+    if (System.getenv("DEMO_IDLE_TEST") != null) {
+        // Boşta kapanan bağlantılardan sonra tekrar aramalar: her eş yine yanıt vermeli.
+        for (round in 1..2) {
+            Thread.sleep(75_000)
+            responses.clear()
+            client.search("megadeth", SearchScope.Network)
+            Thread.sleep(8_000)
+            println("SELFTEST: idle round $round -> ${responses.map { it.username }.toSet()}")
+        }
+    }
+    responses.clear()
+    client.search("boards of canada", SearchScope.Network)
+    waitFor("boards of canada") { responses.isNotEmpty() }
+    println("SELFTEST: 'boards of canada' -> ${responses.map { it.username + ":" + it.files.size }}")
     val browse = kotlinx.coroutines.runBlocking { client.browseUser("jazz_corner") }
     println("SELFTEST: browse jazz_corner -> ${browse.folders.size} folders, ${browse.fileCount} files")
     val small = responses.first { it.username == "slow_lofi" }.files.first { it.extension == "mp3" }

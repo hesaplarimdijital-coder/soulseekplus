@@ -50,6 +50,7 @@ import com.soulseekplus.ui.BannerTone
 import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.IconMenuButton
+import com.soulseekplus.ui.OptionalNumberField
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.StatusBanner
 import com.soulseekplus.ui.TabChip
@@ -324,34 +325,90 @@ private fun CompactTabRow(tabs: List<SearchTabState>, selectedId: Int, vm: Searc
 
 // ---------------------------------------------------------------------- filtre paneli
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun CompactFilterPanel(tab: SearchTabState, ui: TabUi, vm: SearchViewModel) {
     val res = appResources()
     val dimens = DeskTheme.dimens
+    val filter = tab.filter
+    val issues = remember(filter) { com.soulseekplus.core.search.SearchFilterEngine.compile(filter).issues }
+    val includeBad = issues.any { it.field == com.soulseekplus.core.search.FilterField.INCLUDE }
+    val excludeBad = issues.any { it.field == com.soulseekplus.core.search.FilterField.EXCLUDE }
+    val resetKey = tab.id * 1000 + ui.filterReset
+    val update: ((SearchFilter) -> SearchFilter) -> Unit = { transform -> vm.repo.updateFilter(tab.id, transform) }
+    val mib = 1024L * 1024L
     // Panel ekranın en çok yarısını kaplar; fazlası kendi içinde kayar, liste her zaman görünür kalır.
     val maxHeight = (LocalConfiguration.current.screenHeightDp * 0.5f).dp
-    Column(
-        Modifier
-            .fillMaxWidth()
-            .heightIn(max = maxHeight)
-            .verticalScroll(rememberScrollState()),
-    ) {
+
+    Column(Modifier.fillMaxWidth()) {
         HorizontalRule()
-        FlowRow(
-            Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding, vertical = dimens.gapS),
+        // Üstte her zaman görünen eylemler: temizle / tamam.
+        Row(
+            Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs),
+            verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(dimens.gapS),
+        ) {
+            Text(res.getString(R.string.search_filters), style = DeskTheme.type.bodyStrong, color = DeskTheme.colors.text, modifier = Modifier.weight(1f))
+            DeskButton(res.getString(R.string.search_clear_filters), { vm.clearFilter(tab.id) }, enabled = filter != SearchFilter(hideLocked = false))
+            DeskButton(res.getString(R.string.compact_done), { vm.filtersOpen = false }, primary = true)
+        }
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .heightIn(max = maxHeight)
+                .verticalScroll(rememberScrollState())
+                .padding(bottom = dimens.gapS),
             verticalArrangement = Arrangement.spacedBy(dimens.gapS),
         ) {
-            ToggleChip(res.getString(R.string.chip_free_slots), QuickFilter.isActive(tab.filter, QuickFilter.FREE_SLOTS), { vm.toggleQuick(tab.id, QuickFilter.FREE_SLOTS) }, icon = SoulIcons.SlotFree)
-            ToggleChip(res.getString(R.string.chip_hide_locked), QuickFilter.isActive(tab.filter, QuickFilter.HIDE_LOCKED), { vm.toggleQuick(tab.id, QuickFilter.HIDE_LOCKED) }, icon = SoulIcons.LockClosed)
-            ToggleChip(res.getString(R.string.chip_lossless), QuickFilter.isActive(tab.filter, QuickFilter.LOSSLESS), { vm.toggleQuick(tab.id, QuickFilter.LOSSLESS) }, icon = SoulIcons.Lossless)
-            ToggleChip(res.getString(R.string.chip_min_320), QuickFilter.isActive(tab.filter, QuickFilter.MIN_320), { vm.toggleQuick(tab.id, QuickFilter.MIN_320) }, icon = DeskIcons.Equalizer)
+            ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding)) {
+                ToggleChip(res.getString(R.string.chip_free_slots), QuickFilter.isActive(filter, QuickFilter.FREE_SLOTS), { vm.toggleQuick(tab.id, QuickFilter.FREE_SLOTS) }, icon = SoulIcons.SlotFree)
+                ToggleChip(res.getString(R.string.chip_lossless), QuickFilter.isActive(filter, QuickFilter.LOSSLESS), { vm.toggleQuick(tab.id, QuickFilter.LOSSLESS) }, icon = SoulIcons.Lossless)
+                ToggleChip(res.getString(R.string.chip_min_320), QuickFilter.isActive(filter, QuickFilter.MIN_320), { vm.toggleQuick(tab.id, QuickFilter.MIN_320) }, icon = DeskIcons.Equalizer)
+                ToggleChip(res.getString(R.string.chip_hide_locked), QuickFilter.isActive(filter, QuickFilter.HIDE_LOCKED), { vm.toggleQuick(tab.id, QuickFilter.HIDE_LOCKED) }, icon = SoulIcons.LockClosed)
+            }
+            FieldPair(
+                { m -> DebouncedField(filter.include, resetKey, res.getString(if (filter.useRegex) R.string.f_include_regex else R.string.f_include), includeBad, m) { t -> update { it.copy(include = t) } } },
+                { m -> DebouncedField(filter.exclude, resetKey, res.getString(if (filter.useRegex) R.string.f_exclude_regex else R.string.f_exclude), excludeBad, m) { t -> update { it.copy(exclude = t) } } },
+            )
+            FieldPair(
+                { m -> DebouncedField(filter.extensions, resetKey, res.getString(R.string.f_extensions), false, m) { t -> update { it.copy(extensions = t) } } },
+                { m -> DebouncedField(filter.countries, resetKey, res.getString(R.string.f_countries), false, m) { t -> update { it.copy(countries = t) } } },
+            )
+            FieldPair(
+                { m -> OptionalNumberField(filter.minBitrate?.toLong(), { v -> update { it.copy(minBitrate = v?.toInt()) } }, res.getString(R.string.f_min_bitrate), m, resetKey) },
+                { m -> OptionalNumberField(filter.maxQueueLength, { v -> update { it.copy(maxQueueLength = v) } }, res.getString(R.string.f_max_queue), m, resetKey) },
+            )
+            FieldPair(
+                { m -> OptionalNumberField(filter.minSizeBytes?.div(mib), { v -> update { it.copy(minSizeBytes = v?.times(mib)) } }, res.getString(R.string.f_min_size), m, resetKey) },
+                { m -> OptionalNumberField(filter.maxSizeBytes?.div(mib), { v -> update { it.copy(maxSizeBytes = v?.times(mib)) } }, res.getString(R.string.f_max_size), m, resetKey) },
+            )
+            FieldPair(
+                { m -> OptionalNumberField(filter.minSpeedBytes?.toLong()?.div(1024L), { v -> update { it.copy(minSpeedBytes = v?.times(1024L)?.coerceAtMost(Int.MAX_VALUE.toLong())?.toInt()) } }, res.getString(R.string.f_min_speed), m, resetKey) },
+                { m -> ToggleChip(res.getString(R.string.f_regex), filter.useRegex, { update { it.copy(useRegex = !it.useRegex) } }, modifier = m) },
+            )
+            if (issues.isNotEmpty()) {
+                Text(
+                    res.getString(R.string.f_invalid_regex),
+                    style = DeskTheme.type.caption,
+                    color = DeskTheme.colors.danger,
+                    modifier = Modifier.padding(horizontal = dimens.pagePadding),
+                )
+            }
         }
-        FilterBar(tab, ui.filterReset, vm)
-        Row(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs), horizontalArrangement = Arrangement.End) {
-            DeskButton(res.getString(R.string.action_close), { vm.filtersOpen = false })
-        }
+        HorizontalRule()
+    }
+}
+
+/** İki alanı yan yana, eşit genişlikte dizer (telefonda süzgeç ızgarası). */
+@Composable
+private fun FieldPair(first: @Composable (Modifier) -> Unit, second: @Composable (Modifier) -> Unit) {
+    val dimens = DeskTheme.dimens
+    Row(
+        Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding),
+        horizontalArrangement = Arrangement.spacedBy(dimens.gapS),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        first(Modifier.weight(1f))
+        second(Modifier.weight(1f))
     }
 }
 

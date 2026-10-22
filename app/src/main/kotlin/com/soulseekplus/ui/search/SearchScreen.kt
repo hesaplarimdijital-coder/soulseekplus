@@ -383,7 +383,7 @@ internal fun FilterBar(tab: SearchTabState, reset: Int, vm: SearchViewModel) {
 
 /** Yazdıkça değil, kısa bir duraksamadan sonra uygulanan süzgeç metin alanı (imleç sıçramasın diye yerel durumlu). */
 @Composable
-private fun DebouncedField(
+internal fun DebouncedField(
     initial: String,
     resetKey: Int,
     hint: String,

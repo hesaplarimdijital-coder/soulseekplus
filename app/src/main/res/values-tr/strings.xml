@@ -570,4 +570,5 @@
     <string name="compact_group_by">Grupla</string>
     <string name="compact_sort_by">Sırala</string>
     <string name="compact_scope">Arama yeri: %1$s</string>
+    <string name="compact_done">Tamam</string>
 </resources>

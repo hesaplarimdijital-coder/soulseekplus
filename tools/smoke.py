@@ -275,7 +275,7 @@ class Smoke:
         # Filtre paneli
         if self.tap_any(["Filters"], exact=False):
             self.snap("phone-search-filters")
-            self.tap_any(["Close"], exact=True)
+            self.tap_any(["Done"], exact=True)
         # Grup aç + dosya menüsü
         n = self.find("Rust in Peace", exact=False)
         if n is not None:
@@ -292,7 +292,7 @@ class Smoke:
                     self.snap("phone-search-selection")
                     self.tap_any(["Close"], exact=True)
         # Görünüm seçenekleri (üst çubuk ⋮ → View options)
-        if self.tap_any(["More", "More options", "Daha fazla"], exact=True):
+        if self.tap_any(["More options"], exact=True):
             self.snap("phone-search-overflow")
             if self.tap_any(["View options"], exact=True):
                 self.snap("phone-search-view-options")
@@ -307,7 +307,8 @@ class Smoke:
         if fields:
             self.type_into(fields[0], "boards of canada", submit=True)
             self.hide_keyboard()
-        time.sleep(6)
+        time.sleep(10)
+        self.snap("phone-search-second-tab")
         g = self.find("Music Has the Right", exact=False)
         if g is not None:
             self.long_press_node(g)

@@ -98,6 +98,8 @@ import desktopkit.screens.MessageScreen
 import desktopkit.screens.PageHeader
 import desktopkit.shell.WidthClass
 import desktopkit.shell.currentWidthClass
+import desktopkit.shell.TopBarAction
+import desktopkit.shell.CompactTopBar
 import desktopkit.theme.DeskTheme
 
 private const val LINK_TAG = "slsk"
@@ -127,14 +129,44 @@ fun ChatScreen(vm: ChatViewModel, container: AppContainer, actions: AppActions, 
     var newChatDialog by rememberSaveable { mutableStateOf(false) }
 
     Column(modifier.fillMaxSize()) {
-        PageHeader(
-            title = stringResource(R.string.nav_chat),
-            subtitle = if (unread > 0) appResources().getString(R.string.chat_unread_subtitle, unread) else null,
-            actions = {
-                DeskIconButton(SoulIcons.ChatRoom, stringResource(R.string.chat_browse_rooms), { vm.openRoomList() }, selected = vm.showRoomList)
-                DeskIconButton(DeskIcons.Plus, stringResource(R.string.chat_new_message), { newChatDialog = true })
-            },
-        )
+        val showDetail = vm.showRoomList || target != null
+        if (compact) {
+            // Telefon: başlık ve eylemler üst çubukta; açık sohbetten listeye dönüş geri okuyla (sistem geri hareketi de).
+            val res = appResources()
+            CompactTopBar(
+                title = when {
+                    vm.showRoomList -> res.getString(R.string.chat_browse_rooms)
+                    target is ChatTarget.Room -> target.name
+                    target is ChatTarget.Private -> target.username
+                    else -> null
+                },
+                onBack = if (showDetail) {
+                    {
+                        vm.select(null)
+                        vm.closeRoomList()
+                    }
+                } else {
+                    null
+                },
+                actions = if (showDetail) {
+                    emptyList()
+                } else {
+                    listOf(
+                        TopBarAction(SoulIcons.ChatRoom, res.getString(R.string.chat_browse_rooms), { vm.openRoomList() }),
+                        TopBarAction(DeskIcons.Plus, res.getString(R.string.chat_new_message), { newChatDialog = true }),
+                    )
+                },
+            )
+        } else {
+            PageHeader(
+                title = stringResource(R.string.nav_chat),
+                subtitle = if (unread > 0) appResources().getString(R.string.chat_unread_subtitle, unread) else null,
+                actions = {
+                    DeskIconButton(SoulIcons.ChatRoom, stringResource(R.string.chat_browse_rooms), { vm.openRoomList() }, selected = vm.showRoomList)
+                    DeskIconButton(DeskIcons.Plus, stringResource(R.string.chat_new_message), { newChatDialog = true })
+                },
+            )
+        }
         if (connection !is ConnectionState.LoggedIn) {
             StatusBanner(
                 tone = BannerTone.Warning,
@@ -144,7 +176,6 @@ fun ChatScreen(vm: ChatViewModel, container: AppContainer, actions: AppActions, 
                 onAction = { container.client.connect(); container.ensureServiceRunning() },
             )
         }
-        val showDetail = vm.showRoomList || target != null
         val detail: @Composable (Modifier) -> Unit = { m ->
             when {
                 vm.showRoomList -> RoomListPane(vm, container, m)
@@ -161,12 +192,6 @@ fun ChatScreen(vm: ChatViewModel, container: AppContainer, actions: AppActions, 
         }
         if (compact) {
             if (showDetail) {
-                Row(Modifier.fillMaxWidth().padding(horizontal = DeskTheme.dimens.pagePadding)) {
-                    DeskButton(stringResource(R.string.chat_conversations), {
-                        vm.select(null)
-                        vm.closeRoomList()
-                    }, icon = DeskIcons.ArrowLeft)
-                }
                 detail(Modifier.weight(1f))
             } else {
                 ListPane(vm, rooms, privates, presence, Modifier.weight(1f))

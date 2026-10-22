@@ -570,4 +570,5 @@
     <string name="compact_group_by">Group by</string>
     <string name="compact_sort_by">Sort by</string>
     <string name="compact_scope">Search in: %1$s</string>
+    <string name="compact_done">Done</string>
 </resources>
