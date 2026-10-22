@@ -5,6 +5,7 @@ import com.soulseekplus.core.api.CountryResolver
 import com.soulseekplus.core.api.DownloadStore
 import com.soulseekplus.core.api.Logger
 import com.soulseekplus.core.api.ShareProvider
+import com.soulseekplus.core.api.ShareSearchResult
 import com.soulseekplus.core.api.SoulseekClient
 import com.soulseekplus.core.api.SoulseekException
 import com.soulseekplus.core.api.TransferPersistence
@@ -1184,9 +1185,15 @@ class SoulseekEngine private constructor(
         }
         val max = s.maxSearchResultsToSend
         val me = sessionUsername
+        val phrases = excludedPhrases.filter { it.isNotEmpty() }
         ioScope.launch {
             try {
-                val result = searchGate.withPermit { shares.search(text, requester, max) }
+                val raw = searchGate.withPermit { shares.search(text, requester, max) }
+                // Protokol §9 adım 7: yolunda sunucunun yasakladığı ifade geçen dosyalar yanıtta gönderilmez.
+                val result = if (phrases.isEmpty()) raw else ShareSearchResult(
+                    raw.files.filter { f -> f.path.lowercase().let { p -> phrases.none { p.contains(it) } } },
+                    raw.locked.filter { f -> f.path.lowercase().let { p -> phrases.none { p.contains(it) } } },
+                )
                 if (result.isEmpty) return@launch
                 val ctx = withContext(logic) {
                     if (!loggedIn) null

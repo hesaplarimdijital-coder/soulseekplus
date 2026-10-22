@@ -24,6 +24,7 @@ import com.soulseekplus.core.model.TransferState
 import com.soulseekplus.core.model.UserLists
 import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.core.net.NetworkTimeouts
+import com.soulseekplus.core.protocol.ExcludedSearchPhrasesNotification
 import com.soulseekplus.core.protocol.ServerCode
 import com.soulseekplus.core.transfers.PathSanitizer
 import com.soulseekplus.core.transfers.TransferTiming
@@ -694,6 +695,20 @@ class EngineIntegrationTest {
         assertEquals("pwned", saved.readText())
         assertFalse(File(tmp.root, "evil.txt").exists())
         assertTrue(c.loggedIn)
+    }
+
+    @Test
+    fun filesWithServerExcludedPhrasesAreNotSentInSearchResults() {
+        val a = alice().connect()
+        val b = bob().connect()
+        server.push("bob", ExcludedSearchPhrasesNotification(listOf("Song Two")))
+        Thread.sleep(200)
+        val token = a.engine.search("album", SearchScope.Network)
+        await("response") { a.responses.any { it.token == token } }
+        val paths = a.responses.first { it.token == token }.files.map { it.path }
+        assertEquals(2, paths.size)
+        assertTrue(paths.none { it.contains("Song Two") })
+        assertTrue(b.loggedIn)
     }
 
     @Test
