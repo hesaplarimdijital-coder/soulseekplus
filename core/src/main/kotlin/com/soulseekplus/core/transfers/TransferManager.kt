@@ -794,7 +794,7 @@ class TransferManager(
             }
             rec.sizeChanged = false
             val size = snapshot.size
-            if (size > 0 && offset > size) {
+            if (offset > size) {
                 withContext(io) { store.discard(snapshot) }
                 offset = 0
             }
@@ -803,8 +803,19 @@ class TransferManager(
             update(rec) { it.copy(bytesTransferred = offset, startedAtMillis = it.startedAtMillis ?: clockMillis()) }
             rec.done.set(offset)
             rec.lastProgressMillis = clockMillis()
-            if (size > 0 && offset == size) {
-                // Her şey zaten diskte (Nicotine+ gibi): bağlantıyı kapat, tamamlanmış say.
+            if (offset >= size) {
+                // Her şey zaten diskte ya da dosya 0 bayt (Nicotine+: size > offset değilse ofset gönderilmez, bağlantı
+                // kapatılır, tamamlanmış sayılır). 0 baytlık dosya için boş `.part` oluşturulur ki complete() taşısın;
+                // aksi hâlde iki taraf da birbirini bekler ve 60 sn sonra "Connection timeout" ile sonsuz yeniden deneme olur.
+                if (size == 0L) {
+                    withContext(io) {
+                        try {
+                            store.openPartial(snapshot, 0).close()
+                        } catch (e: IOException) {
+                            throw LocalIoException(e)
+                        }
+                    }
+                }
                 conn.close()
                 completed = true
             } else {
@@ -1190,6 +1201,11 @@ class TransferManager(
             c.write(
                 byteArrayOf(token.toByte(), (token ushr 8).toByte(), (token ushr 16).toByte(), (token ushr 24).toByte()),
             )
+            if (size == 0L) {
+                // 0 baytlık dosya: indiren ofset göndermeden kapatır (Nicotine+ da ofset beklemeden bitirir).
+                finishUpload(rec, size, 0)
+                return
+            }
             val rawOffset = withTimeoutOrNull(remaining()) { c.readUInt64() } ?: throw UploadTimeout()
             // Soulseek NS hatası: 2 GiB üstü ofsetler 0xFFFFFFFFFFFFFFFF gelebilir; baştan başla.
             offset = if (rawOffset < 0) 0 else rawOffset

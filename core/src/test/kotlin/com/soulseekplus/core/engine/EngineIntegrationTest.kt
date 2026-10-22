@@ -697,6 +697,18 @@ class EngineIntegrationTest {
     }
 
     @Test
+    fun zeroByteFilesFinishOnBothSides() {
+        val a = alice().connect()
+        val c = Node("carol", "pw3", linkedMapOf("Music\\empty.txt" to ByteArray(0))).connect()
+        a.engine.download("carol", SharedFile("Music\\empty.txt", 0))
+        await("empty download finished") { finished(a, TransferDirection.DOWNLOAD).isNotEmpty() }
+        val saved = File(finished(a, TransferDirection.DOWNLOAD).single().localUri!!)
+        assertTrue(saved.isFile)
+        assertEquals(0L, saved.length())
+        await("empty upload finished") { finished(c, TransferDirection.UPLOAD).isNotEmpty() }
+    }
+
+    @Test
     fun indirectConnectionsWorkWhenNoDirectPortIsKnown() {
         server.hidePorts = true
         val a = alice().connect()
