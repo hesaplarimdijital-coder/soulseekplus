@@ -116,6 +116,10 @@ class PeerNetwork(
     /** Giden bağlantı denemesi: doğrudan ve dolaylı yolun yarışı. */
     private class Attempt(val username: String, val type: String, val token: Int, val deadlineNanos: Long, directPossible: Boolean) {
         val signal = CompletableDeferred<Unit>()
+
+        /** Doğrudan yol başarısız olunca çağrılır ("D" için dolaylı isteği o zaman göndermek üzere). */
+        @Volatile
+        var onDirectFailure: (() -> Unit)? = null
         private var connection: Connection? = null
         private var state = OPEN
         private var directFailed = !directPossible
@@ -392,8 +396,16 @@ class PeerNetwork(
         attempts[token] = attempt
         var delivered = false
         try {
-            host.sendToServer(ConnectToPeerRequest(token, username, type))
-            if (directPossible) startDirect(attempt, address)
+            val request = ConnectToPeerRequest(token, username, type)
+            if (directPossible && type == ConnType.DISTRIBUTED) {
+                // "D": ebeveyn adayı gelen bağlantıyı çocuk olarak kabul eder; aynı anda iki bağlantı gelirse kopya
+                // sayıp gerçekten kullanılanı reddedebilir. Bu yüzden önce yalnızca doğrudan, olmazsa dolaylı denenir.
+                attempt.onDirectFailure = { if (attempt.isOpen()) host.sendToServer(request) }
+                startDirect(attempt, address)
+            } else {
+                host.sendToServer(request)
+                if (directPossible) startDirect(attempt, address)
+            }
             try {
                 withTimeout(timeouts.indirectMillis) { attempt.signal.await() }
             } catch (e: TimeoutCancellationException) {
@@ -425,6 +437,7 @@ class PeerNetwork(
                 throw e
             } catch (e: Exception) {
                 attempt.directFailed(e)
+                attempt.onDirectFailure?.invoke()
             } finally {
                 conn?.close()
             }
@@ -533,11 +546,14 @@ class PeerNetwork(
         if (old != null && old !== conn && !old.isClosed) {
             if (!replace) {
                 entry.others.add(conn)
+                trimSecondary(entry)
                 startReader(username, conn)
                 return
             }
-            // Kapanması istenen (boşaltılan) eski bağlantının kuyruğunu kesme.
-            if (!old.closeRequested) old.close()
+            // Eski bağlantı kapatılmaz: karşı taraf aynı anda bağlandığında uçuştaki bir istek bu bağlantıda olabilir.
+            // İkincil olarak okunmaya devam eder; boşta kalınca süpürücü kapatır.
+            entry.others.add(old)
+            trimSecondary(entry)
         }
         entry.primary = conn
         if (!fromConnector) {
@@ -547,6 +563,14 @@ class PeerNetwork(
         }
         flushPending(entry, conn)
         startReader(username, conn)
+    }
+
+    /** İkincil bağlantı sayısını sınırlar (en eskiler kapatılır). */
+    private fun trimSecondary(entry: PeerEntry) {
+        while (entry.others.size > MAX_SECONDARY_CONNECTIONS) {
+            val oldest = entry.others.removeAt(0)
+            if (!oldest.closeRequested) oldest.close()
+        }
     }
 
     private fun flushPending(entry: PeerEntry, conn: Connection) {
@@ -775,5 +799,8 @@ class PeerNetwork(
 
         /** Aynı anda kurulmaya çalışılan "P" bağlantısı üst sınırı (toplu istekler soket seline dönüşmesin). */
         const val MAX_CONCURRENT_P_CONNECTS = 48
+
+        /** Bir eşle birincil bağlantıya ek olarak tutulan en çok ikincil "P" bağlantısı. */
+        const val MAX_SECONDARY_CONNECTIONS = 3
     }
 }

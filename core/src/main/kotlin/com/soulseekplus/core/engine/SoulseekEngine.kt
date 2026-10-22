@@ -249,6 +249,9 @@ class SoulseekEngine private constructor(
     private val roomMembers = HashMap<String, HashSet<String>>()
     private val desiredRooms = LinkedHashMap<String, Boolean>()
     private val privilegedUsers = HashSet<String>()
+
+    /** Sunucudan durumu gerçekten öğrenilen kullanıcılar (varsayılan OFFLINE değerine güvenilmesin diye). */
+    private val knownStatus = HashSet<String>()
     private val peerCountry = BoundedMap<String, String>(MAX_COUNTRY_CACHE)
     private val recentPmIds = BoundedMap<Int, Boolean>(MAX_RECENT_PMS)
     private var excludedPhrases: List<String> = emptyList()
@@ -326,7 +329,8 @@ class SoulseekEngine private constructor(
             }
         }
 
-        override fun userStatus(username: String): UserStatus? = _users.value[username]?.status
+        override fun userStatus(username: String): UserStatus? =
+            if (username in knownStatus) _users.value[username]?.status else null
 
         override fun isPrivileged(username: String): Boolean = username in privilegedUsers
     }
@@ -555,6 +559,7 @@ class SoulseekEngine private constructor(
         folderWaiters.clear()
         solicited.clearAll()
         roomMembers.clear()
+        knownStatus.clear()
         pruneUsers(_users.value.keys)
     }
 
@@ -894,10 +899,12 @@ class SoulseekEngine private constructor(
             val remove = snapshot.filter { it in map && !isWanted(it) }
             if (remove.isEmpty()) map else map - remove.toSet()
         }
+        for (u in snapshot) if (!isWanted(u)) knownStatus.remove(u)
     }
 
     private fun mergeRoomUsers(users: List<RoomUser>) {
         if (users.isEmpty()) return
+        for (u in users) knownStatus.add(u.username)
         _users.update { map ->
             val result = LinkedHashMap(map)
             for (u in users) {
@@ -911,6 +918,7 @@ class SoulseekEngine private constructor(
 
     private fun onWatchResponse(m: WatchUserResponse) {
         val user = m.username
+        knownStatus.add(user)
         if (!m.exists) {
             updatePresence(user) { it.copy(status = UserStatus.OFFLINE) }
             emit(ClientEvent.UserStatusChanged(user, UserStatus.OFFLINE, false))
@@ -929,6 +937,7 @@ class SoulseekEngine private constructor(
     }
 
     private fun onUserStatusResponse(m: UserStatusResponse) {
+        knownStatus.add(m.username)
         if (m.privileged) privilegedUsers.add(m.username) else privilegedUsers.remove(m.username)
         updatePresence(m.username) { it.copy(status = m.status, privileged = m.privileged) }
         emit(ClientEvent.UserStatusChanged(m.username, m.status, m.privileged))
@@ -1208,6 +1217,7 @@ class SoulseekEngine private constructor(
     private fun handlePeerMessage(username: String, message: PeerMessage, conn: Connection) {
         try {
             rememberCountry(username, conn.remoteIp)
+            if (message !is FileSearchResponseMessage) logger.debug(TAG, "Eş mesajı ${message.code} <- $username (${conn.label})")
             when (message) {
                 is FileSearchResponseMessage -> onSearchResponse(username, message)
                 is SharedFileListRequest -> serveBrowse(username, conn)
@@ -1257,6 +1267,7 @@ class SoulseekEngine private constructor(
 
     /** Yanıtı isteğin geldiği bağlantıdan gönderir; kapanmışsa eşin güncel bağlantısına (gerekirse yeniden kurarak) bırakır. */
     private fun reply(username: String, conn: Connection, frame: ByteArray) {
+        logger.debug(TAG, "Yanıt -> $username (${frame.size} bayt, bağlantı kapalı=${conn.isClosed})")
         if (!conn.isClosed && conn.send(frame)) {
             conn.hasPostInitActivity = true
             return
