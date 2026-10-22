@@ -97,15 +97,16 @@ class BrowseViewModel(application: Application) : AndroidViewModel(application) 
             fileSelection = emptySet()
             return
         }
+        val target: String = clean
         val open = HashSet(expanded)
-        var p = clean
+        var p: String = target
         while (p.contains('\\')) {
             p = p.substringBeforeLast('\\')
             open += p
         }
-        open += clean
+        open += target
         expanded = open
-        selectedPath = clean
+        selectedPath = target
         fileSelection = emptySet()
         showFilesOnCompact = true
     }
