@@ -97,7 +97,7 @@ class BrowseViewModel(application: Application) : AndroidViewModel(application) 
             fileSelection = emptySet()
             return
         }
-        val target: String = clean
+        val target: String = clean ?: return
         val open = HashSet(expanded)
         var p: String = target
         while (p.contains('\\')) {
