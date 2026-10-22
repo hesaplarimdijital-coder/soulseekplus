@@ -75,6 +75,11 @@ class FakeSlskServer : AutoCloseable {
         clients[to]?.send(EmbeddedMessageNotification(DistribCode.SEARCH, body))
     }
 
+    /** Bir istemciye sunucu mesajı iter (testlerde istenmeden gelen bildirimler için). */
+    fun push(to: String, message: ServerMessage) {
+        clients[to]?.send(message)
+    }
+
     /** true: GetPeerAddress port 0 döndürür, eşler yalnızca dolaylı (ConnectToPeer) bağlanabilir. */
     @Volatile
     var hidePorts = false

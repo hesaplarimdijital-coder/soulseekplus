@@ -106,6 +106,9 @@ object SearchFilterEngine {
     /** Düzenli ifade eşleşmesi için üst sınır (karakter erişimi sayısı); aşılırsa eşleşme yok sayılır. */
     private const val REGEX_STEP_BUDGET = 400_000
 
+    /** Bu kadar satırda bütçe aşılınca ifade devre dışı kalır (bkz. RegexMatcher). */
+    private const val MAX_BUDGET_EXHAUSTIONS = 3
+
     private val GENERIC_TYPES: Map<String, Set<String>> = mapOf(
         "audio" to SharedFile.AUDIO_EXTENSIONS,
         "lossless" to SharedFile.LOSSLESS_EXTENSIONS,
@@ -207,12 +210,24 @@ object SearchFilterEngine {
     }
 
     private class RegexMatcher(private val pattern: Pattern) : CompiledFilter.TextMatcher {
-        private fun test(hit: SearchHit): Boolean = try {
-            pattern.matcher(BudgetedText(hit.file.path)).find() || pattern.matcher(BudgetedText(hit.username)).matches()
-        } catch (e: RegexBudgetExceeded) {
-            false
-        } catch (e: StackOverflowError) {
-            false
+        /**
+         * Bütçeyi aşan eşleşme sayısı. Felaket geri izlemeli bir ifade her satırda bütçeyi tüketir; binlerce satırda bu
+         * dakikalar demektir (ve SearchRepository bunu kilit altında, her gelen satır için yapar). Birkaç aşımdan sonra
+         * ifade "fazla karmaşık" sayılır ve hiçbir satırla eşleşmez (tek satırdaki aşımın sonucuyla aynı).
+         */
+        private val exhausted = java.util.concurrent.atomic.AtomicInteger()
+
+        private fun test(hit: SearchHit): Boolean {
+            if (exhausted.get() >= MAX_BUDGET_EXHAUSTIONS) return false
+            return try {
+                pattern.matcher(BudgetedText(hit.file.path)).find() || pattern.matcher(BudgetedText(hit.username)).matches()
+            } catch (e: RegexBudgetExceeded) {
+                exhausted.incrementAndGet()
+                false
+            } catch (e: StackOverflowError) {
+                exhausted.incrementAndGet()
+                false
+            }
         }
 
         override fun includes(hit: SearchHit): Boolean = test(hit)

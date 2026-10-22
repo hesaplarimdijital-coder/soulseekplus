@@ -30,6 +30,11 @@ class BrowseTree(result: BrowseResult) {
         val totalSize: Long = files.sumOf { it.size } + children.sumOf { it.totalSize }
     }
 
+    companion object {
+        /** Kabul edilen en derin klasör (bileşen sayısı); daha derin girdiler gösterilmez. */
+        const val MAX_DEPTH = 256
+    }
+
     /** Arama eşleşmesi. */
     data class Match(val file: SharedFile, val folderPath: String, val locked: Boolean)
 
@@ -63,6 +68,9 @@ class BrowseTree(result: BrowseResult) {
         fun add(folder: SharedFolder, locked: Boolean) {
             val path = folder.path.trim('\\')
             if (path.isEmpty()) return
+            // Güvenilmeyen veri: ağaç kurma/gezinme özyinelemelidir; on binlerce bileşenli bir yol yığın taşmasıyla
+            // (StackOverflowError, uygulama çöker) sonuçlanırdı. Gerçek paylaşımlar bu derinliğe yaklaşmaz.
+            if (path.count { it == '\\' } >= MAX_DEPTH) return
             val builder = ensure(path)
             builder.files = (builder.files + folder.files).sortedBy { it.name.lowercase() }
             if (locked) builder.locked = true else builder.hasOpenContent = true

@@ -5,6 +5,7 @@ import com.soulseekplus.core.api.CountryResolver
 import com.soulseekplus.core.api.DownloadStore
 import com.soulseekplus.core.api.Logger
 import com.soulseekplus.core.api.ShareProvider
+import com.soulseekplus.core.api.ShareSearchResult
 import com.soulseekplus.core.api.SoulseekClient
 import com.soulseekplus.core.api.SoulseekException
 import com.soulseekplus.core.api.TransferPersistence
@@ -116,7 +117,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -133,7 +133,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeout
 import kotlinx.coroutines.withTimeoutOrNull
 import java.io.IOException
 import java.util.concurrent.Executors
@@ -254,6 +253,7 @@ class SoulseekEngine private constructor(
     private val knownStatus = HashSet<String>()
     private val peerCountry = BoundedMap<String, String>(MAX_COUNTRY_CACHE)
     private val recentPmIds = BoundedMap<Int, Boolean>(MAX_RECENT_PMS)
+    private val lastBrowseNanos = BoundedMap<String, Long>(MAX_BROWSE_TRACKED)
     private var excludedPhrases: List<String> = emptyList()
 
     private val infoWaiters = WaiterTable<String, UserInfo>()
@@ -1051,9 +1051,9 @@ class SoulseekEngine private constructor(
                 if (folderWaiters.remove(token) != null) waiter.result.completeExceptionally(peerFailure(name, failure))
             }
             try {
-                withTimeout(tuning.folderTimeoutMillis) { waiter.result.await() }
-            } catch (e: TimeoutCancellationException) {
-                throw SoulseekException("Timed out waiting for folder contents from $name")
+                // withTimeoutOrNull: çağıranın kendi zaman aşımı/iptali SoulseekException'a dönüştürülmez.
+                withTimeoutOrNull(tuning.folderTimeoutMillis) { waiter.result.await() }
+                    ?: throw SoulseekException("Timed out waiting for folder contents from $name")
             } finally {
                 folderWaiters.remove(token)
             }
@@ -1105,9 +1105,9 @@ class SoulseekEngine private constructor(
             }
         }
         try {
-            withTimeout(timeoutMillis) { waiter.await() }
-        } catch (e: TimeoutCancellationException) {
-            throw SoulseekException("Timed out waiting for response from $user")
+            val box = withTimeoutOrNull(timeoutMillis) { Box(waiter.await()) }
+                ?: throw SoulseekException("Timed out waiting for response from $user")
+            box.value
         } finally {
             if (table.remove(user, waiter)) solicited.clear(user, responseCode)
         }
@@ -1184,9 +1184,15 @@ class SoulseekEngine private constructor(
         }
         val max = s.maxSearchResultsToSend
         val me = sessionUsername
+        val phrases = excludedPhrases.filter { it.isNotEmpty() }
         ioScope.launch {
             try {
-                val result = searchGate.withPermit { shares.search(text, requester, max) }
+                val raw = searchGate.withPermit { shares.search(text, requester, max) }
+                // Protokol §9 adım 7: yolunda sunucunun yasakladığı ifade geçen dosyalar yanıtta gönderilmez.
+                val result = if (phrases.isEmpty()) raw else ShareSearchResult(
+                    raw.files.filter { f -> f.path.lowercase().let { p -> phrases.none { p.contains(it) } } },
+                    raw.locked.filter { f -> f.path.lowercase().let { p -> phrases.none { p.contains(it) } } },
+                )
                 if (result.isEmpty) return@launch
                 val ctx = withContext(logic) {
                     if (!loggedIn) null
@@ -1209,6 +1215,9 @@ class SoulseekEngine private constructor(
             }
         }
     }
+
+    /** withTimeoutOrNull ile null sonucu zaman aşımından ayırmak için. */
+    private class Box<T>(val value: T)
 
     private class SearchContext(val freeSlots: Boolean, val speed: Long, val queue: Long)
 
@@ -1294,6 +1303,12 @@ class SoulseekEngine private constructor(
     }
 
     private fun serveBrowse(username: String, conn: Connection) {
+        // Nicotine+: aynı kullanıcıdan 0,4 sn içinde gelen tekrar istek yok sayılır. Aksi hâlde tek bir eş, tüm paylaşım
+        // listesini (100 bin+ dosya, sıkıştırma) tekrar tekrar kodlatarak sınırlı sunum yuvalarını tüketebilir.
+        val now = System.nanoTime()
+        val last = lastBrowseNanos[username]
+        if (last != null && now - last < BROWSE_REPEAT_NANOS) return
+        lastBrowseNanos[username] = now
         emit(ClientEvent.SharesBrowsedBy(username))
         val banned = userLists.value.isBanned(username)
         serveAsync(
@@ -1467,6 +1482,8 @@ class SoulseekEngine private constructor(
         private const val MAX_ACTIVE_SEARCHES = 1_000
         private const val MAX_COUNTRY_CACHE = 4_096
         private const val MAX_RECENT_PMS = 512
+        private const val MAX_BROWSE_TRACKED = 256
+        private const val BROWSE_REPEAT_NANOS = 400_000_000L
         private const val MAX_USERNAME_LENGTH = 64
         private const val MAX_INCOMING_QUERY = 512
         private const val MAX_SEARCH_IN_FLIGHT = 32
