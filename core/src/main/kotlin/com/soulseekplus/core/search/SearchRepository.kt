@@ -206,17 +206,30 @@ class SearchRepository(
             tab.requestedFilter = filter
             FilterJob(++tab.filterVersion, tab.epoch, ArrayList(tab.all))
         }
-        // Ağır kısım (özellikle düzenli ifadeler) kilit dışında; çağıran iş parçacığı ana iş parçacığı olmamalıdır.
+        // Ağır kısım (özellikle düzenli ifadeler) kilit dışında ve depo kapsamında: arayüz bunu ana iş parçacığından
+        // (Compose geri çağrıları) çağırır; binlerce satırı orada süzmek arayüzü dondururdu. Sürüm denetimi eski
+        // hesapların yeni süzgecin üstüne yazmasını engeller.
+        coroutineScope.launch { applyFilter(tabId, filter, begin) }
+    }
+
+    private fun applyFilter(tabId: Int, filter: SearchFilter, begin: FilterJob) {
         val compiled = SearchFilterEngine.compile(filter)
         val visible: ArrayList<SearchHit> =
             if (compiled.isPassThrough) ArrayList(begin.snapshot) else begin.snapshot.filterTo(ArrayList()) { compiled.matches(it) }
         synchronized(lock) {
             val tab = tabList.firstOrNull { it.id == tabId } ?: return
-            if (tab.filterVersion != begin.version || tab.epoch != begin.epoch) return
-            // Hesap sürerken gelen yeni satırları da süz.
-            for (i in begin.snapshot.size until tab.all.size) {
-                val hit = tab.all[i]
-                if (compiled.matches(hit)) visible.add(hit)
+            if (tab.filterVersion != begin.version) return
+            if (tab.epoch != begin.epoch) {
+                // Hesap sürerken sonuçlar temizlendi: anlık görüntü geçersiz, (küçük) güncel listeyi süz. Erken dönülürse
+                // süzgeç hiç uygulanmaz ve sekme eski süzgeçte kalırdı.
+                visible.clear()
+                tab.all.filterTo(visible) { compiled.matches(it) }
+            } else {
+                // Hesap sürerken gelen yeni satırları da süz.
+                for (i in begin.snapshot.size until tab.all.size) {
+                    val hit = tab.all[i]
+                    if (compiled.matches(hit)) visible.add(hit)
+                }
             }
             tab.filter = filter
             tab.compiled = compiled
