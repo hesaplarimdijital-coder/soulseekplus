@@ -104,3 +104,55 @@ jobs:
           name: soulseekplus-apk
           path: app/build/outputs/apk/release/*.apk
           if-no-files-found: error
+
+  # Emülatörde duman testi: APK kurulur, açılır, ekranlar gezilir, çökme aranır.
+  # Ekran görüntüleri ve rapor ci/smoke dalına konur.
+  smoke:
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: soulseekplus-apk
+          path: apk
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Run smoke test on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: python3 tools/smoke.py "$(ls apk/*.apk | head -1)" smoke-out > smoke.log 2>&1 || echo "SMOKE_FAILED" >> smoke.log
+
+      - name: Publish smoke results to ci/smoke
+        if: always()
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          out="$RUNNER_TEMP/smoke"
+          rm -rf "$out" && mkdir -p "$out"
+          cp -r smoke-out/. "$out/" 2>/dev/null || true
+          cp smoke.log "$out/" 2>/dev/null || echo "no smoke log" > "$out/smoke.log"
+          status=success; grep -q SMOKE_FAILED "$out/smoke.log" && status=failure
+          echo "sha=${GITHUB_SHA} run=${GITHUB_RUN_NUMBER} status=${status}" > "$out/STATUS"
+          cd "$out"
+          git init -q && git checkout -q --orphan ci/smoke
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m "Smoke ${GITHUB_SHA::7} (run ${GITHUB_RUN_NUMBER})"
+          git push -q --force "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/heads/ci/smoke
+          [ "$status" = success ]
