@@ -64,6 +64,7 @@ import desktopkit.appResources
 import desktopkit.components.DeskSwitch
 import desktopkit.components.CountBadge
 import desktopkit.components.DeskTextField
+import desktopkit.components.DeskDialog
 
 @Composable
 fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
@@ -201,15 +202,16 @@ private fun ItemList(items: List<WishlistItem>, selected: String?, vm: WishlistV
         }
     }
     confirmRemove?.let { query ->
-        com.soulseekplus.ui.DeskDialog(
-            title = res.getString(R.string.wishlist_remove_title),
-            text = res.getString(R.string.wishlist_remove_text, query),
-            confirmLabel = res.getString(R.string.action_remove),
-            dismissLabel = res.getString(R.string.action_cancel),
-            onConfirm = { vm.remove(query); confirmRemove = null },
+        DeskDialog(
             onDismiss = { confirmRemove = null },
-            destructive = true,
-        )
+            title = res.getString(R.string.wishlist_remove_title),
+            actions = {
+                DeskButton(res.getString(R.string.action_cancel), { confirmRemove = null })
+                DeskButton(res.getString(R.string.action_remove), { vm.remove(query); confirmRemove = null })
+            },
+        ) {
+            Text(res.getString(R.string.wishlist_remove_text, query), style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)
+        }
     }
 }
 

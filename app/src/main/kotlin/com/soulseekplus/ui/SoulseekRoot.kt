@@ -1,5 +1,6 @@
 package com.soulseekplus.ui
 
+import desktopkit.components.DeskButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -72,6 +73,7 @@ import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import desktopkit.appResources
+import desktopkit.components.DeskDialog
 
 /**
  * Kompozisyon ↔ etkinlik köprüsü: klavye kısayolları `Activity.dispatchKeyEvent` içinde eşleşir (odak nerede
@@ -328,18 +330,20 @@ private fun AppShell(
     linkDownload?.let { link ->
         val name = link.path.substringAfterLast('\\')
         DeskDialog(
-            title = stringResource(R.string.link_download_title),
-            text = stringResource(R.string.link_download_text, name, link.username),
-            confirmLabel = stringResource(R.string.action_download),
-            dismissLabel = stringResource(R.string.action_cancel),
-            onConfirm = {
-                container.client.download(link.username, SharedFile(path = link.path, size = 0L))
-                container.ensureServiceRunning()
-                actions.toast(R.string.toast_queued_downloads, 1)
-                linkDownload = null
-            },
             onDismiss = { linkDownload = null },
-        )
+            title = stringResource(R.string.link_download_title),
+            actions = {
+                DeskButton(stringResource(R.string.action_cancel), { linkDownload = null })
+                DeskButton(stringResource(R.string.action_download), {
+                    container.client.download(link.username, SharedFile(path = link.path, size = 0L))
+                    container.ensureServiceRunning()
+                    actions.toast(R.string.toast_queued_downloads, 1)
+                    linkDownload = null
+                }, primary = true)
+            },
+        ) {
+            Text(stringResource(R.string.link_download_text, name, link.username), style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)
+        }
     }
 }
 

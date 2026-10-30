@@ -31,8 +31,6 @@ import com.soulseekplus.core.model.UserGroup
 import com.soulseekplus.core.model.UserPresence
 import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.DeskDialog
-import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.userStatusText
@@ -53,6 +51,7 @@ import desktopkit.appResources
 import desktopkit.components.IconMenuButton
 import desktopkit.components.DeskCard
 import desktopkit.components.DeskTextField
+import desktopkit.components.DeskDialog
 
 private enum class UsersTab { BUDDIES, GROUPS, BANNED, IGNORED }
 
@@ -263,14 +262,17 @@ private fun UserTable(
 
     noteFor?.let { name ->
         var text by remember(name) { mutableStateOf(notes[name].orEmpty()) }
-        DeskFormDialog(
-            title = res.getString(R.string.users_note_title, name),
-            confirmLabel = res.getString(R.string.action_save),
-            dismissLabel = res.getString(R.string.action_cancel),
-            onConfirm = { repo.setBuddyNote(name, text); noteFor = null },
+        DeskDialog(
             onDismiss = { noteFor = null },
+            title = res.getString(R.string.users_note_title, name),
+            actions = {
+                DeskButton(res.getString(R.string.action_cancel), { noteFor = null })
+                DeskButton(res.getString(R.string.action_save), { repo.setBuddyNote(name, text); noteFor = null }, primary = true)
+            },
         ) {
-            DeskTextField(text, { text = it.take(200) }, Modifier.fillMaxWidth(), hint = res.getString(R.string.users_note_hint), singleLine = false, minLines = 2)
+            Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+                DeskTextField(text, { text = it.take(200) }, Modifier.fillMaxWidth(), hint = res.getString(R.string.users_note_hint), singleLine = false, minLines = 2)
+            }
         }
     }
 }
@@ -318,43 +320,48 @@ private fun GroupsPane(container: AppContainer, groups: List<UserGroup>, presenc
     if (createDialog) {
         var name by remember { mutableStateOf("") }
         var failed by remember { mutableStateOf(false) }
-        DeskFormDialog(
-            title = res.getString(R.string.users_new_group),
-            confirmLabel = res.getString(R.string.action_create),
-            dismissLabel = res.getString(R.string.action_cancel),
-            onConfirm = { if (repo.createGroup(name)) createDialog = false else failed = true },
+        DeskDialog(
             onDismiss = { createDialog = false },
-            confirmEnabled = name.isNotBlank(),
+            title = res.getString(R.string.users_new_group),
+            actions = {
+                DeskButton(res.getString(R.string.action_cancel), { createDialog = false })
+                DeskButton(res.getString(R.string.action_create), { if (repo.createGroup(name)) createDialog = false else failed = true }, primary = true, enabled = name.isNotBlank())
+            },
         ) {
-            DeskTextField(name, { name = it; failed = false }, Modifier.fillMaxWidth(), hint = res.getString(R.string.users_group_name), error = failed)
-            if (failed) Text(res.getString(R.string.users_group_exists), style = DeskTheme.type.caption, color = colors.danger)
+            Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+                DeskTextField(name, { name = it; failed = false }, Modifier.fillMaxWidth(), hint = res.getString(R.string.users_group_name), error = failed)
+                if (failed) Text(res.getString(R.string.users_group_exists), style = DeskTheme.type.caption, color = colors.danger)
+            }
         }
     }
     renameFrom?.let { old ->
         var name by remember(old) { mutableStateOf(old) }
         var failed by remember(old) { mutableStateOf(false) }
-        DeskFormDialog(
-            title = res.getString(R.string.users_rename_group),
-            confirmLabel = res.getString(R.string.action_save),
-            dismissLabel = res.getString(R.string.action_cancel),
-            onConfirm = { if (repo.renameGroup(old, name)) renameFrom = null else failed = true },
+        DeskDialog(
             onDismiss = { renameFrom = null },
-            confirmEnabled = name.isNotBlank(),
+            title = res.getString(R.string.users_rename_group),
+            actions = {
+                DeskButton(res.getString(R.string.action_cancel), { renameFrom = null })
+                DeskButton(res.getString(R.string.action_save), { if (repo.renameGroup(old, name)) renameFrom = null else failed = true }, primary = true, enabled = name.isNotBlank())
+            },
         ) {
-            DeskTextField(name, { name = it; failed = false }, Modifier.fillMaxWidth(), hint = res.getString(R.string.users_group_name), error = failed)
-            if (failed) Text(res.getString(R.string.users_group_exists), style = DeskTheme.type.caption, color = colors.danger)
+            Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+                DeskTextField(name, { name = it; failed = false }, Modifier.fillMaxWidth(), hint = res.getString(R.string.users_group_name), error = failed)
+                if (failed) Text(res.getString(R.string.users_group_exists), style = DeskTheme.type.caption, color = colors.danger)
+            }
         }
     }
     deleteName?.let { name ->
         DeskDialog(
-            title = res.getString(R.string.users_delete_group_title),
-            text = res.getString(R.string.users_delete_group_text, name),
-            confirmLabel = res.getString(R.string.action_delete),
-            dismissLabel = res.getString(R.string.action_cancel),
-            onConfirm = { repo.deleteGroup(name); deleteName = null },
             onDismiss = { deleteName = null },
-            destructive = true,
-        )
+            title = res.getString(R.string.users_delete_group_title),
+            actions = {
+                DeskButton(res.getString(R.string.action_cancel), { deleteName = null })
+                DeskButton(res.getString(R.string.action_delete), { repo.deleteGroup(name); deleteName = null })
+            },
+        ) {
+            Text(res.getString(R.string.users_delete_group_text, name), style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)
+        }
     }
 }
 

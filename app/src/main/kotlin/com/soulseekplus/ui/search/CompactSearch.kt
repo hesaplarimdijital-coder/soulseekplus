@@ -46,7 +46,6 @@ import com.soulseekplus.core.search.ResultColumn
 import com.soulseekplus.core.search.ResultRow
 import com.soulseekplus.core.search.ResultSort
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.TabChip
 import com.soulseekplus.ui.ToggleChip
@@ -76,6 +75,7 @@ import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
 import desktopkit.components.DeskTextField
 import desktopkit.components.OptionalNumberField
+import desktopkit.components.DeskDialog
 
 /*
  * Telefon düzeni (WidthClass.Compact). Masaüstü düzeninden farkları:
@@ -419,32 +419,34 @@ private fun FieldPair(first: @Composable (Modifier) -> Unit, second: @Composable
 private fun ViewOptionsDialog(tab: SearchTabState, vm: SearchViewModel, onDismiss: () -> Unit) {
     val res = appResources()
     val ui = vm.tabUi(tab.id)
-    DeskFormDialog(
-        title = res.getString(R.string.compact_view_options),
-        confirmLabel = res.getString(R.string.action_close),
-        dismissLabel = null,
-        onConfirm = onDismiss,
+    DeskDialog(
         onDismiss = onDismiss,
+        title = res.getString(R.string.compact_view_options),
+        actions = {
+            DeskButton(res.getString(R.string.action_close), onDismiss, primary = true)
+        },
     ) {
-        SectionCaption(res.getString(R.string.compact_group_by))
-        SegmentedChoice(
-            options = GroupMode.entries.map { it to res.groupModeText(it) },
-            selected = tab.groupMode,
-            onSelect = { vm.setGroupMode(tab.id, it) },
-        )
-        SectionCaption(res.getString(R.string.compact_sort_by))
-        FlowRow(horizontalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
-            for ((column, label) in SORT_CHOICES) {
-                val selected = ui.sort.column == column
-                ToggleChip(
-                    label = res.getString(label) + if (selected) (if (ui.sort.ascending) " ↑" else " ↓") else "",
-                    selected = selected,
-                    onClick = {
-                        // Aynı sütuna yeniden dokunmak yönü çevirir; yeni sütun azalan (en iyi önce) başlar.
-                        val next = if (selected) ui.sort.copy(ascending = !ui.sort.ascending) else ResultSort(column, ascending = column == ResultColumn.FILE || column == ResultColumn.USER || column == ResultColumn.QUEUE)
-                        vm.setSort(tab.id, next)
-                    },
-                )
+        Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+            SectionCaption(res.getString(R.string.compact_group_by))
+            SegmentedChoice(
+                options = GroupMode.entries.map { it to res.groupModeText(it) },
+                selected = tab.groupMode,
+                onSelect = { vm.setGroupMode(tab.id, it) },
+            )
+            SectionCaption(res.getString(R.string.compact_sort_by))
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
+                for ((column, label) in SORT_CHOICES) {
+                    val selected = ui.sort.column == column
+                    ToggleChip(
+                        label = res.getString(label) + if (selected) (if (ui.sort.ascending) " ↑" else " ↓") else "",
+                        selected = selected,
+                        onClick = {
+                            // Aynı sütuna yeniden dokunmak yönü çevirir; yeni sütun azalan (en iyi önce) başlar.
+                            val next = if (selected) ui.sort.copy(ascending = !ui.sort.ascending) else ResultSort(column, ascending = column == ResultColumn.FILE || column == ResultColumn.USER || column == ResultColumn.QUEUE)
+                            vm.setSort(tab.id, next)
+                        },
+                    )
+                }
             }
         }
     }

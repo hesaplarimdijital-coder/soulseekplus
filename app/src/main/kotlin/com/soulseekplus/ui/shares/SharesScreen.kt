@@ -33,8 +33,6 @@ import com.soulseekplus.core.model.ShareLevel
 import com.soulseekplus.data.shares.ScanPhase
 import com.soulseekplus.data.shares.ShareRootInfo
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.DeskDialog
-import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.dateTimeText
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.levelText
@@ -59,6 +57,7 @@ import desktopkit.components.StatusBanner
 import desktopkit.components.KeyValueRow
 import desktopkit.components.DeskCard
 import desktopkit.components.DeskTextField
+import desktopkit.components.DeskDialog
 
 /** Düzenlenen ya da eklenen kök: [id] null ise yeni ekleniyor ([uri] dolu). */
 private data class RootDraft(val id: String?, val uri: Uri?, val alias: String, val level: ShareLevel, val group: String?)
@@ -196,14 +195,15 @@ fun SharesScreen(container: AppContainer, actions: AppActions, modifier: Modifie
     }
     removing?.let { root ->
         DeskDialog(
-            title = res.getString(R.string.shares_remove_title),
-            text = res.getString(R.string.shares_remove_text, root.alias),
-            confirmLabel = res.getString(R.string.action_remove),
-            dismissLabel = res.getString(R.string.action_cancel),
-            onConfirm = { repo.removeRoot(root.id); removing = null },
             onDismiss = { removing = null },
-            destructive = true,
-        )
+            title = res.getString(R.string.shares_remove_title),
+            actions = {
+                DeskButton(res.getString(R.string.action_cancel), { removing = null })
+                DeskButton(res.getString(R.string.action_remove), { repo.removeRoot(root.id); removing = null })
+            },
+        ) {
+            Text(res.getString(R.string.shares_remove_text, root.alias), style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)
+        }
     }
 }
 
@@ -253,36 +253,38 @@ private fun RootDialog(initial: RootDraft, groups: List<String>, onDismiss: () -
     var level by rememberSaveable(initial.id, initial.uri?.toString()) { mutableStateOf(initial.level) }
     var group by rememberSaveable(initial.id, initial.uri?.toString()) { mutableStateOf(initial.group) }
     val valid = alias.isNotBlank() && (level != ShareLevel.GROUP || group != null)
-    DeskFormDialog(
-        title = res.getString(if (initial.id == null) R.string.shares_add_folder else R.string.shares_edit_folder),
-        confirmLabel = res.getString(if (initial.id == null) R.string.action_add else R.string.action_save),
-        dismissLabel = res.getString(R.string.action_cancel),
-        onConfirm = { onConfirm(initial.copy(alias = alias.trim(), level = level, group = if (level == ShareLevel.GROUP) group else null)) },
+    DeskDialog(
         onDismiss = onDismiss,
-        confirmEnabled = valid,
+        title = res.getString(if (initial.id == null) R.string.shares_add_folder else R.string.shares_edit_folder),
+        actions = {
+            DeskButton(res.getString(R.string.action_cancel), onDismiss)
+            DeskButton(res.getString(if (initial.id == null) R.string.action_add else R.string.action_save), { onConfirm(initial.copy(alias = alias.trim(), level = level, group = if (level == ShareLevel.GROUP) group else null)) }, primary = true, enabled = valid)
+        },
     ) {
-        Text(res.getString(R.string.shares_alias), style = DeskTheme.type.label, color = DeskTheme.colors.textSecondary)
-        DeskTextField(alias, { alias = it }, Modifier.fillMaxWidth(), hint = res.getString(R.string.shares_alias_hint))
-        Text(res.getString(R.string.shares_visible_to), style = DeskTheme.type.label, color = DeskTheme.colors.textSecondary)
-        SegmentedChoice(
-            options = listOf(
-                ShareLevel.PUBLIC to res.getString(R.string.level_public),
-                ShareLevel.BUDDIES to res.getString(R.string.level_buddies),
-                ShareLevel.GROUP to res.getString(R.string.level_group),
-            ),
-            selected = level,
-            onSelect = { level = it },
-        )
-        if (level == ShareLevel.GROUP) {
-            if (groups.isEmpty()) {
-                Text(res.getString(R.string.shares_no_groups), style = DeskTheme.type.caption, color = DeskTheme.colors.warning)
-            } else {
-                MenuButton(
-                    text = group ?: res.getString(R.string.shares_choose_group),
-                    entries = { groups.map { name -> MenuEntry.Item(name, { group = name }, checked = name == group) } },
-                    modifier = Modifier.fillMaxWidth(),
-                    icon = SoulIcons.Group,
-                )
+        Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+            Text(res.getString(R.string.shares_alias), style = DeskTheme.type.label, color = DeskTheme.colors.textSecondary)
+            DeskTextField(alias, { alias = it }, Modifier.fillMaxWidth(), hint = res.getString(R.string.shares_alias_hint))
+            Text(res.getString(R.string.shares_visible_to), style = DeskTheme.type.label, color = DeskTheme.colors.textSecondary)
+            SegmentedChoice(
+                options = listOf(
+                    ShareLevel.PUBLIC to res.getString(R.string.level_public),
+                    ShareLevel.BUDDIES to res.getString(R.string.level_buddies),
+                    ShareLevel.GROUP to res.getString(R.string.level_group),
+                ),
+                selected = level,
+                onSelect = { level = it },
+            )
+            if (level == ShareLevel.GROUP) {
+                if (groups.isEmpty()) {
+                    Text(res.getString(R.string.shares_no_groups), style = DeskTheme.type.caption, color = DeskTheme.colors.warning)
+                } else {
+                    MenuButton(
+                        text = group ?: res.getString(R.string.shares_choose_group),
+                        entries = { groups.map { name -> MenuEntry.Item(name, { group = name }, checked = name == group) } },
+                        modifier = Modifier.fillMaxWidth(),
+                        icon = SoulIcons.Group,
+                    )
+                }
             }
         }
     }

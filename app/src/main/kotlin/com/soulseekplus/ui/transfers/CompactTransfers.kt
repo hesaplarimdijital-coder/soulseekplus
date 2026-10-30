@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.transfers
 
+import desktopkit.components.DeskButton
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,7 +34,6 @@ import com.soulseekplus.core.view.TransferGrouping
 import com.soulseekplus.core.view.TransferItemRow
 import com.soulseekplus.core.view.TransferRow
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.rememberUserActions
@@ -54,6 +54,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import desktopkit.appResources
 import desktopkit.components.DeskSearchField
+import desktopkit.components.DeskDialog
 
 /*
  * Telefon düzeni (WidthClass.Compact): yön seçici + kategori çipleri iki ince satırda; arama, gruplama, seçim ve
@@ -160,23 +161,25 @@ internal fun CompactTransfersScreen(vm: TransfersViewModel, container: AppContai
     }
 
     if (viewOptionsOpen) {
-        DeskFormDialog(
-            title = res.getString(R.string.compact_view_options),
-            confirmLabel = res.getString(R.string.action_close),
-            dismissLabel = null,
-            onConfirm = { viewOptionsOpen = false },
+        DeskDialog(
             onDismiss = { viewOptionsOpen = false },
+            title = res.getString(R.string.compact_view_options),
+            actions = {
+                DeskButton(res.getString(R.string.action_close), { viewOptionsOpen = false }, primary = true)
+            },
         ) {
-            SectionCaption(res.getString(R.string.compact_group_by))
-            SegmentedChoice(
-                options = listOf(
-                    TransferGroupMode.NONE to res.getString(R.string.transfers_group_none),
-                    TransferGroupMode.USER to res.getString(R.string.transfers_group_user),
-                    TransferGroupMode.FOLDER to res.getString(R.string.transfers_group_folder),
-                ),
-                selected = vm.groupMode,
-                onSelect = { vm.changeGroupMode(it) },
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+                SectionCaption(res.getString(R.string.compact_group_by))
+                SegmentedChoice(
+                    options = listOf(
+                        TransferGroupMode.NONE to res.getString(R.string.transfers_group_none),
+                        TransferGroupMode.USER to res.getString(R.string.transfers_group_user),
+                        TransferGroupMode.FOLDER to res.getString(R.string.transfers_group_folder),
+                    ),
+                    selected = vm.groupMode,
+                    onSelect = { vm.changeGroupMode(it) },
+                )
+            }
         }
     }
 }

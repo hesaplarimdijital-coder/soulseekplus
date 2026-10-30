@@ -34,7 +34,6 @@ import com.soulseekplus.core.model.GroupMode
 import com.soulseekplus.core.model.UploadQueueMode
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.AppShortcuts
-import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.account.AccountForm
 import com.soulseekplus.ui.connectionText
 import com.soulseekplus.ui.groupModeText
@@ -58,6 +57,7 @@ import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
 import desktopkit.components.DeskTextField
 import desktopkit.components.NumberField
+import desktopkit.components.DeskDialog
 
 @Composable
 fun SettingsScreen(
@@ -363,32 +363,34 @@ private fun scopeTitle(scope: ShortcutScope): String? = when (scope) {
 @Composable
 private fun AliasManagerDialog(aliases: Map<String, String>, onRemove: (String) -> Unit, onDismiss: () -> Unit) {
     val res = appResources()
-    DeskFormDialog(
-        title = res.getString(R.string.chat_aliases_title),
-        confirmLabel = res.getString(R.string.action_close),
-        dismissLabel = null,
-        onConfirm = onDismiss,
+    DeskDialog(
         onDismiss = onDismiss,
+        title = res.getString(R.string.chat_aliases_title),
+        actions = {
+            DeskButton(res.getString(R.string.action_close), onDismiss, primary = true)
+        },
     ) {
-        if (aliases.isEmpty()) {
-            Text(res.getString(R.string.chat_fb_no_aliases), style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)
-        } else {
-            Column(
-                Modifier.fillMaxWidth().padding(end = 4.dp).verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS),
-            ) {
-                for ((name, expansion) in aliases.toSortedMap()) {
-                    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
-                        Column(Modifier.weight(1f)) {
-                            Text("/$name", style = DeskTheme.type.mono, color = DeskTheme.colors.accentText)
-                            Text(expansion, style = DeskTheme.type.caption, color = DeskTheme.colors.textSecondary, maxLines = 2)
+        Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+            if (aliases.isEmpty()) {
+                Text(res.getString(R.string.chat_fb_no_aliases), style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)
+            } else {
+                Column(
+                    Modifier.fillMaxWidth().padding(end = 4.dp).verticalScroll(rememberScrollState()),
+                    verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS),
+                ) {
+                    for ((name, expansion) in aliases.toSortedMap()) {
+                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
+                            Column(Modifier.weight(1f)) {
+                                Text("/$name", style = DeskTheme.type.mono, color = DeskTheme.colors.accentText)
+                                Text(expansion, style = DeskTheme.type.caption, color = DeskTheme.colors.textSecondary, maxLines = 2)
+                            }
+                            desktopkit.components.DeskIconButton(DeskIcons.Delete, res.getString(R.string.action_remove), { onRemove(name) })
                         }
-                        desktopkit.components.DeskIconButton(DeskIcons.Delete, res.getString(R.string.action_remove), { onRemove(name) })
                     }
                 }
             }
+            Text(res.getString(R.string.chat_help_alias_tip), style = DeskTheme.type.caption, color = DeskTheme.colors.textTertiary)
         }
-        Text(res.getString(R.string.chat_help_alias_tip), style = DeskTheme.type.caption, color = DeskTheme.colors.textTertiary)
     }
 }
 

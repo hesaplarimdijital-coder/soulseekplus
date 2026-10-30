@@ -64,7 +64,6 @@ import com.soulseekplus.core.model.RoomUser
 import com.soulseekplus.core.model.UserPresence
 import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.rememberUserActions
@@ -101,6 +100,7 @@ import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
 import desktopkit.components.DeskSearchField
 import desktopkit.components.DeskTextField
+import desktopkit.components.DeskDialog
 
 private const val LINK_TAG = "slsk"
 
@@ -412,15 +412,18 @@ private fun ConversationPane(
 
     if (wallDialog && target is ChatTarget.Room) {
         var text by remember { mutableStateOf(room?.tickers?.get(ownName).orEmpty()) }
-        DeskFormDialog(
-            title = res.getString(R.string.chat_wall_title),
-            confirmLabel = res.getString(R.string.action_save),
-            dismissLabel = res.getString(R.string.action_cancel),
-            onConfirm = { vm.repo.setTicker(target.name, text); wallDialog = false },
+        DeskDialog(
             onDismiss = { wallDialog = false },
+            title = res.getString(R.string.chat_wall_title),
+            actions = {
+                DeskButton(res.getString(R.string.action_cancel), { wallDialog = false })
+                DeskButton(res.getString(R.string.action_save), { vm.repo.setTicker(target.name, text); wallDialog = false }, primary = true)
+            },
         ) {
-            Text(res.getString(R.string.chat_wall_desc), style = DeskTheme.type.body, color = colors.textSecondary)
-            DeskTextField(text, { text = it.take(300) }, Modifier.fillMaxWidth(), hint = res.getString(R.string.chat_wall_hint), singleLine = false, minLines = 2)
+            Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+                Text(res.getString(R.string.chat_wall_desc), style = DeskTheme.type.body, color = colors.textSecondary)
+                DeskTextField(text, { text = it.take(300) }, Modifier.fillMaxWidth(), hint = res.getString(R.string.chat_wall_hint), singleLine = false, minLines = 2)
+            }
         }
     }
 }
@@ -730,15 +733,17 @@ private fun RoomListPane(vm: ChatViewModel, container: AppContainer, modifier: M
 private fun NewChatDialog(onDismiss: () -> Unit, onOpen: (String) -> Unit) {
     val res = appResources()
     var name by remember { mutableStateOf("") }
-    DeskFormDialog(
-        title = res.getString(R.string.chat_new_message),
-        confirmLabel = res.getString(R.string.action_open),
-        dismissLabel = res.getString(R.string.action_cancel),
-        onConfirm = { onOpen(name) },
+    DeskDialog(
         onDismiss = onDismiss,
-        confirmEnabled = name.isNotBlank(),
+        title = res.getString(R.string.chat_new_message),
+        actions = {
+            DeskButton(res.getString(R.string.action_cancel), onDismiss)
+            DeskButton(res.getString(R.string.action_open), { onOpen(name) }, primary = true, enabled = name.isNotBlank())
+        },
     ) {
-        DeskTextField(name, { name = it }, Modifier.fillMaxWidth(), hint = res.getString(R.string.label_username), leading = SoulIcons.User, imeAction = ImeAction.Go, onImeAction = { if (name.isNotBlank()) onOpen(name) })
+        Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+            DeskTextField(name, { name = it }, Modifier.fillMaxWidth(), hint = res.getString(R.string.label_username), leading = SoulIcons.User, imeAction = ImeAction.Go, onImeAction = { if (name.isNotBlank()) onOpen(name) })
+        }
     }
 }
 
@@ -746,22 +751,24 @@ private fun NewChatDialog(onDismiss: () -> Unit, onOpen: (String) -> Unit) {
 private fun HelpDialog(commands: List<com.soulseekplus.core.chat.CommandInfo>, onDismiss: () -> Unit) {
     val res = appResources()
     val colors = DeskTheme.colors
-    DeskFormDialog(
-        title = res.getString(R.string.chat_help_title),
-        confirmLabel = res.getString(R.string.action_close),
-        dismissLabel = null,
-        onConfirm = onDismiss,
+    DeskDialog(
         onDismiss = onDismiss,
+        title = res.getString(R.string.chat_help_title),
+        actions = {
+            DeskButton(res.getString(R.string.action_close), onDismiss, primary = true)
+        },
     ) {
-        Column(Modifier.heightIn(max = 380.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
-            for (c in commands) {
-                Column {
-                    val aliases = if (c.aliases.isEmpty()) "" else "  (" + c.aliases.joinToString(", ") { "/$it" } + ")"
-                    Text("/${c.name} ${c.parameters}$aliases".trim(), style = DeskTheme.type.mono, color = colors.accentText)
-                    Text(res.getString(commandDescription(c.name)), style = DeskTheme.type.caption, color = colors.textSecondary)
+        Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+            Column(Modifier.heightIn(max = 380.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
+                for (c in commands) {
+                    Column {
+                        val aliases = if (c.aliases.isEmpty()) "" else "  (" + c.aliases.joinToString(", ") { "/$it" } + ")"
+                        Text("/${c.name} ${c.parameters}$aliases".trim(), style = DeskTheme.type.mono, color = colors.accentText)
+                        Text(res.getString(commandDescription(c.name)), style = DeskTheme.type.caption, color = colors.textSecondary)
+                    }
                 }
+                Text(res.getString(R.string.chat_help_alias_tip), style = DeskTheme.type.caption, color = colors.textTertiary)
             }
-            Text(res.getString(R.string.chat_help_alias_tip), style = DeskTheme.type.caption, color = colors.textTertiary)
         }
     }
 }
@@ -769,16 +776,18 @@ private fun HelpDialog(commands: List<com.soulseekplus.core.chat.CommandInfo>, o
 @Composable
 private fun AliasDialog(aliases: Map<String, String>, onDismiss: () -> Unit) {
     val res = appResources()
-    DeskFormDialog(
-        title = res.getString(R.string.chat_aliases_title),
-        confirmLabel = res.getString(R.string.action_close),
-        dismissLabel = null,
-        onConfirm = onDismiss,
+    DeskDialog(
         onDismiss = onDismiss,
+        title = res.getString(R.string.chat_aliases_title),
+        actions = {
+            DeskButton(res.getString(R.string.action_close), onDismiss, primary = true)
+        },
     ) {
-        Column(Modifier.heightIn(max = 320.dp).verticalScroll(rememberScrollState())) {
-            for ((name, expansion) in aliases.toSortedMap()) {
-                Text("/$name  →  $expansion", style = DeskTheme.type.mono, color = DeskTheme.colors.text)
+        Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
+            Column(Modifier.heightIn(max = 320.dp).verticalScroll(rememberScrollState())) {
+                for ((name, expansion) in aliases.toSortedMap()) {
+                    Text("/$name  →  $expansion", style = DeskTheme.type.mono, color = DeskTheme.colors.text)
+                }
             }
         }
     }

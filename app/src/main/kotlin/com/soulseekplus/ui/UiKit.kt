@@ -70,58 +70,6 @@ import desktopkit.theme.DeskTheme
 // desktop-kit'te olmayan ortak bileşenler: Material3 yalnızca onay kutusu, anahtar, ilerleme çubuğu ve iletişim
 // kutusu için; renkler DeskTheme belirteçlerinden gelir.
 
-/** Onay penceresi. */
-@Composable
-fun DeskDialog(
-    title: String,
-    text: String,
-    confirmLabel: String,
-    dismissLabel: String,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit,
-    destructive: Boolean = false,
-) {
-    DeskFormDialog(
-        title = title,
-        confirmLabel = confirmLabel,
-        dismissLabel = dismissLabel,
-        onConfirm = onConfirm,
-        onDismiss = onDismiss,
-        destructive = destructive,
-    ) {
-        Text(text, style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)
-    }
-}
-
-/** Serbest içerikli pencere (form alanları vb.). */
-@Composable
-fun DeskFormDialog(
-    title: String,
-    confirmLabel: String,
-    dismissLabel: String?,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit,
-    modifier: Modifier = Modifier,
-    confirmEnabled: Boolean = true,
-    destructive: Boolean = false,
-    content: @Composable ColumnScope.() -> Unit,
-) {
-    val colors = DeskTheme.colors
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        modifier = modifier,
-        confirmButton = { DeskButton(confirmLabel, onConfirm, primary = !destructive, enabled = confirmEnabled) },
-        dismissButton = dismissLabel?.let { label -> { DeskButton(label, onDismiss) } },
-        title = { Text(title, style = DeskTheme.type.title, color = if (destructive) colors.danger else colors.text) },
-        text = {
-            Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM), content = content)
-        },
-        containerColor = colors.surfaceRaised,
-        titleContentColor = colors.text,
-        textContentColor = colors.textSecondary,
-    )
-}
-
 /** Açılıp kapanan süzgeç çipi (hızlı süzgeçler). */
 @Composable
 fun ToggleChip(label: String, selected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier, icon: ImageVector? = null) {
