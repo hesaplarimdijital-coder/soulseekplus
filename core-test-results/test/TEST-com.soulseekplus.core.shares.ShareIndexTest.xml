@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.shares.ShareIndexTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2026-10-30T21:08:46.733Z" hostname="runnervmnwato" time="0.43">
+  <properties/>
+  <testcase name="virtualPathsUseAliasAndBackslashes" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.006"/>
+  <testcase name="largeIndexStaysFast" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.418"/>
+  <testcase name="bannedUserGetsNothing" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.001"/>
+  <testcase name="statsCountAllLevels" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="minusExcludesWords" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.001"/>
+  <testcase name="resultLimitCountsLockedToo" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="threeTierPermissionsInSearch" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="aliasSanitizingAndEmptySnapshot" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="searchWordsSplitUnicodePunctuation" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.001"/>
+  <testcase name="starMatchesSuffixOfIndexedWords" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="resolveUploadNormalizesAndChecksPermission" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.001"/>
+  <testcase name="excludedPhrasesFilterResults" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="folderContentsIncludesSubfoldersAndRespectsPermission" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="allWordsMustMatchExactly" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.001"/>
+  <testcase name="caseAndPunctuationInsensitive" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="browseSplitsOpenAndLockedFolders" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="revealRestrictedOffHidesLockedLists" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.0"/>
+  <testcase name="listChangesApplyWithoutRebuildingIndex" classname="com.soulseekplus.core.shares.ShareIndexTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
