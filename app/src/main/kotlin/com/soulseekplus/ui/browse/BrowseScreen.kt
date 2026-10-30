@@ -20,8 +20,6 @@ import com.soulseekplus.core.format.Formatting
 import com.soulseekplus.core.model.SharedFile
 import com.soulseekplus.core.view.BrowseTree
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.FilterTextField
 import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.UserActions
 import com.soulseekplus.ui.common.rememberUserActions
@@ -47,6 +45,8 @@ import desktopkit.appResources
 import desktopkit.components.DeskProgressBar
 import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
+import desktopkit.components.DeskSearchField
+import desktopkit.components.DeskTextField
 
 private data class TreeRow(val node: BrowseTree.Node, val depth: Int)
 
@@ -90,7 +90,7 @@ fun BrowseScreen(vm: BrowseViewModel, container: AppContainer, actions: AppActio
         }
         Row(Modifier.fillMaxWidth().padding(dimens.pagePadding, dimens.gapS)) {
             if (loaded != null) {
-                FilterTextField(vm.filter, { vm.filter = it }, stringResource(R.string.browse_filter_hint), Modifier.weight(1f))
+                DeskSearchField(vm.filter, { vm.filter = it }, Modifier.weight(1f), hint = stringResource(R.string.browse_filter_hint))
             }
         }
         when (state) {

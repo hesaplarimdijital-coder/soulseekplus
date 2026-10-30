@@ -34,7 +34,6 @@ import com.soulseekplus.core.view.TransferItemRow
 import com.soulseekplus.core.view.TransferRow
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.DeskFormDialog
-import com.soulseekplus.ui.FilterTextField
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.rememberUserActions
@@ -54,6 +53,7 @@ import desktopkit.theme.DeskTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import desktopkit.appResources
+import desktopkit.components.DeskSearchField
 
 /*
  * Telefon düzeni (WidthClass.Compact): yön seçici + kategori çipleri iki ince satırda; arama, gruplama, seçim ve
@@ -114,7 +114,7 @@ internal fun CompactTransfersScreen(vm: TransfersViewModel, container: AppContai
                 onSelect = { vm.changeDirection(it) },
             )
             if (searchOpen) {
-                FilterTextField(vm.query, { vm.query = it }, stringResource(R.string.transfers_filter_hint), Modifier.fillMaxWidth())
+                DeskSearchField(vm.query, { vm.query = it }, Modifier.fillMaxWidth(), hint = stringResource(R.string.transfers_filter_hint))
             }
         }
         ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding).padding(bottom = dimens.gapXs)) {

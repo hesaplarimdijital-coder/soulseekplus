@@ -27,11 +27,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.soulseekplus.AppContainer
 import com.soulseekplus.R
 import com.soulseekplus.core.model.ClientSettings
-import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.icons.SoulIcons
 import desktopkit.components.DeskButton
 import desktopkit.theme.DeskTheme
 import desktopkit.components.DeskCard
+import desktopkit.components.DeskTextField
 
 /**
  * Hesap alanları: kullanıcı adı, parola ve (isteğe bağlı) sunucu. Kaydedince ayarlar yazılır ve bağlantı yenilenir.

@@ -47,8 +47,6 @@ import com.soulseekplus.core.search.ResultRow
 import com.soulseekplus.core.search.ResultSort
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.DeskFormDialog
-import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.OptionalNumberField
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.TabChip
 import com.soulseekplus.ui.ToggleChip
@@ -76,6 +74,8 @@ import desktopkit.appResources
 import desktopkit.components.IconMenuButton
 import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
+import desktopkit.components.DeskTextField
+import desktopkit.components.OptionalNumberField
 
 /*
  * Telefon düzeni (WidthClass.Compact). Masaüstü düzeninden farkları:
@@ -251,7 +251,7 @@ private fun CompactQueryRow(vm: SearchViewModel, container: AppContainer, action
                 hint = stringResource(R.string.search_hint_query),
                 imeAction = ImeAction.Search,
                 onImeAction = { vm.submit(actions) },
-                trailing = if (recent.isNotEmpty()) {
+                trailingContent = if (recent.isNotEmpty()) {
                     {
                         IconMenuButton(
                             icon = DeskIcons.History,
@@ -273,7 +273,7 @@ private fun CompactQueryRow(vm: SearchViewModel, container: AppContainer, action
                 modifier = Modifier.fillMaxWidth().padding(start = dimens.gapS),
                 hint = stringResource(if (vm.scope == ScopeChoice.ROOM) R.string.search_hint_room else R.string.search_hint_user),
                 leading = scopeIcon(vm.scope),
-                trailing = if (vm.scope == ScopeChoice.ROOM && joined.isNotEmpty()) {
+                trailingContent = if (vm.scope == ScopeChoice.ROOM && joined.isNotEmpty()) {
                     {
                         IconMenuButton(
                             icon = DeskIcons.ChevronDown,
@@ -374,15 +374,15 @@ private fun CompactFilterPanel(tab: SearchTabState, ui: TabUi, vm: SearchViewMod
                 { m -> DebouncedField(filter.countries, resetKey, res.getString(R.string.f_countries), false, m) { t -> update { it.copy(countries = t) } } },
             )
             FieldPair(
-                { m -> OptionalNumberField(filter.minBitrate?.toLong(), { v -> update { it.copy(minBitrate = v?.toInt()) } }, res.getString(R.string.f_min_bitrate), m, resetKey) },
-                { m -> OptionalNumberField(filter.maxQueueLength, { v -> update { it.copy(maxQueueLength = v) } }, res.getString(R.string.f_max_queue), m, resetKey) },
+                { m -> OptionalNumberField(filter.minBitrate?.toLong(), { v -> update { it.copy(minBitrate = v?.toInt()) } }, m, hint = res.getString(R.string.f_min_bitrate)) },
+                { m -> OptionalNumberField(filter.maxQueueLength, { v -> update { it.copy(maxQueueLength = v) } }, m, hint = res.getString(R.string.f_max_queue)) },
             )
             FieldPair(
-                { m -> OptionalNumberField(filter.minSizeBytes?.div(mib), { v -> update { it.copy(minSizeBytes = v?.times(mib)) } }, res.getString(R.string.f_min_size), m, resetKey) },
-                { m -> OptionalNumberField(filter.maxSizeBytes?.div(mib), { v -> update { it.copy(maxSizeBytes = v?.times(mib)) } }, res.getString(R.string.f_max_size), m, resetKey) },
+                { m -> OptionalNumberField(filter.minSizeBytes?.div(mib), { v -> update { it.copy(minSizeBytes = v?.times(mib)) } }, m, hint = res.getString(R.string.f_min_size)) },
+                { m -> OptionalNumberField(filter.maxSizeBytes?.div(mib), { v -> update { it.copy(maxSizeBytes = v?.times(mib)) } }, m, hint = res.getString(R.string.f_max_size)) },
             )
             FieldPair(
-                { m -> OptionalNumberField(filter.minSpeedBytes?.toLong()?.div(1024L), { v -> update { it.copy(minSpeedBytes = v?.times(1024L)?.coerceAtMost(Int.MAX_VALUE.toLong())?.toInt()) } }, res.getString(R.string.f_min_speed), m, resetKey) },
+                { m -> OptionalNumberField(filter.minSpeedBytes?.toLong()?.div(1024L), { v -> update { it.copy(minSpeedBytes = v?.times(1024L)?.coerceAtMost(Int.MAX_VALUE.toLong())?.toInt()) } }, m, hint = res.getString(R.string.f_min_speed)) },
                 { m -> ToggleChip(res.getString(R.string.f_regex), filter.useRegex, { update { it.copy(useRegex = !it.useRegex) } }, modifier = m) },
             )
             if (issues.isNotEmpty()) {

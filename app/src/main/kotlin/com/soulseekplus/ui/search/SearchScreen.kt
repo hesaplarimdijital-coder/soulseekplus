@@ -48,8 +48,6 @@ import com.soulseekplus.core.search.SearchFilterEngine
 import com.soulseekplus.core.search.SearchGrouping
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.AppShortcuts
-import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.OptionalNumberField
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.TabChip
 import com.soulseekplus.ui.ToggleChip
@@ -82,6 +80,8 @@ import desktopkit.components.IconMenuButton
 import desktopkit.components.MenuButton
 import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
+import desktopkit.components.DeskTextField
+import desktopkit.components.OptionalNumberField
 
 private const val MIB = 1024L * 1024L
 
@@ -159,7 +159,7 @@ private fun QueryBar(vm: SearchViewModel, container: AppContainer, actions: AppA
             leading = DeskIcons.Search,
             imeAction = ImeAction.Search,
             onImeAction = { vm.submit(actions) },
-            trailing = {
+            trailingContent = {
                 IconMenuButton(
                     icon = DeskIcons.History,
                     label = res.getString(R.string.search_history),
@@ -203,7 +203,7 @@ private fun QueryBar(vm: SearchViewModel, container: AppContainer, actions: AppA
                 onValueChange = { vm.scopeArg = it },
                 modifier = Modifier.width(160.dp),
                 hint = stringResource(if (vm.scope == ScopeChoice.ROOM) R.string.search_hint_room else R.string.search_hint_user),
-                trailing = if (vm.scope == ScopeChoice.ROOM && joined.isNotEmpty()) {
+                trailingContent = if (vm.scope == ScopeChoice.ROOM && joined.isNotEmpty()) {
                     {
                         IconMenuButton(
                             icon = DeskIcons.ChevronDown,
@@ -370,11 +370,11 @@ internal fun FilterBar(tab: SearchTabState, reset: Int, vm: SearchViewModel) {
         ToggleChip(res.getString(R.string.f_regex), filter.useRegex, { update { it.copy(useRegex = !it.useRegex) } })
         DebouncedField(filter.extensions, resetKey, res.getString(R.string.f_extensions), false, Modifier.width(190.dp)) { text -> update { it.copy(extensions = text) } }
         DebouncedField(filter.countries, resetKey, res.getString(R.string.f_countries), false, Modifier.width(150.dp)) { text -> update { it.copy(countries = text) } }
-        OptionalNumberField(filter.minBitrate?.toLong(), { v -> update { it.copy(minBitrate = v?.toInt()) } }, res.getString(R.string.f_min_bitrate), Modifier.width(110.dp), resetKey)
-        OptionalNumberField(filter.minSizeBytes?.div(MIB), { v -> update { it.copy(minSizeBytes = v?.times(MIB)) } }, res.getString(R.string.f_min_size), Modifier.width(110.dp), resetKey)
-        OptionalNumberField(filter.maxSizeBytes?.div(MIB), { v -> update { it.copy(maxSizeBytes = v?.times(MIB)) } }, res.getString(R.string.f_max_size), Modifier.width(110.dp), resetKey)
-        OptionalNumberField(filter.maxQueueLength, { v -> update { it.copy(maxQueueLength = v) } }, res.getString(R.string.f_max_queue), Modifier.width(110.dp), resetKey)
-        OptionalNumberField(filter.minSpeedBytes?.toLong()?.div(1024L), { v -> update { it.copy(minSpeedBytes = v?.times(1024L)?.coerceAtMost(Int.MAX_VALUE.toLong())?.toInt()) } }, res.getString(R.string.f_min_speed), Modifier.width(120.dp), resetKey)
+        OptionalNumberField(filter.minBitrate?.toLong(), { v -> update { it.copy(minBitrate = v?.toInt()) } }, Modifier.width(110.dp), hint = res.getString(R.string.f_min_bitrate))
+        OptionalNumberField(filter.minSizeBytes?.div(MIB), { v -> update { it.copy(minSizeBytes = v?.times(MIB)) } }, Modifier.width(110.dp), hint = res.getString(R.string.f_min_size))
+        OptionalNumberField(filter.maxSizeBytes?.div(MIB), { v -> update { it.copy(maxSizeBytes = v?.times(MIB)) } }, Modifier.width(110.dp), hint = res.getString(R.string.f_max_size))
+        OptionalNumberField(filter.maxQueueLength, { v -> update { it.copy(maxQueueLength = v) } }, Modifier.width(110.dp), hint = res.getString(R.string.f_max_queue))
+        OptionalNumberField(filter.minSpeedBytes?.toLong()?.div(1024L), { v -> update { it.copy(minSpeedBytes = v?.times(1024L)?.coerceAtMost(Int.MAX_VALUE.toLong())?.toInt()) } }, Modifier.width(120.dp), hint = res.getString(R.string.f_min_speed))
         DeskButton(res.getString(R.string.search_clear_filters), { vm.clearFilter(tab.id) }, icon = DeskIcons.Close, enabled = filter != SearchFilter(hideLocked = false))
         if (issues.isNotEmpty()) {
             Text(res.getString(R.string.f_invalid_regex), style = DeskTheme.type.caption, color = DeskTheme.colors.danger, modifier = Modifier.padding(top = dimens.gapS))

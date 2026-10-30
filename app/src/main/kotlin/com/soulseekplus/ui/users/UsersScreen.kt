@@ -33,7 +33,6 @@ import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.DeskDialog
 import com.soulseekplus.ui.DeskFormDialog
-import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.userStatusText
@@ -53,6 +52,7 @@ import desktopkit.theme.DeskTheme
 import desktopkit.appResources
 import desktopkit.components.IconMenuButton
 import desktopkit.components.DeskCard
+import desktopkit.components.DeskTextField
 
 private enum class UsersTab { BUDDIES, GROUPS, BANNED, IGNORED }
 

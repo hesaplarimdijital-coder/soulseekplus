@@ -35,7 +35,6 @@ import com.soulseekplus.data.shares.ShareRootInfo
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.DeskDialog
 import com.soulseekplus.ui.DeskFormDialog
-import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.dateTimeText
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.levelText
@@ -59,6 +58,7 @@ import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
 import desktopkit.components.KeyValueRow
 import desktopkit.components.DeskCard
+import desktopkit.components.DeskTextField
 
 /** Düzenlenen ya da eklenen kök: [id] null ise yeni ekleniyor ([uri] dolu). */
 private data class RootDraft(val id: String?, val uri: Uri?, val alias: String, val level: ShareLevel, val group: String?)

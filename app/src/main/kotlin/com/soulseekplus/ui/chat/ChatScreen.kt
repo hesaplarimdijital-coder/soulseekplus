@@ -65,8 +65,6 @@ import com.soulseekplus.core.model.UserPresence
 import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.DeskFormDialog
-import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.FilterTextField
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.rememberUserActions
@@ -101,6 +99,8 @@ import desktopkit.appResources
 import desktopkit.components.CountBadge
 import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
+import desktopkit.components.DeskSearchField
+import desktopkit.components.DeskTextField
 
 private const val LINK_TAG = "slsk"
 
@@ -582,7 +582,7 @@ private fun UsersPane(users: List<RoomUser>, container: AppContainer, actions: A
         )
     }
     Column(modifier) {
-        FilterTextField(filter, { filter = it }, stringResource(R.string.chat_filter_users), Modifier.fillMaxWidth().padding(DeskTheme.dimens.gapS))
+        DeskSearchField(filter, { filter = it }, Modifier.fillMaxWidth().padding(DeskTheme.dimens.gapS), hint = stringResource(R.string.chat_filter_users))
         DenseTable(
             columns = columns,
             rows = rows,
@@ -693,7 +693,7 @@ private fun RoomListPane(vm: ChatViewModel, container: AppContainer, modifier: M
             }
             DeskButton(res.getString(R.string.chat_join), { vm.openRoom(newRoom, privateRoom); newRoom = "" }, primary = true, enabled = newRoom.isNotBlank())
         }
-        FilterTextField(filter, { filter = it }, stringResource(R.string.chat_filter_rooms), Modifier.fillMaxWidth().padding(dimens.pagePadding, dimens.gapS))
+        DeskSearchField(filter, { filter = it }, Modifier.fillMaxWidth().padding(dimens.pagePadding, dimens.gapS), hint = stringResource(R.string.chat_filter_rooms))
         if (rows.isEmpty()) {
             MessageScreen(
                 title = stringResource(R.string.chat_no_room_list),

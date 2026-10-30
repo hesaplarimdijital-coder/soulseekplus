@@ -32,7 +32,6 @@ import com.soulseekplus.R
 import com.soulseekplus.core.format.Formatting
 import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.userStatusText
@@ -49,6 +48,7 @@ import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
 import desktopkit.components.KeyValueRow
 import desktopkit.components.DeskCard
+import desktopkit.components.DeskTextField
 
 @Composable
 fun ProfileScreen(vm: ProfileViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {

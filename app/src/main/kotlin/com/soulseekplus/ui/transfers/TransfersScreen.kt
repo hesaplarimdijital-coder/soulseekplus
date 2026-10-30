@@ -37,7 +37,6 @@ import com.soulseekplus.core.view.TransferRow
 import com.soulseekplus.core.view.TransferSort
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.AppShortcuts
-import com.soulseekplus.ui.FilterTextField
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.rememberUserActions
@@ -61,6 +60,7 @@ import desktopkit.theme.DeskTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import desktopkit.appResources
+import desktopkit.components.DeskSearchField
 
 /** Hesaplanmış görünüm: tablo satırları, kategori sayıları ve süzülmüş liste. */
 internal data class TransferView(
@@ -136,7 +136,7 @@ fun TransfersScreen(vm: TransfersViewModel, container: AppContainer, actions: Ap
                     )
                 }
             }
-            FilterTextField(vm.query, { vm.query = it }, stringResource(R.string.transfers_filter_hint), Modifier.fillMaxWidth())
+            DeskSearchField(vm.query, { vm.query = it }, Modifier.fillMaxWidth(), hint = stringResource(R.string.transfers_filter_hint))
         }
 
         if (view.rows.isEmpty()) {

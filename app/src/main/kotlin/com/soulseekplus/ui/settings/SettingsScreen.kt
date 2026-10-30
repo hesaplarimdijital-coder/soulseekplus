@@ -35,8 +35,6 @@ import com.soulseekplus.core.model.UploadQueueMode
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.AppShortcuts
 import com.soulseekplus.ui.DeskFormDialog
-import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.NumberField
 import com.soulseekplus.ui.account.AccountForm
 import com.soulseekplus.ui.connectionText
 import com.soulseekplus.ui.groupModeText
@@ -58,6 +56,8 @@ import desktopkit.appResources
 import desktopkit.components.SwitchRow
 import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
+import desktopkit.components.DeskTextField
+import desktopkit.components.NumberField
 
 @Composable
 fun SettingsScreen(
