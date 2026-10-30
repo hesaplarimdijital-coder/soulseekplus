@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.users
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,8 +34,6 @@ import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.DeskDialog
 import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.SurfaceCard
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.userStatusText
@@ -51,6 +50,9 @@ import desktopkit.components.TableSort
 import desktopkit.screens.MessageScreen
 import desktopkit.screens.PageHeader
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.IconMenuButton
+import desktopkit.components.DeskCard
 
 private enum class UsersTab { BUDDIES, GROUPS, BANNED, IGNORED }
 
@@ -370,7 +372,7 @@ private fun GroupCard(
     val dimens = DeskTheme.dimens
     val colors = DeskTheme.colors
     var addText by remember(group.name) { mutableStateOf("") }
-    SurfaceCard(Modifier.fillMaxWidth()) {
+    DeskCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(dimens.gapS)) {
             Column(Modifier.weight(1f)) {
                 Text(group.name, style = DeskTheme.type.title, color = colors.text, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -400,7 +402,7 @@ private fun GroupCard(
                     style = DeskTheme.type.body,
                 )
                 Text(member, style = DeskTheme.type.body, color = colors.text, modifier = Modifier.weight(1f), maxLines = 1, overflow = TextOverflow.Ellipsis)
-                com.soulseekplus.ui.IconMenuButton(DeskIcons.MoreVertical, res.getString(R.string.action_more), { ua.userEntries(member) })
+                IconMenuButton(DeskIcons.MoreVertical, res.getString(R.string.action_more), { ua.userEntries(member) })
                 DeskIconButton(DeskIcons.Close, res.getString(R.string.users_remove_member), { repo.removeFromGroup(group.name, member) })
             }
         }

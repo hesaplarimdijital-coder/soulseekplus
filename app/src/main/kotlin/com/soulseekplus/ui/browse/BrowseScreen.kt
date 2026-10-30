@@ -20,13 +20,9 @@ import com.soulseekplus.core.format.Formatting
 import com.soulseekplus.core.model.SharedFile
 import com.soulseekplus.core.view.BrowseTree
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.BannerTone
-import com.soulseekplus.ui.DeskProgressBar
 import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.FilterTextField
-import com.soulseekplus.ui.StatusBanner
 import com.soulseekplus.ui.ToggleChip
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.UserActions
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
@@ -47,6 +43,10 @@ import desktopkit.screens.PageHeader
 import desktopkit.shell.WidthClass
 import desktopkit.shell.currentWidthClass
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.DeskProgressBar
+import desktopkit.components.BannerTone
+import desktopkit.components.StatusBanner
 
 private data class TreeRow(val node: BrowseTree.Node, val depth: Int)
 

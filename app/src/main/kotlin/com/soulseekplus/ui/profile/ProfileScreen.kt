@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.profile
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -31,13 +32,7 @@ import com.soulseekplus.R
 import com.soulseekplus.core.format.Formatting
 import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.BannerTone
-import com.soulseekplus.ui.DeskProgressBar
 import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.KeyValueRow
-import com.soulseekplus.ui.StatusBanner
-import com.soulseekplus.ui.SurfaceCard
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.userStatusText
@@ -48,6 +43,12 @@ import desktopkit.components.SectionCaption
 import desktopkit.screens.MessageScreen
 import desktopkit.screens.PageHeader
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.DeskProgressBar
+import desktopkit.components.BannerTone
+import desktopkit.components.StatusBanner
+import desktopkit.components.KeyValueRow
+import desktopkit.components.DeskCard
 
 @Composable
 fun ProfileScreen(vm: ProfileViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
@@ -122,7 +123,7 @@ private fun LoadedProfile(state: ProfileState.Loaded, container: AppContainer, a
             .padding(horizontal = dimens.pagePadding, vertical = dimens.gapS),
         verticalArrangement = Arrangement.spacedBy(dimens.gapM),
     ) {
-        SurfaceCard(Modifier.fillMaxWidth()) {
+        DeskCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
             Row(horizontalArrangement = Arrangement.spacedBy(dimens.gapL)) {
                 Box(
                     Modifier.size(112.dp).clip(RoundedCornerShape(dimens.radiusCard)).background(colors.surfaceRaised),
@@ -158,7 +159,7 @@ private fun LoadedProfile(state: ProfileState.Loaded, container: AppContainer, a
             }
         }
 
-        SurfaceCard(Modifier.fillMaxWidth()) {
+        DeskCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
             SectionCaption(stringResource(R.string.profile_about))
             Text(
                 text = info.description.ifBlank { res.getString(R.string.profile_no_description) },
@@ -167,8 +168,10 @@ private fun LoadedProfile(state: ProfileState.Loaded, container: AppContainer, a
             )
         }
 
-        SurfaceCard(Modifier.fillMaxWidth()) {
+        DeskCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
             SectionCaption(stringResource(R.string.profile_sharing))
+            // Kitin KeyValueRow'u kendi dikey boşluğunu taşır; satırlar aralıksız bir sütunda (kartın gapS aralığı iki kat olmasın).
+            Column {
             KeyValueRow(res.getString(R.string.profile_slots), info.uploadSlots.toString(), mono = true)
             KeyValueRow(
                 res.getString(R.string.profile_slots_free),
@@ -184,9 +187,10 @@ private fun LoadedProfile(state: ProfileState.Loaded, container: AppContainer, a
                 KeyValueRow(res.getString(R.string.profile_folders), stats.folders.toString(), mono = true)
             }
             state.address?.let { (ip, port) -> KeyValueRow(res.getString(R.string.profile_address), "$ip:$port", mono = true) }
+            }
         }
 
-        SurfaceCard(Modifier.fillMaxWidth()) {
+        DeskCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
             SectionCaption(stringResource(R.string.profile_lists))
             val buddy = name in lists.buddies
             Row(horizontalArrangement = Arrangement.spacedBy(dimens.gapS), verticalAlignment = Alignment.CenterVertically) {

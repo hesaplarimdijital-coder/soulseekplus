@@ -30,8 +30,6 @@ import com.soulseekplus.R
 import com.soulseekplus.core.format.Formatting
 import com.soulseekplus.core.model.ConnectionState
 import com.soulseekplus.core.model.PortMappingState
-import com.soulseekplus.ui.DeskProgressBar
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.connectionText
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.portMappingText
@@ -48,6 +46,8 @@ import desktopkit.components.stateBackground
 import desktopkit.shell.WidthClass
 import desktopkit.shell.currentWidthClass
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.DeskProgressBar
 
 /**
  * Kabuğun alt şeridi: (varsa) mini oynatıcı ve ağ durumu — bağlantı, hızlar, dağıtık ağ konumu, port eşlemesi.
@@ -234,7 +234,7 @@ private fun MiniPlayerRow(container: AppContainer) {
             )
             when {
                 state.failed -> Text(res.getString(R.string.player_failed), style = DeskTheme.type.caption, color = colors.danger)
-                state.preparing -> DeskProgressBar(null, Modifier.fillMaxWidth())
+                state.preparing -> DeskProgressBar(null, Modifier.fillMaxWidth(), height = 6.dp)
                 else -> {
                     val shown = dragging ?: state.fraction
                     DeskSlider(

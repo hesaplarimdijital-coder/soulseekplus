@@ -32,8 +32,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.soulseekplus.ui.DeskCheckbox
-import com.soulseekplus.ui.DeskProgressBar
+import desktopkit.components.DeskCheckbox
+import desktopkit.components.DeskProgressBar
 import desktopkit.components.DeskIconButton
 import desktopkit.components.DeskIcons
 import desktopkit.components.HorizontalRule

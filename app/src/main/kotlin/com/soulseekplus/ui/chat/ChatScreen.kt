@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.chat
 
+import desktopkit.components.DeskCheckbox
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -63,16 +64,11 @@ import com.soulseekplus.core.model.RoomUser
 import com.soulseekplus.core.model.UserPresence
 import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.BannerTone
-import com.soulseekplus.ui.CountBadge
-import com.soulseekplus.ui.DeskCheckbox
 import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.FilterTextField
 import com.soulseekplus.ui.ScrollRow
-import com.soulseekplus.ui.StatusBanner
 import com.soulseekplus.ui.ToggleChip
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.timeText
@@ -101,6 +97,10 @@ import desktopkit.shell.currentWidthClass
 import desktopkit.shell.TopBarAction
 import desktopkit.shell.CompactTopBar
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.CountBadge
+import desktopkit.components.BannerTone
+import desktopkit.components.StatusBanner
 
 private const val LINK_TAG = "slsk"
 
@@ -685,6 +685,8 @@ private fun RoomListPane(vm: ChatViewModel, container: AppContainer, modifier: M
                 imeAction = ImeAction.Go,
                 onImeAction = { if (newRoom.isNotBlank()) { vm.openRoom(newRoom, privateRoom); newRoom = "" } },
             )
+            // Yana kayan satırın içinde: kitin CheckboxRow'u tam genişlik + weight ile dizildiği için burada başlığı
+            // sıfır genişliğe düşer; kitin onay kutusu ve yanında metin.
             Row(verticalAlignment = Alignment.CenterVertically) {
                 DeskCheckbox(privateRoom, { privateRoom = it })
                 Text(res.getString(R.string.chat_private_room), style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)

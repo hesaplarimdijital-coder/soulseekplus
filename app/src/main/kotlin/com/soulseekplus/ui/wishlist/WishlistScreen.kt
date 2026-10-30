@@ -35,11 +35,8 @@ import com.soulseekplus.core.format.Formatting
 import com.soulseekplus.core.model.SearchHit
 import com.soulseekplus.core.model.WishlistItem
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.CountBadge
-import com.soulseekplus.ui.DeskSwitch
 import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.agoText
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.qualityText
@@ -64,6 +61,9 @@ import desktopkit.screens.PageHeader
 import desktopkit.shell.WidthClass
 import desktopkit.shell.currentWidthClass
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.DeskSwitch
+import desktopkit.components.CountBadge
 
 @Composable
 fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {

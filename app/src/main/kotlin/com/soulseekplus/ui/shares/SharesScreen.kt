@@ -1,5 +1,7 @@
 package com.soulseekplus.ui.shares
 
+import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.PaddingValues
 import android.net.Uri
 import android.provider.DocumentsContract
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -31,17 +33,9 @@ import com.soulseekplus.core.model.ShareLevel
 import com.soulseekplus.data.shares.ScanPhase
 import com.soulseekplus.data.shares.ShareRootInfo
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.BannerTone
 import com.soulseekplus.ui.DeskDialog
 import com.soulseekplus.ui.DeskFormDialog
-import com.soulseekplus.ui.DeskProgressBar
 import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.IconMenuButton
-import com.soulseekplus.ui.KeyValueRow
-import com.soulseekplus.ui.MenuButton
-import com.soulseekplus.ui.StatusBanner
-import com.soulseekplus.ui.SurfaceCard
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.dateTimeText
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.levelText
@@ -57,6 +51,14 @@ import desktopkit.shell.WidthClass
 import desktopkit.shell.TopBarAction
 import desktopkit.shell.CompactTopBar
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.DeskProgressBar
+import desktopkit.components.IconMenuButton
+import desktopkit.components.MenuButton
+import desktopkit.components.BannerTone
+import desktopkit.components.StatusBanner
+import desktopkit.components.KeyValueRow
+import desktopkit.components.DeskCard
 
 /** Düzenlenen ya da eklenen kök: [id] null ise yeni ekleniyor ([uri] dolu). */
 private data class RootDraft(val id: String?, val uri: Uri?, val alias: String, val level: ShareLevel, val group: String?)
@@ -117,7 +119,7 @@ fun SharesScreen(container: AppContainer, actions: AppActions, modifier: Modifie
         ) {
             if (progress.active) {
                 item(key = "progress") {
-                    SurfaceCard(Modifier.fillMaxWidth()) {
+                    DeskCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
                         val text = when (progress.phase) {
                             ScanPhase.READING_TAGS -> res.getString(R.string.shares_reading_tags, progress.tagsDone, progress.tagsTotal)
                             else -> res.getString(R.string.shares_scanning, progress.rootAlias, progress.folders, progress.files)
@@ -129,6 +131,7 @@ fun SharesScreen(container: AppContainer, actions: AppActions, modifier: Modifie
                         DeskProgressBar(
                             if (progress.phase == ScanPhase.READING_TAGS && progress.tagsTotal > 0) progress.tagsDone.toFloat() / progress.tagsTotal else null,
                             Modifier.fillMaxWidth(),
+                            height = 6.dp,
                         )
                     }
                 }
@@ -164,7 +167,7 @@ fun SharesScreen(container: AppContainer, actions: AppActions, modifier: Modifie
                 }
             }
             item(key = "levels") {
-                SurfaceCard(Modifier.fillMaxWidth()) {
+                DeskCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
                     Text(stringResource(R.string.shares_levels_title), style = DeskTheme.type.bodyStrong, color = colors.text)
                     Text(stringResource(R.string.shares_levels_public), style = DeskTheme.type.caption, color = colors.textSecondary)
                     Text(stringResource(R.string.shares_levels_buddies), style = DeskTheme.type.caption, color = colors.textSecondary)
@@ -209,7 +212,7 @@ private fun RootCard(root: ShareRootInfo, scanning: Boolean, onRescan: () -> Uni
     val res = appResources()
     val colors = DeskTheme.colors
     val dimens = DeskTheme.dimens
-    SurfaceCard(Modifier.fillMaxWidth()) {
+    DeskCard(Modifier.fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
         Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(dimens.gapS)) {
             Column(Modifier.weight(1f)) {
                 Text(root.alias, style = DeskTheme.type.title, color = colors.text, maxLines = 1, overflow = TextOverflow.Ellipsis)
@@ -228,12 +231,15 @@ private fun RootCard(root: ShareRootInfo, scanning: Boolean, onRescan: () -> Uni
                 },
             )
         }
+        // Kitin KeyValueRow'u kendi dikey boşluğunu taşır; satırlar aralıksız bir sütunda.
+        Column {
         KeyValueRow(res.getString(R.string.shares_visible_to), res.levelText(root.level, root.group))
         KeyValueRow(res.getString(R.string.shares_contents), res.getString(R.string.shares_contents_value, root.fileCount, root.folderCount, Formatting.size(root.totalBytes)))
         KeyValueRow(
             res.getString(R.string.shares_last_scan),
             if (root.scannedAtMillis > 0) res.dateTimeText(root.scannedAtMillis) else res.getString(R.string.shares_never_scanned),
         )
+        }
         if (!root.accessible) {
             Text(res.getString(R.string.shares_inaccessible), style = DeskTheme.type.caption, color = colors.warning)
         }

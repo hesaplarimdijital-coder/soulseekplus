@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.about
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -20,13 +21,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.soulseekplus.BuildConfig
 import com.soulseekplus.R
-import com.soulseekplus.ui.KeyValueRow
-import com.soulseekplus.ui.SurfaceCard
 import com.soulseekplus.ui.icons.SoulIcons
 import desktopkit.components.DeskButton
 import desktopkit.components.DeskIcons
 import desktopkit.screens.PageHeader
 import desktopkit.theme.DeskTheme
+import desktopkit.components.KeyValueRow
+import desktopkit.components.DeskCard
 
 private const val IP2LOCATION_URL = "https://lite.ip2location.com"
 private const val GPL_URL = "https://www.gnu.org/licenses/gpl-3.0.html"
@@ -55,19 +56,19 @@ fun AboutScreen(modifier: Modifier = Modifier) {
             Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = dimens.pagePadding),
             verticalArrangement = Arrangement.spacedBy(dimens.gapM),
         ) {
-            SurfaceCard(Modifier.widthIn(max = 640.dp).fillMaxWidth()) {
+            DeskCard(Modifier.widthIn(max = 640.dp).fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
                 Icon(SoulIcons.P2pConnected, contentDescription = null, tint = colors.accentText)
                 Text(stringResource(R.string.app_name), style = DeskTheme.type.headline, color = colors.text)
                 Text(stringResource(R.string.about_tagline), style = DeskTheme.type.body, color = colors.textSecondary)
                 KeyValueRow(stringResource(R.string.about_version), BuildConfig.VERSION_NAME, mono = true)
                 Text(stringResource(R.string.about_description), style = DeskTheme.type.body, color = colors.textSecondary)
             }
-            SurfaceCard(Modifier.widthIn(max = 640.dp).fillMaxWidth()) {
+            DeskCard(Modifier.widthIn(max = 640.dp).fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
                 Text(stringResource(R.string.about_license_title), style = DeskTheme.type.title, color = colors.text)
                 Text(stringResource(R.string.about_license_text), style = DeskTheme.type.body, color = colors.textSecondary)
                 DeskButton(stringResource(R.string.about_open_gpl), { open(GPL_URL) }, icon = DeskIcons.Info)
             }
-            SurfaceCard(Modifier.widthIn(max = 640.dp).fillMaxWidth()) {
+            DeskCard(Modifier.widthIn(max = 640.dp).fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
                 Text(stringResource(R.string.about_third_party), style = DeskTheme.type.title, color = colors.text)
                 Text(stringResource(R.string.about_ip2location), style = DeskTheme.type.body, color = colors.text)
                 Text(stringResource(R.string.about_ip2location_license), style = DeskTheme.type.caption, color = colors.textSecondary)

@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.account
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -27,11 +28,10 @@ import com.soulseekplus.AppContainer
 import com.soulseekplus.R
 import com.soulseekplus.core.model.ClientSettings
 import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.SurfaceCard
-import com.soulseekplus.ui.SwitchRow
 import com.soulseekplus.ui.icons.SoulIcons
 import desktopkit.components.DeskButton
 import desktopkit.theme.DeskTheme
+import desktopkit.components.DeskCard
 
 /**
  * Hesap alanları: kullanıcı adı, parola ve (isteğe bağlı) sunucu. Kaydedince ayarlar yazılır ve bağlantı yenilenir.
@@ -124,7 +124,7 @@ fun AccountScreen(container: AppContainer, onSaved: () -> Unit, modifier: Modifi
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        SurfaceCard(Modifier.widthIn(max = 460.dp).fillMaxWidth()) {
+        DeskCard(Modifier.widthIn(max = 460.dp).fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
             Icon(SoulIcons.P2pConnected, contentDescription = null, tint = colors.accentText, modifier = Modifier.padding(bottom = dimens.gapXs))
             Text(stringResource(R.string.account_welcome_title), style = DeskTheme.type.headline, color = colors.text)
             Text(stringResource(R.string.account_welcome_text), style = DeskTheme.type.body, color = colors.textSecondary)

@@ -34,14 +34,10 @@ import com.soulseekplus.core.model.GroupMode
 import com.soulseekplus.core.model.UploadQueueMode
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.AppShortcuts
-import com.soulseekplus.ui.BannerTone
 import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.DeskTextField
 import com.soulseekplus.ui.NumberField
-import com.soulseekplus.ui.StatusBanner
-import com.soulseekplus.ui.SwitchRow
 import com.soulseekplus.ui.account.AccountForm
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.connectionText
 import com.soulseekplus.ui.groupModeText
 import com.soulseekplus.ui.icons.SoulIcons
@@ -58,6 +54,10 @@ import desktopkit.settings.InputSection
 import desktopkit.settings.SettingsSection
 import desktopkit.settings.ShortcutListSection
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.SwitchRow
+import desktopkit.components.BannerTone
+import desktopkit.components.StatusBanner
 
 @Composable
 fun SettingsScreen(

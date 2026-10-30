@@ -37,7 +37,6 @@ import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.FilterTextField
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.ToggleChip
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.compact.CompactListRow
 import com.soulseekplus.ui.compact.CompactSelectionBar
@@ -54,6 +53,7 @@ import desktopkit.shell.TopBarAction
 import desktopkit.theme.DeskTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import desktopkit.appResources
 
 /*
  * Telefon düzeni (WidthClass.Compact): yön seçici + kategori çipleri iki ince satırda; arama, gruplama, seçim ve

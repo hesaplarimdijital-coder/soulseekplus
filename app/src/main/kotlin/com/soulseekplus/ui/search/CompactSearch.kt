@@ -46,16 +46,12 @@ import com.soulseekplus.core.search.ResultColumn
 import com.soulseekplus.core.search.ResultRow
 import com.soulseekplus.core.search.ResultSort
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.BannerTone
 import com.soulseekplus.ui.DeskFormDialog
 import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.IconMenuButton
 import com.soulseekplus.ui.OptionalNumberField
 import com.soulseekplus.ui.ScrollRow
-import com.soulseekplus.ui.StatusBanner
 import com.soulseekplus.ui.TabChip
 import com.soulseekplus.ui.ToggleChip
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.UserActions
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.compact.CompactCaption
@@ -76,6 +72,10 @@ import desktopkit.screens.MessageScreen
 import desktopkit.shell.CompactTopBar
 import desktopkit.shell.TopBarAction
 import desktopkit.theme.DeskTheme
+import desktopkit.appResources
+import desktopkit.components.IconMenuButton
+import desktopkit.components.BannerTone
+import desktopkit.components.StatusBanner
 
 /*
  * Telefon düzeni (WidthClass.Compact). Masaüstü düzeninden farkları:

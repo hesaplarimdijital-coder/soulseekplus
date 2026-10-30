@@ -40,7 +40,6 @@ import com.soulseekplus.ui.AppShortcuts
 import com.soulseekplus.ui.FilterTextField
 import com.soulseekplus.ui.ScrollRow
 import com.soulseekplus.ui.ToggleChip
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.transferStateText
@@ -61,6 +60,7 @@ import desktopkit.shell.currentWidthClass
 import desktopkit.theme.DeskTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import desktopkit.appResources
 
 /** Hesaplanmış görünüm: tablo satırları, kategori sayıları ve süzülmüş liste. */
 internal data class TransferView(

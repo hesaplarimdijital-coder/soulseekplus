@@ -71,6 +71,7 @@ import desktopkit.theme.DeskTheme
 import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import desktopkit.appResources
 
 /**
  * Kompozisyon ↔ etkinlik köprüsü: klavye kısayolları `Activity.dispatchKeyEvent` içinde eşleşir (odak nerede

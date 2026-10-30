@@ -48,16 +48,11 @@ import com.soulseekplus.core.search.SearchFilterEngine
 import com.soulseekplus.core.search.SearchGrouping
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.AppShortcuts
-import com.soulseekplus.ui.BannerTone
 import com.soulseekplus.ui.DeskTextField
-import com.soulseekplus.ui.IconMenuButton
-import com.soulseekplus.ui.MenuButton
 import com.soulseekplus.ui.OptionalNumberField
 import com.soulseekplus.ui.ScrollRow
-import com.soulseekplus.ui.StatusBanner
 import com.soulseekplus.ui.TabChip
 import com.soulseekplus.ui.ToggleChip
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.common.UserActions
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.groupModeText
@@ -81,6 +76,12 @@ import desktopkit.theme.DeskTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import desktopkit.appResources
+import desktopkit.components.DeskProgressBar
+import desktopkit.components.IconMenuButton
+import desktopkit.components.MenuButton
+import desktopkit.components.BannerTone
+import desktopkit.components.StatusBanner
 
 private const val MIB = 1024L * 1024L
 
@@ -330,7 +331,7 @@ private fun TabContent(tab: SearchTabState, vm: SearchViewModel, container: AppC
 
 @Composable
 internal fun DeskProgressLine() {
-    com.soulseekplus.ui.DeskProgressBar(null, Modifier.fillMaxWidth(), height = 2.dp)
+    DeskProgressBar(null, Modifier.fillMaxWidth(), height = 2.dp)
 }
 
 // ---------------------------------------------------------------------- süzgeç çubuğu

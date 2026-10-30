@@ -9,10 +9,10 @@ import com.soulseekplus.AppContainer
 import com.soulseekplus.R
 import com.soulseekplus.core.links.SlskUri
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.appResources
 import com.soulseekplus.ui.icons.SoulIcons
 import desktopkit.components.DeskIcons
 import desktopkit.components.MenuEntry
+import desktopkit.appResources
 
 /**
  * Kullanıcı ve dosya bağlam menüsü girdileri; arama, transfer, gözatma ve sohbet ekranları aynı menüyü paylaşır.
