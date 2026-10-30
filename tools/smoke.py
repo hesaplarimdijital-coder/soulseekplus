@@ -218,7 +218,8 @@ class Smoke:
         lines = log.splitlines()
         out = []
         for i, line in enumerate(lines):
-            if "FATAL EXCEPTION" in line or ("AndroidRuntime" in line and "E/" in line):
+            # Sistem hata pencereleri ci-smoke.sh'de kapatıldığı için uygulamanın kendi ANR'si yalnızca logcat'ten görünür.
+            if "FATAL EXCEPTION" in line or ("AndroidRuntime" in line and "E/" in line) or f"ANR in {PKG}" in line:
                 out.extend(lines[i:i + 40])
                 break
         return out, log
