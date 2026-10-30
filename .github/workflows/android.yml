@@ -1,16 +1,24 @@
 # Derler (:core JVM testleri + imzalı sürüm APK'sı), günlüğü ci/logs dalına,
 # APK'yı ci/apk dalına ve "nightly" sürümüne (Release) koyar.
+# main dışındaki dallar (ör. desktop-kit-2.2.0) aynı işi kendi adlarıyla yapar: ci/logs-<dal>, ci/apk-<dal>,
+# ci/smoke-<dal> ve "test-<dal>" ön sürümü; main'in nightly'sine dokunmaz. wip/ dalları yalnızca derlenir.
 name: Android build
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'desktop-kit-*', 'wip/**']
   pull_request:
   workflow_dispatch:
 
+# Her gönderinin kendi çalıştırması olsun (dalda art arda gönderilen her commit ayrı denetlenir); yalnızca wip/
+# dallarında yenisi eskisini iptal eder.
 concurrency:
-  group: android-${{ github.ref }}
-  cancel-in-progress: true
+  group: android-${{ github.ref }}-${{ startsWith(github.ref, 'refs/heads/wip/') && 'wip' || github.sha }}
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/heads/wip/') }}
+
+env:
+  # Yayın dallarının ve sürümün adı: main için boş, öbür dallar için "-<dal>" ("/" → "-").
+  CI_SUFFIX: ${{ github.ref_name != 'main' && format('-{0}', github.ref_name) || '' }}
 
 jobs:
   build:
@@ -21,9 +29,9 @@ jobs:
     env:
       BUILD_NUMBER: ${{ github.run_number }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
@@ -70,32 +78,35 @@ jobs:
           grep -E "^e: |error:|FAILED|BUILD (SUCCESSFUL|FAILED)|warning:.*(unchecked|deprecat)" build.log | head -400 > "$out/errors.txt" || true
           [ -d core/build/test-results ] && cp -r core/build/test-results "$out/core-test-results" || true
           echo "sha=${GITHUB_SHA} run=${GITHUB_RUN_NUMBER} status=${STATUS}" > "$out/STATUS"
+          branch="ci/logs${CI_SUFFIX//\//-}"
           cd "$out"
-          git init -q && git checkout -q --orphan ci/logs
+          git init -q && git checkout -q --orphan "$branch"
           git -c user.name=ci -c user.email=ci@users.noreply.github.com add -A
           git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m "Build log for ${GITHUB_SHA::7} (run ${GITHUB_RUN_NUMBER})"
-          git push -q --force "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/heads/ci/logs
+          git push -q --force "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$branch"
 
       - name: Publish APK
-        if: success() && github.event_name != 'pull_request'
+        if: success() && github.event_name != 'pull_request' && !startsWith(github.ref, 'refs/heads/wip/')
         env:
           TOKEN: ${{ github.token }}
           GH_TOKEN: ${{ github.token }}
         run: |
           apk=$(ls app/build/outputs/apk/release/*.apk | head -1)
-          name="SoulseekPlus-1.0.${GITHUB_RUN_NUMBER}.apk"
+          suffix="${CI_SUFFIX//\//-}"
+          name="SoulseekPlus-1.0.${GITHUB_RUN_NUMBER}${suffix}.apk"
           out="$RUNNER_TEMP/apk"
           rm -rf "$out" && mkdir -p "$out"
           cp "$apk" "$out/$name"
           (cd "$out" && sha256sum "$name" > SHA256SUMS && echo "sha=${GITHUB_SHA} run=${GITHUB_RUN_NUMBER}" > STATUS \
-            && git init -q && git checkout -q --orphan ci/apk \
+            && git init -q && git checkout -q --orphan "ci/apk${suffix}" \
             && git -c user.name=ci -c user.email=ci@users.noreply.github.com add -A \
             && git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m "APK ${GITHUB_SHA::7} (run ${GITHUB_RUN_NUMBER})" \
-            && git push -q --force "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/heads/ci/apk)
-          gh release delete nightly --yes --cleanup-tag 2>/dev/null || true
-          gh release create nightly "$out/$name" --target "$GITHUB_SHA" --prerelease \
-            --title "Soulseek+ 1.0.${GITHUB_RUN_NUMBER}" \
-            --notes "Otomatik derleme: ${GITHUB_SHA::7} (çalıştırma ${GITHUB_RUN_NUMBER})."
+            && git push -q --force "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/ci/apk${suffix}")
+          if [ -z "$suffix" ]; then tag=nightly; else tag="test${suffix}"; fi
+          gh release delete "$tag" --yes --cleanup-tag 2>/dev/null || true
+          gh release create "$tag" "$out/$name" --target "$GITHUB_SHA" --prerelease \
+            --title "Soulseek+ 1.0.${GITHUB_RUN_NUMBER}${suffix}" \
+            --notes "Otomatik derleme (${GITHUB_REF_NAME}): ${GITHUB_SHA::7} (çalıştırma ${GITHUB_RUN_NUMBER})."
 
       - name: Upload APK artifact
         if: success()
@@ -109,20 +120,20 @@ jobs:
   # Ekran görüntüleri ve rapor ci/smoke dalına konur.
   smoke:
     needs: build
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && !startsWith(github.ref, 'refs/heads/wip/')
     runs-on: ubuntu-latest
     timeout-minutes: 40
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: actions/download-artifact@v4
         with:
           name: soulseekplus-apk
           path: apk
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
@@ -177,9 +188,10 @@ jobs:
           grep -q SMOKE_FAILED "$out/smoke.log" && status=failure
           [ -f "$out/report.txt" ] || status=failure
           echo "sha=${GITHUB_SHA} run=${GITHUB_RUN_NUMBER} status=${status}" > "$out/STATUS"
+          branch="ci/smoke${CI_SUFFIX//\//-}"
           cd "$out"
-          git init -q && git checkout -q --orphan ci/smoke
+          git init -q && git checkout -q --orphan "$branch"
           git -c user.name=ci -c user.email=ci@users.noreply.github.com add -A
           git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -q -m "Smoke ${GITHUB_SHA::7} (run ${GITHUB_RUN_NUMBER})"
-          git push -q --force "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/heads/ci/smoke
+          git push -q --force "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$branch"
           [ "$status" = success ]
