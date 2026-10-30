@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.search
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -46,14 +47,9 @@ import com.soulseekplus.core.search.ResultColumn
 import com.soulseekplus.core.search.ResultRow
 import com.soulseekplus.core.search.ResultSort
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.ScrollRow
-import com.soulseekplus.ui.TabChip
-import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.UserActions
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.compact.CompactCaption
-import com.soulseekplus.ui.compact.CompactListRow
-import com.soulseekplus.ui.compact.CompactSelectionBar
 import com.soulseekplus.ui.groupModeText
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.qualityText
@@ -76,6 +72,12 @@ import desktopkit.components.StatusBanner
 import desktopkit.components.DeskTextField
 import desktopkit.components.OptionalNumberField
 import desktopkit.components.DeskDialog
+import desktopkit.components.DeskChip
+import desktopkit.components.DeskTab
+import desktopkit.components.DeskListRow
+import desktopkit.components.SelectionBar
+import desktopkit.components.ChipRow
+import desktopkit.components.TabStrip
 
 /*
  * Telefon düzeni (WidthClass.Compact). Masaüstü düzeninden farkları:
@@ -193,9 +195,8 @@ internal fun CompactSearchScreen(vm: SearchViewModel, container: AppContainer, a
         }
 
         if (ui.selectMode || ui.selected.isNotEmpty()) {
-            CompactSelectionBar(
-                countText = res.getString(R.string.label_selected_count, ui.selected.size),
-                closeLabel = res.getString(R.string.action_close),
+            SelectionBar(
+                text = res.getString(R.string.label_selected_count, ui.selected.size),
                 onClose = { vm.clearSelection(tab.id); vm.setSelectMode(tab.id, false) },
             ) {
                 DeskButton(
@@ -309,9 +310,9 @@ private fun scopeLabel(res: android.content.res.Resources, choice: ScopeChoice) 
 private fun CompactTabRow(tabs: List<SearchTabState>, selectedId: Int, vm: SearchViewModel) {
     val res = appResources()
     val dimens = DeskTheme.dimens
-    ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.gapS)) {
+    TabStrip(Modifier.fillMaxWidth(), contentPadding = PaddingValues(horizontal = dimens.gapS)) {
         for (t in tabs) {
-            TabChip(
+            DeskTab(
                 label = t.query,
                 selected = t.id == selectedId,
                 onClick = { vm.repo.selectTab(t.id) },
@@ -359,11 +360,11 @@ private fun CompactFilterPanel(tab: SearchTabState, ui: TabUi, vm: SearchViewMod
                 .padding(bottom = dimens.gapS),
             verticalArrangement = Arrangement.spacedBy(dimens.gapS),
         ) {
-            ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding)) {
-                ToggleChip(res.getString(R.string.chip_free_slots), QuickFilter.isActive(filter, QuickFilter.FREE_SLOTS), { vm.toggleQuick(tab.id, QuickFilter.FREE_SLOTS) }, icon = SoulIcons.SlotFree)
-                ToggleChip(res.getString(R.string.chip_lossless), QuickFilter.isActive(filter, QuickFilter.LOSSLESS), { vm.toggleQuick(tab.id, QuickFilter.LOSSLESS) }, icon = SoulIcons.Lossless)
-                ToggleChip(res.getString(R.string.chip_min_320), QuickFilter.isActive(filter, QuickFilter.MIN_320), { vm.toggleQuick(tab.id, QuickFilter.MIN_320) }, icon = DeskIcons.Equalizer)
-                ToggleChip(res.getString(R.string.chip_hide_locked), QuickFilter.isActive(filter, QuickFilter.HIDE_LOCKED), { vm.toggleQuick(tab.id, QuickFilter.HIDE_LOCKED) }, icon = SoulIcons.LockClosed)
+            ChipRow(Modifier.fillMaxWidth(), wrap = false, contentPadding = dimens.pagePadding) {
+                DeskChip(res.getString(R.string.chip_free_slots), QuickFilter.isActive(filter, QuickFilter.FREE_SLOTS), { vm.toggleQuick(tab.id, QuickFilter.FREE_SLOTS) }, icon = SoulIcons.SlotFree)
+                DeskChip(res.getString(R.string.chip_lossless), QuickFilter.isActive(filter, QuickFilter.LOSSLESS), { vm.toggleQuick(tab.id, QuickFilter.LOSSLESS) }, icon = SoulIcons.Lossless)
+                DeskChip(res.getString(R.string.chip_min_320), QuickFilter.isActive(filter, QuickFilter.MIN_320), { vm.toggleQuick(tab.id, QuickFilter.MIN_320) }, icon = DeskIcons.Equalizer)
+                DeskChip(res.getString(R.string.chip_hide_locked), QuickFilter.isActive(filter, QuickFilter.HIDE_LOCKED), { vm.toggleQuick(tab.id, QuickFilter.HIDE_LOCKED) }, icon = SoulIcons.LockClosed)
             }
             FieldPair(
                 { m -> DebouncedField(filter.include, resetKey, res.getString(if (filter.useRegex) R.string.f_include_regex else R.string.f_include), includeBad, m) { t -> update { it.copy(include = t) } } },
@@ -383,7 +384,7 @@ private fun CompactFilterPanel(tab: SearchTabState, ui: TabUi, vm: SearchViewMod
             )
             FieldPair(
                 { m -> OptionalNumberField(filter.minSpeedBytes?.toLong()?.div(1024L), { v -> update { it.copy(minSpeedBytes = v?.times(1024L)?.coerceAtMost(Int.MAX_VALUE.toLong())?.toInt()) } }, m, hint = res.getString(R.string.f_min_speed)) },
-                { m -> ToggleChip(res.getString(R.string.f_regex), filter.useRegex, { update { it.copy(useRegex = !it.useRegex) } }, modifier = m) },
+                { m -> DeskChip(res.getString(R.string.f_regex), filter.useRegex, { update { it.copy(useRegex = !it.useRegex) } }, modifier = m) },
             )
             if (issues.isNotEmpty()) {
                 Text(
@@ -437,8 +438,8 @@ private fun ViewOptionsDialog(tab: SearchTabState, vm: SearchViewModel, onDismis
             FlowRow(horizontalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
                 for ((column, label) in SORT_CHOICES) {
                     val selected = ui.sort.column == column
-                    ToggleChip(
-                        label = res.getString(label) + if (selected) (if (ui.sort.ascending) " ↑" else " ↓") else "",
+                    DeskChip(
+                        text = res.getString(label) + if (selected) (if (ui.sort.ascending) " ↑" else " ↓") else "",
                         selected = selected,
                         onClick = {
                             // Aynı sütuna yeniden dokunmak yönü çevirir; yeni sütun azalan (en iyi önce) başlar.
@@ -549,7 +550,7 @@ private fun GroupRow(
             qualitySummary(row, res)?.let { add(it) }
         }.joinToString("  ·  ")
     }
-    CompactListRow(
+    DeskListRow(
         title = title,
         subtitle = subtitle,
         leading = when {
@@ -603,7 +604,7 @@ private fun FileRow(
         if (duration != null && duration != "-") add(duration)
     }.joinToString("  ·  ")
     val (slot, slotColor) = slotText(hit.freeSlots, hit.queueLength)
-    CompactListRow(
+    DeskListRow(
         title = file.name,
         subtitle = subtitle,
         leading = when {

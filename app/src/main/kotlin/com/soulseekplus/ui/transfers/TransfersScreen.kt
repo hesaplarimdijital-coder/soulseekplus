@@ -37,8 +37,6 @@ import com.soulseekplus.core.view.TransferRow
 import com.soulseekplus.core.view.TransferSort
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.AppShortcuts
-import com.soulseekplus.ui.ScrollRow
-import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.transferStateText
@@ -61,6 +59,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import desktopkit.appResources
 import desktopkit.components.DeskSearchField
+import desktopkit.components.DeskChip
+import desktopkit.components.ChipRow
 
 /** Hesaplanmış görünüm: tablo satırları, kategori sayıları ve süzülmüş liste. */
 internal data class TransferView(
@@ -106,7 +106,7 @@ fun TransfersScreen(vm: TransfersViewModel, container: AppContainer, actions: Ap
             Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding),
             verticalArrangement = Arrangement.spacedBy(dimens.gapS),
         ) {
-            ScrollRow {
+            ChipRow(wrap = false, contentPadding = 0.dp) {
                 SegmentedChoice(
                     options = listOf(
                         TransferDirection.DOWNLOAD to res.getString(R.string.transfers_downloads),
@@ -124,13 +124,13 @@ fun TransfersScreen(vm: TransfersViewModel, container: AppContainer, actions: Ap
                     selected = vm.groupMode,
                     onSelect = { vm.changeGroupMode(it) },
                 )
-                ToggleChip(res.getString(R.string.action_select), vm.selectMode, { vm.selectMode = !vm.selectMode }, icon = DeskIcons.Check)
+                DeskChip(res.getString(R.string.action_select), vm.selectMode, { vm.selectMode = !vm.selectMode }, icon = DeskIcons.Check)
             }
-            ScrollRow {
+            ChipRow(wrap = false, contentPadding = 0.dp) {
                 for (category in TransferCategory.entries) {
                     val count = view.counts[category].orZero()
-                    ToggleChip(
-                        label = res.getString(categoryLabel(category)) + if (category != TransferCategory.ALL && count > 0) " ($count)" else "",
+                    DeskChip(
+                        text = res.getString(categoryLabel(category)) + if (category != TransferCategory.ALL && count > 0) " ($count)" else "",
                         selected = vm.category == category,
                         onClick = { vm.category = category },
                     )

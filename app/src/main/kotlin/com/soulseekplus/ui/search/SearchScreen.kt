@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.search
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -48,9 +49,6 @@ import com.soulseekplus.core.search.SearchFilterEngine
 import com.soulseekplus.core.search.SearchGrouping
 import com.soulseekplus.ui.AppActions
 import com.soulseekplus.ui.AppShortcuts
-import com.soulseekplus.ui.ScrollRow
-import com.soulseekplus.ui.TabChip
-import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.UserActions
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.groupModeText
@@ -82,6 +80,10 @@ import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
 import desktopkit.components.DeskTextField
 import desktopkit.components.OptionalNumberField
+import desktopkit.components.DeskChip
+import desktopkit.components.DeskTab
+import desktopkit.components.ChipRow
+import desktopkit.components.TabStrip
 
 private const val MIB = 1024L * 1024L
 
@@ -227,7 +229,7 @@ private fun QueryBar(vm: SearchViewModel, container: AppContainer, actions: AppA
                 queryField(Modifier.weight(1f))
                 DeskButton(stringResource(R.string.action_search), { vm.submit(actions) }, primary = true, enabled = vm.query.isNotBlank())
             }
-            ScrollRow { scopeControls() }
+            ChipRow(wrap = false, contentPadding = 0.dp) { scopeControls() }
         }
     } else {
         Row(
@@ -248,9 +250,9 @@ private fun QueryBar(vm: SearchViewModel, container: AppContainer, actions: AppA
 private fun TabStrip(tabs: List<SearchTabState>, selectedId: Int, vm: SearchViewModel) {
     val res = appResources()
     val dimens = DeskTheme.dimens
-    ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding, vertical = dimens.gapS)) {
+    TabStrip(Modifier.fillMaxWidth().padding(vertical = dimens.gapS), contentPadding = PaddingValues(horizontal = dimens.pagePadding)) {
         for (t in tabs) {
-            TabChip(
+            DeskTab(
                 label = t.query,
                 selected = t.id == selectedId,
                 onClick = { vm.repo.selectTab(t.id) },
@@ -281,17 +283,17 @@ private fun TabContent(tab: SearchTabState, vm: SearchViewModel, container: AppC
 
     Column(modifier.fillMaxSize()) {
         // Hızlı süzgeçler ve gruplama
-        ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs)) {
-            ToggleChip(res.getString(R.string.chip_free_slots), QuickFilter.isActive(tab.filter, QuickFilter.FREE_SLOTS), { vm.toggleQuick(tab.id, QuickFilter.FREE_SLOTS) }, icon = SoulIcons.SlotFree)
-            ToggleChip(res.getString(R.string.chip_hide_locked), QuickFilter.isActive(tab.filter, QuickFilter.HIDE_LOCKED), { vm.toggleQuick(tab.id, QuickFilter.HIDE_LOCKED) }, icon = SoulIcons.LockClosed)
-            ToggleChip(res.getString(R.string.chip_lossless), QuickFilter.isActive(tab.filter, QuickFilter.LOSSLESS), { vm.toggleQuick(tab.id, QuickFilter.LOSSLESS) }, icon = SoulIcons.Lossless)
-            ToggleChip(res.getString(R.string.chip_min_320), QuickFilter.isActive(tab.filter, QuickFilter.MIN_320), { vm.toggleQuick(tab.id, QuickFilter.MIN_320) }, icon = DeskIcons.Equalizer)
+        ChipRow(Modifier.fillMaxWidth().padding(vertical = dimens.gapXs), wrap = false, contentPadding = dimens.pagePadding) {
+            DeskChip(res.getString(R.string.chip_free_slots), QuickFilter.isActive(tab.filter, QuickFilter.FREE_SLOTS), { vm.toggleQuick(tab.id, QuickFilter.FREE_SLOTS) }, icon = SoulIcons.SlotFree)
+            DeskChip(res.getString(R.string.chip_hide_locked), QuickFilter.isActive(tab.filter, QuickFilter.HIDE_LOCKED), { vm.toggleQuick(tab.id, QuickFilter.HIDE_LOCKED) }, icon = SoulIcons.LockClosed)
+            DeskChip(res.getString(R.string.chip_lossless), QuickFilter.isActive(tab.filter, QuickFilter.LOSSLESS), { vm.toggleQuick(tab.id, QuickFilter.LOSSLESS) }, icon = SoulIcons.Lossless)
+            DeskChip(res.getString(R.string.chip_min_320), QuickFilter.isActive(tab.filter, QuickFilter.MIN_320), { vm.toggleQuick(tab.id, QuickFilter.MIN_320) }, icon = DeskIcons.Equalizer)
             SegmentedChoice(
                 options = GroupMode.entries.map { it to res.groupModeText(it) },
                 selected = tab.groupMode,
                 onSelect = { vm.setGroupMode(tab.id, it) },
             )
-            ToggleChip(res.getString(R.string.action_select), ui.selectMode, { vm.setSelectMode(tab.id, !ui.selectMode) }, icon = DeskIcons.Check)
+            DeskChip(res.getString(R.string.action_select), ui.selectMode, { vm.setSelectMode(tab.id, !ui.selectMode) }, icon = DeskIcons.Check)
         }
         if (vm.filtersOpen) {
             FilterBar(tab, ui.filterReset, vm)
@@ -367,7 +369,7 @@ internal fun FilterBar(tab: SearchTabState, reset: Int, vm: SearchViewModel) {
             error = excludeBad,
             modifier = Modifier.width(220.dp),
         ) { text -> update { it.copy(exclude = text) } }
-        ToggleChip(res.getString(R.string.f_regex), filter.useRegex, { update { it.copy(useRegex = !it.useRegex) } })
+        DeskChip(res.getString(R.string.f_regex), filter.useRegex, { update { it.copy(useRegex = !it.useRegex) } })
         DebouncedField(filter.extensions, resetKey, res.getString(R.string.f_extensions), false, Modifier.width(190.dp)) { text -> update { it.copy(extensions = text) } }
         DebouncedField(filter.countries, resetKey, res.getString(R.string.f_countries), false, Modifier.width(150.dp)) { text -> update { it.copy(countries = text) } }
         OptionalNumberField(filter.minBitrate?.toLong(), { v -> update { it.copy(minBitrate = v?.toInt()) } }, Modifier.width(110.dp), hint = res.getString(R.string.f_min_bitrate))

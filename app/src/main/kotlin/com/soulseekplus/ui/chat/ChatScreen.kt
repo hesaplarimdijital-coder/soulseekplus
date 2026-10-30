@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.chat
 
+import androidx.compose.foundation.layout.PaddingValues
 import desktopkit.components.DeskCheckbox
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -64,8 +65,6 @@ import com.soulseekplus.core.model.RoomUser
 import com.soulseekplus.core.model.UserPresence
 import com.soulseekplus.core.model.UserStatus
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.ScrollRow
-import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.timeText
@@ -101,6 +100,8 @@ import desktopkit.components.StatusBanner
 import desktopkit.components.DeskSearchField
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
+import desktopkit.components.DeskChip
+import desktopkit.components.ChipRow
 
 private const val LINK_TAG = "slsk"
 
@@ -620,8 +621,8 @@ private fun InputBar(target: ChatTarget, vm: ChatViewModel, actions: AppActions)
             )
         }
         if (suggestions.isNotEmpty() && !(suggestions.size == 1 && suggestions[0] == draft)) {
-            ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs)) {
-                for (s in suggestions) ToggleChip(s, false, { vm.setDraft(target, "$s ") })
+            ChipRow(Modifier.fillMaxWidth().padding(vertical = dimens.gapXs), wrap = false, contentPadding = dimens.pagePadding) {
+                for (s in suggestions) DeskChip(s, false, { vm.setDraft(target, "$s ") })
             }
         }
         Row(
@@ -679,7 +680,7 @@ private fun RoomListPane(vm: ChatViewModel, container: AppContainer, modifier: M
             DeskIconButton(SoulIcons.Retry, stringResource(R.string.action_refresh), { vm.repo.refreshRoomList() })
             DeskIconButton(DeskIcons.Close, stringResource(R.string.action_close), { vm.closeRoomList() })
         }
-        ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding)) {
+        ChipRow(Modifier.fillMaxWidth(), wrap = false, contentPadding = dimens.pagePadding) {
             DeskTextField(
                 value = newRoom,
                 onValueChange = { newRoom = it },

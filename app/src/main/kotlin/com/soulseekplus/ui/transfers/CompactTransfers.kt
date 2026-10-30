@@ -34,11 +34,7 @@ import com.soulseekplus.core.view.TransferGrouping
 import com.soulseekplus.core.view.TransferItemRow
 import com.soulseekplus.core.view.TransferRow
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.ScrollRow
-import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.rememberUserActions
-import com.soulseekplus.ui.compact.CompactListRow
-import com.soulseekplus.ui.compact.CompactSelectionBar
 import com.soulseekplus.ui.icons.SoulIcons
 import com.soulseekplus.ui.transferStateText
 import desktopkit.components.DeskIconButton
@@ -55,6 +51,10 @@ import kotlinx.coroutines.withContext
 import desktopkit.appResources
 import desktopkit.components.DeskSearchField
 import desktopkit.components.DeskDialog
+import desktopkit.components.DeskChip
+import desktopkit.components.DeskListRow
+import desktopkit.components.SelectionBar
+import desktopkit.components.ChipRow
 
 /*
  * Telefon düzeni (WidthClass.Compact): yön seçici + kategori çipleri iki ince satırda; arama, gruplama, seçim ve
@@ -118,11 +118,11 @@ internal fun CompactTransfersScreen(vm: TransfersViewModel, container: AppContai
                 DeskSearchField(vm.query, { vm.query = it }, Modifier.fillMaxWidth(), hint = stringResource(R.string.transfers_filter_hint))
             }
         }
-        ScrollRow(Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding).padding(bottom = dimens.gapXs)) {
+        ChipRow(Modifier.fillMaxWidth().padding(bottom = dimens.gapXs), wrap = false, contentPadding = dimens.pagePadding) {
             for (category in TransferCategory.entries) {
                 val count = view.counts[category].orZero()
-                ToggleChip(
-                    label = res.getString(categoryLabel(category)) + if (category != TransferCategory.ALL && count > 0) " $count" else "",
+                DeskChip(
+                    text = res.getString(categoryLabel(category)) + if (category != TransferCategory.ALL && count > 0) " $count" else "",
                     selected = vm.category == category,
                     onClick = { vm.category = category },
                 )
@@ -147,9 +147,8 @@ internal fun CompactTransfersScreen(vm: TransfersViewModel, container: AppContai
 
         if (vm.selectMode || vm.selected.isNotEmpty()) {
             val items = vm.resolve(vm.selected)
-            CompactSelectionBar(
-                countText = res.getString(R.string.label_selected_count, vm.selected.size),
-                closeLabel = res.getString(R.string.action_close),
+            SelectionBar(
+                text = res.getString(R.string.label_selected_count, vm.selected.size),
                 onClose = { vm.selected = emptySet(); vm.selectMode = false },
             ) {
                 DeskIconButton(DeskIcons.Pause, res.getString(R.string.transfers_pause), { vm.pause(items) }, enabled = items.any(TransfersViewModel::canPause))
@@ -240,7 +239,7 @@ private fun GroupHeader(
         if (row.failed > 0) add(res.getString(R.string.transfers_n_failed, row.failed))
         if (row.speed > 0) add(Formatting.speed(row.speed))
     }.joinToString("  ·  ")
-    CompactListRow(
+    DeskListRow(
         title = title,
         subtitle = subtitle,
         leading = if (row.expanded) DeskIcons.ChevronDown else DeskIcons.ChevronRight,
@@ -279,7 +278,7 @@ private fun TransferItem(
         }
     }.joinToString("  ·  ")
     val partial = t.state != TransferState.FINISHED && t.bytesTransferred > 0
-    CompactListRow(
+    DeskListRow(
         title = t.fileName,
         subtitle = subtitle,
         subtitleColor = when (t.state) {

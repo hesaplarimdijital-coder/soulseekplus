@@ -20,7 +20,6 @@ import com.soulseekplus.core.format.Formatting
 import com.soulseekplus.core.model.SharedFile
 import com.soulseekplus.core.view.BrowseTree
 import com.soulseekplus.ui.AppActions
-import com.soulseekplus.ui.ToggleChip
 import com.soulseekplus.ui.common.UserActions
 import com.soulseekplus.ui.common.rememberUserActions
 import com.soulseekplus.ui.icons.SoulIcons
@@ -47,6 +46,7 @@ import desktopkit.components.BannerTone
 import desktopkit.components.StatusBanner
 import desktopkit.components.DeskSearchField
 import desktopkit.components.DeskTextField
+import desktopkit.components.DeskChip
 
 private data class TreeRow(val node: BrowseTree.Node, val depth: Int)
 
@@ -265,7 +265,7 @@ private fun FilesPane(vm: BrowseViewModel, state: BrowseState.Loaded, ua: UserAc
                 modifier = Modifier.weight(1f),
             )
             if (!filtering && node != null && node.children.isNotEmpty()) {
-                ToggleChip(res.getString(R.string.browse_subfolders), vm.includeSubfolders, { vm.includeSubfolders = !vm.includeSubfolders })
+                DeskChip(res.getString(R.string.browse_subfolders), vm.includeSubfolders, { vm.includeSubfolders = !vm.includeSubfolders })
             }
         }
         HorizontalRule()
