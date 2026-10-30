@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.protocol.PacketSerializerTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-10-30T21:13:30.199Z" hostname="runnervmnwato" time="0.073">
+  <properties/>
+  <testcase name="zlibRoundTripAndBombGuard" classname="com.soulseekplus.core.protocol.PacketSerializerTest" time="0.007"/>
+  <testcase name="countryLookup" classname="com.soulseekplus.core.protocol.PacketSerializerTest" time="0.003"/>
+  <testcase name="bundledCountryDataLoads" classname="com.soulseekplus.core.protocol.PacketSerializerTest" time="0.057"/>
+  <testcase name="invalidUtf8FallsBackToLatin1" classname="com.soulseekplus.core.protocol.PacketSerializerTest" time="0.001"/>
+  <testcase name="primitivesRoundTrip" classname="com.soulseekplus.core.protocol.PacketSerializerTest" time="0.0"/>
+  <testcase name="truncatedThrows" classname="com.soulseekplus.core.protocol.PacketSerializerTest" time="0.004"/>
+  <testcase name="littleEndianLayout" classname="com.soulseekplus.core.protocol.PacketSerializerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

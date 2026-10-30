@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.net.ReactorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-30T21:13:30.132Z" hostname="runnervmnwato" time="0.065">
+  <properties/>
+  <testcase name="echoOfALargeFrameKeepsEveryByte" classname="com.soulseekplus.core.net.ReactorTest" time="0.044"/>
+  <testcase name="closeListenersFireExactlyOnceAndPendingReadsEnd" classname="com.soulseekplus.core.net.ReactorTest" time="0.009"/>
+  <testcase name="closeWhenFlushedDeliversEverythingThenEndsTheStream" classname="com.soulseekplus.core.net.ReactorTest" time="0.007"/>
+  <testcase name="connectionToAClosedPortFailsWithIoException" classname="com.soulseekplus.core.net.ReactorTest" time="0.002"/>
+  <testcase name="listenerStopsAcceptingAfterClose" classname="com.soulseekplus.core.net.ReactorTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
