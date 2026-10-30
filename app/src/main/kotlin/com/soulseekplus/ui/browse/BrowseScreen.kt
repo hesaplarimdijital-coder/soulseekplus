@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.browse
 
+import desktopkit.theme.InputMode
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -235,6 +236,7 @@ private fun FilesPane(vm: BrowseViewModel, state: BrowseState.Loaded, ua: UserAc
     val res = appResources()
     val dimens = DeskTheme.dimens
     val compact = currentWidthClass() == WidthClass.Compact
+    val touch = DeskTheme.inputMode == InputMode.Touch
     val tree = state.tree
     val path = vm.selectedPath
     val node = path?.let { tree.node(it) }
@@ -280,7 +282,9 @@ private fun FilesPane(vm: BrowseViewModel, state: BrowseState.Loaded, ua: UserAc
                 columns = columns,
                 rows = rows,
                 key = { it.file.path },
-                onRowClick = { _, _ -> },
+                // 2.1.0: kitin tablosunda parmak dokunuşu seçmez, yalnızca onRowClick'i çağırır (seçim yokken). Bu ekranda
+                // dokunuş eskisi gibi satırı seçer (seçim çubuğu açılır); fare tıklamasını kit zaten seçer.
+                onRowClick = { row, _ -> if (touch) vm.fileSelection = setOf(row.file.path) },
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 sort = TableSort(vm.sortColumn.coerceIn(0, columns.lastIndex), vm.sortAscending),
                 onSortChange = { vm.sortColumn = it.column; vm.sortAscending = it.ascending },

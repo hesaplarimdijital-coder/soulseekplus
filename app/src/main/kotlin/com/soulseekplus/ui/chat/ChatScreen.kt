@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.chat
 
+import desktopkit.shell.keepsKeyboardOpen
 import androidx.compose.foundation.layout.PaddingValues
 import desktopkit.components.DeskCheckbox
 import androidx.compose.foundation.background
@@ -622,7 +623,8 @@ private fun InputBar(target: ChatTarget, vm: ChatViewModel, actions: AppActions)
         }
         if (suggestions.isNotEmpty() && !(suggestions.size == 1 && suggestions[0] == draft)) {
             ChipRow(Modifier.fillMaxWidth().padding(vertical = dimens.gapXs), wrap = false, contentPadding = dimens.pagePadding) {
-                for (s in suggestions) DeskChip(s, false, { vm.setDraft(target, "$s ") })
+                // Komut önerisine dokunmak yazmayı sürdürür: klavye kapanmasın, taslak odağı kaybetmesin.
+                for (s in suggestions) DeskChip(s, false, { vm.setDraft(target, "$s ") }, modifier = Modifier.keepsKeyboardOpen())
             }
         }
         Row(
@@ -638,7 +640,16 @@ private fun InputBar(target: ChatTarget, vm: ChatViewModel, actions: AppActions)
                 imeAction = ImeAction.Send,
                 onImeAction = { vm.submit(draft, actions) },
             )
-            DeskIconButton(SoulIcons.Send, stringResource(R.string.chat_send), { vm.submit(draft, actions) }, enabled = draft.isNotBlank(), tint = DeskTheme.colors.accentText)
+            // 2.1.0: parmakla metin alanı dışına dokununca kabuk odağı alır ve klavye kapanır. Gönder bundan muaf;
+            // yoksa her mesajdan sonra klavye kapanırdı (oda ve özel mesaj aynı yazma çubuğunu kullanır).
+            DeskIconButton(
+                SoulIcons.Send,
+                stringResource(R.string.chat_send),
+                { vm.submit(draft, actions) },
+                modifier = Modifier.keepsKeyboardOpen(),
+                enabled = draft.isNotBlank(),
+                tint = DeskTheme.colors.accentText,
+            )
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.wishlist
 
+import desktopkit.theme.InputMode
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -226,6 +227,7 @@ private fun ResultsPane(
     modifier: Modifier,
 ) {
     val res = appResources()
+    val touch = DeskTheme.inputMode == InputMode.Touch
     val dimens = DeskTheme.dimens
     val ua = rememberUserActions(container, actions)
     var sort by rememberSaveable(query) { mutableStateOf(0 to false) }
@@ -293,7 +295,9 @@ private fun ResultsPane(
                 columns = columns,
                 rows = sorted,
                 key = { it.key },
-                onRowClick = { _, _ -> },
+                // 2.1.0: kitin tablosunda parmak dokunuşu seçmez, yalnızca onRowClick'i çağırır (seçim yokken). Bu ekranda
+                // dokunuş eskisi gibi satırı seçer (seçim çubuğu açılır); fare tıklamasını kit zaten seçer.
+                onRowClick = { row, _ -> if (touch) vm.selectedHits = setOf(row.key) },
                 modifier = Modifier.weight(1f).fillMaxWidth(),
                 sort = TableSort(sort.first, sort.second),
                 onSortChange = { sort = it.column to it.ascending },

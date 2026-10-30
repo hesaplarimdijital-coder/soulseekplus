@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.settings
 
+import desktopkit.input.showShortcutHints
 import android.content.Intent
 import android.net.Uri
 import android.provider.DocumentsContract
@@ -337,7 +338,11 @@ fun SettingsScreen(
             // ------------------------------------------------------------ kit bölümleri
             AppearanceSection(prefs)
             InputSection(prefs)
-            ShortcutListSection(AppShortcuts.registry, scopeLabel = { scope -> scopeTitle(scope) })
+            // Kısayol listesi yalnızca fare ya da donanım klavyesi varken (kitin tek kuralı, 2.2.0); elde tutulan
+            // telefonda "Ctrl+Shift+C" gösterilmez. Menülerdeki kısayol yazıları da aynı kurala uyar.
+            if (showShortcutHints()) {
+                ShortcutListSection(AppShortcuts.registry, scopeLabel = { scope -> scopeTitle(scope) })
+            }
 
             SettingsSection(stringResource(R.string.settings_about)) {
                 SettingRow(stringResource(R.string.about_title), subtitle = stringResource(R.string.about_tagline)) {

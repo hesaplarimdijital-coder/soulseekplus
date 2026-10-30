@@ -130,7 +130,10 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
-    fun setSelection(tabId: Int, keys: Set<Any>) = updateUi(tabId) { it.copy(selected = keys) }
+    /** Seçim boşalınca (Geri, Esc, son satırın bırakılması) seçim kipi de kapanır; Android'in eylem kipi gibi. */
+    fun setSelection(tabId: Int, keys: Set<Any>) = updateUi(tabId) {
+        it.copy(selected = keys, selectMode = it.selectMode && keys.isNotEmpty())
+    }
 
     fun clearSelection(tabId: Int) = updateUi(tabId) { it.copy(selected = emptySet()) }
 

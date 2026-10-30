@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.search
 
+import desktopkit.theme.InputMode
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -437,12 +438,20 @@ private fun ResultTable(
     val sortIndex = cols.indexOfFirst { it.column == ui.sort.column }
     val tableSort = if (sortIndex >= 0) TableSort(sortIndex, ui.sort.ascending) else null
     val tabId = tab.id
+    val touch = DeskTheme.inputMode == InputMode.Touch
 
     DenseTable(
         columns = tableColumns,
         rows = rows,
         key = { it.key },
-        onRowClick = { row, _ -> if (row is GroupHeaderRow) vm.toggleGroup(tabId, row.key) },
+        // 2.1.0: kitin tablosunda parmak dokunuşu seçmez, yalnızca onRowClick'i çağırır (seçim yokken). Bu ekranda
+        // dokunuş eskisi gibi satırı seçer (seçim çubuğu açılır); fare tıklamasını kit zaten seçer.
+        onRowClick = { row, _ ->
+            when (row) {
+                is GroupHeaderRow -> vm.toggleGroup(tabId, row.key)
+                is FileResultRow -> if (touch) vm.setSelection(tabId, setOf(row.key))
+            }
+        },
         modifier = modifier.fillMaxWidth(),
         selectedKeys = ui.selected,
         onSelectionChange = { vm.setSelection(tabId, it) },

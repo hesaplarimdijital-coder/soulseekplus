@@ -1,5 +1,6 @@
 package com.soulseekplus.ui.transfers
 
+import desktopkit.theme.InputMode
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -184,6 +185,7 @@ private fun TransfersTable(vm: TransfersViewModel, container: AppContainer, acti
     val res = appResources()
     val context = LocalContext.current
     val widthClass = currentWidthClass()
+    val touch = DeskTheme.inputMode == InputMode.Touch
     val ua = rememberUserActions(container, actions)
     val mode = vm.groupMode
     val cols = remember(res, widthClass, mode) { transferColumns(res, widthClass, mode) }
@@ -196,10 +198,21 @@ private fun TransfersTable(vm: TransfersViewModel, container: AppContainer, acti
         columns = tableColumns,
         rows = rows,
         key = { it.key },
-        onRowClick = { row, _ -> if (row is TransferGroupHeader) vm.toggleGroup(row.key) },
+        // 2.1.0: kitin tablosunda parmak dokunuşu seçmez, yalnızca onRowClick'i çağırır (seçim yokken). Bu ekranda
+        // dokunuş eskisi gibi satırı seçer (seçim çubuğu açılır); fare tıklamasını kit zaten seçer.
+        onRowClick = { row, _ ->
+            when (row) {
+                is TransferGroupHeader -> vm.toggleGroup(row.key)
+                is TransferItemRow -> if (touch) vm.selected = setOf(row.key)
+            }
+        },
         modifier = modifier.fillMaxWidth(),
         selectedKeys = vm.selected,
-        onSelectionChange = { vm.selected = it },
+        onSelectionChange = { keys ->
+            vm.selected = keys
+            // Seçim boşalınca (Geri, Esc, son satırın bırakılması) seçim kipi de kapanır; Android'in eylem kipi gibi.
+            if (keys.isEmpty()) vm.selectMode = false
+        },
         toggleOnClick = vm.selectMode,
         sort = if (sortIndex >= 0) TableSort(sortIndex, vm.sort.ascending) else null,
         onSortChange = { s -> cols.getOrNull(s.column)?.let { vm.sort = TransferSort(it.column, s.ascending) } },
