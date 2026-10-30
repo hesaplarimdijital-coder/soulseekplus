@@ -135,7 +135,7 @@ abstract class SharesDatabase : RoomDatabase() {
             instance ?: synchronized(this) {
                 instance ?: Room.databaseBuilder(context.applicationContext, SharesDatabase::class.java, "shares.db")
                     // Önbellek yeniden üretilebilir (yeniden tarama); şema değişirse sıfırdan başlamak yeterli.
-                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration(dropAllTables = true)
                     .build()
                     .also { instance = it }
             }

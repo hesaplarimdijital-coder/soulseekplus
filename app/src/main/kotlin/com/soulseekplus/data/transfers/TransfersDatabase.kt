@@ -20,7 +20,7 @@ abstract class TransfersDatabase : RoomDatabase() {
             instance ?: synchronized(this) {
                 instance ?: Room.databaseBuilder(context.applicationContext, TransfersDatabase::class.java, NAME)
                     // Transfer listesi yeniden kurulabilir bir önbellektir; şema uyuşmazlığında uygulamayı çökertme.
-                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration(dropAllTables = true)
                     .build()
                     .also { instance = it }
             }

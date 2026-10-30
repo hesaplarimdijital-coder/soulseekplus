@@ -34,7 +34,7 @@ imzalı APK olarak yüklenir. Aynı APK `ci/apk` dalında da bulunur.
 ./gradlew :core:test :app:assembleRelease
 ```
 
-Gereksinimler: JDK 17, Android SDK 35. `:core` saf Kotlin/JVM modülüdür ve Android SDK olmadan da doğrulanabilir:
+Gereksinimler: JDK 17, Android SDK 37 (AGP 9.4, Gradle 9.8, Kotlin 2.4). Uygulama Android 14 (API 34) ve üstünde çalışır. `:core` saf Kotlin/JVM modülüdür ve Android SDK olmadan da doğrulanabilir:
 `tools/verify-core.sh`. Mimari ve modül sözleşmeleri: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md). Protokol özeti:
 [docs/slsk-protocol.md](docs/slsk-protocol.md).
 

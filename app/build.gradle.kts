@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    // AGP 9 Kotlin'i kendisi derler (yerleşik Kotlin): kotlin-android eklentisi uygulanmaz.
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
 }
@@ -10,12 +10,13 @@ val ciBuildNumber = (System.getenv("BUILD_NUMBER") ?: "1").toInt()
 
 android {
     namespace = "com.soulseekplus"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.soulseekplus"
-        minSdk = 26
-        targetSdk = 35
+        // desktop-kit 2 Android 14 ister (MIGRATION.md); Tab S11 Ultra ve Galaxy S24 Android 16'da.
+        minSdk = 34
+        targetSdk = 36
         versionCode = ciBuildNumber
         versionName = "1.0.$ciBuildNumber"
     }
@@ -50,10 +51,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = "17"
     }
 
     sourceSets {

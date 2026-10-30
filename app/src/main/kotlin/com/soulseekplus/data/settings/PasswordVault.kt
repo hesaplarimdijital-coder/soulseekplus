@@ -1,6 +1,5 @@
 package com.soulseekplus.data.settings
 
-import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Base64
@@ -62,9 +61,7 @@ internal object PasswordVault {
             .setBlockModes(KeyProperties.BLOCK_MODE_GCM)
             .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
             .setKeySize(256)
-            .apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) setUnlockedDeviceRequired(false)
-            }
+            .setUnlockedDeviceRequired(false)
             .build()
         generator.init(spec)
         return generator.generateKey()

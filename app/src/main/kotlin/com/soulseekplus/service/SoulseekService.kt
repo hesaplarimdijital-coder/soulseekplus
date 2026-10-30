@@ -11,7 +11,6 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.wifi.WifiManager
-import android.os.Build
 import android.os.PowerManager
 import android.os.SystemClock
 import android.text.format.Formatter
@@ -133,8 +132,7 @@ class SoulseekService : LifecycleService() {
     }
 
     private fun enterForeground(notification: Notification): Boolean = try {
-        val type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC else 0
-        ServiceCompat.startForeground(this, NOTIFICATION_ID, notification, type)
+        ServiceCompat.startForeground(this, NOTIFICATION_ID, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
         true
     } catch (e: Exception) {
         // Android 12+ arka plandan başlatma yasağı (ForegroundServiceStartNotAllowedException), eksik izin vb.
