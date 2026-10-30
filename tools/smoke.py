@@ -231,14 +231,24 @@ class Smoke:
             return self.tap_label(label, sidebar=True)
         w, h = self.screen()
         root = self.dump()
-        bottom = [n for n in self.nodes(root) if (n.get("text") or "") == label and self.bounds(n) and self.bounds(n)[1] > h * 0.85]
+        bottom = [n for n in self.nodes(root) if (n.get("text") or "") == label and self.bounds(n) and h * 0.85 < self.bounds(n)[1] < h]
         if bottom:
             self.tap_node(bottom[0])
             return True
-        more = [n for n in self.nodes(root) if (n.get("text") or "") in ("More", "Daha fazla") and self.bounds(n) and self.bounds(n)[1] > h * 0.85]
+        more = [n for n in self.nodes(root) if (n.get("text") or "") in ("More", "Daha fazla") and self.bounds(n) and h * 0.85 < self.bounds(n)[1] < h]
         if more:
             self.tap_node(more[0])
             return self.tap_label(label)
+        if not getattr(self, "_revealing", False):
+            # desktop-kit 2: içerik aşağı kaydırılınca alt çubuk ekrandan çekilir (hideBarsOnScroll); hafifçe yukarı
+            # kaydırınca geri gelir.
+            self._revealing = True
+            try:
+                adb("shell", "input", "swipe", str(w // 2), str(int(h * 0.45)), str(w // 2), str(int(h * 0.65)), "250")
+                time.sleep(1.2)
+                return self.nav(label, wide)
+            finally:
+                self._revealing = False
         self.log(f"  - gezinme '{label}' bulunamadı")
         return False
 
