@@ -1,5 +1,7 @@
 package com.soulseekplus.ui
 
+import kotlinx.coroutines.flow.filterNotNull
+import desktopkit.components.rememberToastState
 import desktopkit.components.DeskButton
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -292,6 +294,17 @@ private fun AppShell(
         if (chatUnread > 0) put(Routes.CHAT, if (chatUnread > 99) "99+" else chatUnread.toString())
     }
 
+    // Uygulamanın kısa mesajları kitin bildirimleriyle (MIGRATION.md 2. adım): telefonda alt çubuğun ve şeridin,
+    // tablet ve DeX'te oynatıcının üstünde; yana kaydırınca kapanır, TalkBack açıkken sistemin önerdiği süre kalır.
+    // Yenisi ekrandakinin yerini alır; bu yüzden her mesaj ayrı bir eşyordamda gösterilir (toplayıcı beklemez).
+    val toasts = rememberToastState()
+    LaunchedEffect(appViewModel, toasts) {
+        appViewModel.message.filterNotNull().collect { message ->
+            appViewModel.dismissMessage()
+            launch { toasts.show(message.text) }
+        }
+    }
+
     DesktopShell(
         spec = spec,
         widthClass = widthClass,
@@ -303,6 +316,7 @@ private fun AppShell(
         onSearch = { host.perform(CommonShortcuts.SEARCH) },
         searchHint = stringResource(R.string.search_hint_global),
         bottomBar = { StatusStrip(container) },
+        toasts = toasts,
     ) { currentRoute, _ ->
         Box(Modifier.fillMaxSize()) {
             when (currentRoute) {
@@ -323,7 +337,6 @@ private fun AppShell(
                     onOpenAbout = { navigator.navigate(Routes.ABOUT) },
                 )
             }
-            ToastHost(appViewModel, Modifier.align(Alignment.BottomCenter))
         }
     }
 
@@ -419,28 +432,5 @@ private fun isShortcutEnabled(id: String, container: AppContainer, route: String
         -> route == Routes.SEARCH && container.searches.tabs.value.isNotEmpty()
         AppShortcuts.PAUSE_SELECTED, AppShortcuts.RESUME_SELECTED, AppShortcuts.CLEAR_FINISHED -> route == Routes.TRANSFERS
         else -> true
-    }
-}
-
-/** Alttan beliren geçici mesaj; dokununca kapanır. */
-@Composable
-private fun ToastHost(appViewModel: AppViewModel, modifier: Modifier = Modifier) {
-    val message by appViewModel.message.collectAsStateWithLifecycle()
-    val colors = DeskTheme.colors
-    val dimens = DeskTheme.dimens
-    val current = message ?: return
-    val shape = RoundedCornerShape(dimens.radiusControl)
-    Row(
-        modifier
-            .padding(horizontal = dimens.pagePadding, vertical = dimens.gapL)
-            .widthIn(max = 520.dp)
-            .background(colors.surfaceRaised, shape)
-            .border(1.dp, colors.borderStrong, shape)
-            .clickable(onClick = appViewModel::dismissMessage)
-            .padding(horizontal = dimens.gapL, vertical = dimens.gapM),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(dimens.gapM),
-    ) {
-        Text(current.text, style = DeskTheme.type.body, color = colors.text, maxLines = 3, overflow = TextOverflow.Ellipsis)
     }
 }
