@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.engine.EngineIntegrationTest" tests="21" skipped="0" failures="0" errors="0" timestamp="2026-11-04T20:47:12.969Z" hostname="runnervmwuk1x" time="6.795">
+  <properties/>
+  <testcase name="privateMessagesAreAckedAndIgnoredUsersAreDropped" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.61"/>
+  <testcase name="browseFolderContentsUserInfoAndAddress" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.112"/>
+  <testcase name="indirectConnectionsWorkWhenNoDirectPortIsKnown" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.246"/>
+  <testcase name="distributedNetworkAdoptsAParentAndAnswersForwardedSearches" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.174"/>
+  <testcase name="pausedDownloadsWaitAndResumeLater" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.197"/>
+  <testcase name="searchResultsComeFromTheSharingPeer" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.368"/>
+  <testcase name="autoConnectLogsInAndAnnouncesPortSharesAndPrivilegeCheck" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.027"/>
+  <testcase name="rejectedLoginAndReloggedDoNotReconnect" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="1.465"/>
+  <testcase name="downloadTransfersEveryByteAndReportsBothSides" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.179"/>
+  <testcase name="requestsToOfflineUsersAndWhileDisconnectedFailWithShortMessages" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.035"/>
+  <testcase name="filesWithServerExcludedPhrasesAreNotSentInSearchResults" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.265"/>
+  <testcase name="bannedRequestersAndDisabledResponsesProduceNoResults" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="1.088"/>
+  <testcase name="partialFileIsResumedFromItsOffset" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.138"/>
+  <testcase name="liveSettingChangesRebindPortAndReconnectWithNewCredentials" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.103"/>
+  <testcase name="serverDropTriggersBackoffReconnectButManualDisconnectDoesNot" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="1.124"/>
+  <testcase name="downloadFolderKeepsTheRemoteFolderNameAndSubfolders" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.123"/>
+  <testcase name="roomsDeliverMessagesAndMembership" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.169"/>
+  <testcase name="zeroByteFilesFinishOnBothSides" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.135"/>
+  <testcase name="watchedUsersReportStatusStatsAndCountry" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.083"/>
+  <testcase name="remoteFileNamesCannotEscapeTheDownloadFolder" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.126"/>
+  <testcase name="changingTheSharesReportsNewCountsToTheServer" classname="com.soulseekplus.core.engine.EngineIntegrationTest" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
