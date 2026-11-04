@@ -78,6 +78,10 @@ import desktopkit.components.DeskListRow
 import desktopkit.components.SelectionBar
 import desktopkit.components.ChipRow
 import desktopkit.components.TabStrip
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.lazy.itemsIndexed
+import desktopkit.components.listAppear
+import desktopkit.components.rememberListAppear
 
 /*
  * Telefon düzeni (WidthClass.Compact). Masaüstü düzeninden farkları:
@@ -480,27 +484,32 @@ private fun CompactResultList(
         vm.setSelection(tabId, ui.selected + row.key)
     }
 
+    // Telefonda ilk satırlar sırayla gelir (kit 2.3.0): sonuçlar ilk göründüğünde ve başka sekmeye geçince; sonradan
+    // gelen, kaydırılan ya da açılan grubun satırları olduğu yerdedir. Tablet ve DeX'te hiçbir şey kıpırdamaz.
+    val appear = rememberListAppear(tabId)
     LazyColumn(modifier.fillMaxWidth(), state = listState) {
-        items(rows, key = { it.key }) { row ->
+        itemsIndexed(rows, key = { _, row -> row.key }) { index, row ->
             val menu = { buildMenu(row, ui, tab, vm, actions, userActions, res, expandByDefault) }
-            when (row) {
-                is GroupHeaderRow -> GroupRow(
-                    row = row,
-                    selected = row.key in ui.selected,
-                    selectionMode = ui.selectMode,
-                    onClick = { if (ui.selectMode) toggleSelected(row) else vm.toggleGroup(tabId, row.key) },
-                    onLongClick = null,
-                    menu = menu,
-                )
-                is FileResultRow -> FileRow(
-                    row = row,
-                    mode = tab.groupMode,
-                    selected = row.key in ui.selected,
-                    selectionMode = ui.selectMode,
-                    onClick = { toggleSelected(row) },
-                    onLongClick = { if (ui.selectMode) toggleSelected(row) else startSelection(row) },
-                    menu = menu,
-                )
+            Box(Modifier.listAppear(appear, index)) {
+                when (row) {
+                    is GroupHeaderRow -> GroupRow(
+                        row = row,
+                        selected = row.key in ui.selected,
+                        selectionMode = ui.selectMode,
+                        onClick = { if (ui.selectMode) toggleSelected(row) else vm.toggleGroup(tabId, row.key) },
+                        onLongClick = null,
+                        menu = menu,
+                    )
+                    is FileResultRow -> FileRow(
+                        row = row,
+                        mode = tab.groupMode,
+                        selected = row.key in ui.selected,
+                        selectionMode = ui.selectMode,
+                        onClick = { toggleSelected(row) },
+                        onLongClick = { if (ui.selectMode) toggleSelected(row) else startSelection(row) },
+                        menu = menu,
+                    )
+                }
             }
         }
     }

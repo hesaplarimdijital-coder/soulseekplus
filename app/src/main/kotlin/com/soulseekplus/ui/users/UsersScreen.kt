@@ -52,6 +52,10 @@ import desktopkit.components.IconMenuButton
 import desktopkit.components.DeskCard
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.lazy.itemsIndexed
+import desktopkit.components.listAppear
+import desktopkit.components.rememberListAppear
 
 private enum class UsersTab { BUDDIES, GROUPS, BANNED, IGNORED }
 
@@ -287,6 +291,8 @@ private fun GroupsPane(container: AppContainer, groups: List<UserGroup>, presenc
     var createDialog by rememberSaveable { mutableStateOf(false) }
     var renameFrom by rememberSaveable { mutableStateOf<String?>(null) }
     var deleteName by rememberSaveable { mutableStateOf<String?>(null) }
+    // Telefonda grup kartları sırayla gelir (kit 2.3.0); tablet ve DeX'te hiçbir şey kıpırdamaz.
+    val appear = rememberListAppear()
 
     Column(modifier) {
         Row(
@@ -310,8 +316,10 @@ private fun GroupsPane(container: AppContainer, groups: List<UserGroup>, presenc
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = dimens.pagePadding, vertical = dimens.gapS),
                 verticalArrangement = Arrangement.spacedBy(dimens.gapM),
             ) {
-                items(groups, key = { it.name }) { group ->
-                    GroupCard(group, presence, repo, ua, actions, onRename = { renameFrom = group.name }, onDelete = { deleteName = group.name })
+                itemsIndexed(groups, key = { _, group -> group.name }) { index, group ->
+                    Box(Modifier.listAppear(appear, index)) {
+                        GroupCard(group, presence, repo, ua, actions, onRename = { renameFrom = group.name }, onDelete = { deleteName = group.name })
+                    }
                 }
             }
         }

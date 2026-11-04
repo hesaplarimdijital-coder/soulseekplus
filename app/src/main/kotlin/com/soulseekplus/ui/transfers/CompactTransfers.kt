@@ -55,6 +55,11 @@ import desktopkit.components.DeskChip
 import desktopkit.components.DeskListRow
 import desktopkit.components.SelectionBar
 import desktopkit.components.ChipRow
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.lazy.itemsIndexed
+import desktopkit.components.ListAppear
+import desktopkit.components.listAppear
+import desktopkit.components.rememberListAppear
 
 /*
  * Telefon düzeni (WidthClass.Compact): yön seçici + kategori çipleri iki ince satırda; arama, gruplama, seçim ve
@@ -101,6 +106,9 @@ internal fun CompactTransfersScreen(vm: TransfersViewModel, container: AppContai
         showSearch = false,
     )
 
+    // Telefonda ilk satırlar sırayla gelir (kit 2.3.0): ekran açılınca, yön ya da kategori değişince; boş listeden
+    // dönünce yeniden sayılmasın diye burada alınır. Tablet ve DeX'te hiçbir şey kıpırdamaz.
+    val appear = rememberListAppear(vm.direction, vm.category)
     Column(modifier.fillMaxSize()) {
         Column(
             Modifier.fillMaxWidth().padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs),
@@ -142,7 +150,7 @@ internal fun CompactTransfersScreen(vm: TransfersViewModel, container: AppContai
                 ),
             )
         } else {
-            CompactTransferList(vm, container, actions, view.rows, Modifier.weight(1f))
+            CompactTransferList(vm, container, actions, view.rows, appear, Modifier.weight(1f))
         }
 
         if (vm.selectMode || vm.selected.isNotEmpty()) {
@@ -184,7 +192,7 @@ internal fun CompactTransfersScreen(vm: TransfersViewModel, container: AppContai
 }
 
 @Composable
-private fun CompactTransferList(vm: TransfersViewModel, container: AppContainer, actions: AppActions, rows: List<TransferRow>, modifier: Modifier) {
+private fun CompactTransferList(vm: TransfersViewModel, container: AppContainer, actions: AppActions, rows: List<TransferRow>, appear: ListAppear, modifier: Modifier) {
     val res = appResources()
     val context = LocalContext.current
     val ua = rememberUserActions(container, actions)
@@ -194,28 +202,30 @@ private fun CompactTransferList(vm: TransfersViewModel, container: AppContainer,
     }
 
     LazyColumn(modifier.fillMaxWidth()) {
-        items(rows, key = { it.key }) { row ->
+        itemsIndexed(rows, key = { _, row -> row.key }) { index, row ->
             val menu = { buildTransferMenu(row, vm, res, context, actions, ua) }
-            when (row) {
-                is TransferGroupHeader -> GroupHeader(
-                    row = row,
-                    selected = row.key in vm.selected,
-                    selectionMode = vm.selectMode,
-                    onClick = { if (vm.selectMode) toggle(row) else vm.toggleGroup(row.key) },
-                    menu = menu,
-                )
-                is TransferItemRow -> TransferItem(
-                    row = row,
-                    showUser = vm.groupMode != TransferGroupMode.USER,
-                    selected = row.key in vm.selected,
-                    selectionMode = vm.selectMode,
-                    onClick = { toggle(row) },
-                    onLongClick = {
-                        if (!vm.selectMode) vm.selectMode = true
-                        toggle(row)
-                    },
-                    menu = menu,
-                )
+            Box(Modifier.listAppear(appear, index)) {
+                when (row) {
+                    is TransferGroupHeader -> GroupHeader(
+                        row = row,
+                        selected = row.key in vm.selected,
+                        selectionMode = vm.selectMode,
+                        onClick = { if (vm.selectMode) toggle(row) else vm.toggleGroup(row.key) },
+                        menu = menu,
+                    )
+                    is TransferItemRow -> TransferItem(
+                        row = row,
+                        showUser = vm.groupMode != TransferGroupMode.USER,
+                        selected = row.key in vm.selected,
+                        selectionMode = vm.selectMode,
+                        onClick = { toggle(row) },
+                        onLongClick = {
+                            if (!vm.selectMode) vm.selectMode = true
+                            toggle(row)
+                        },
+                        menu = menu,
+                    )
+                }
             }
         }
     }
