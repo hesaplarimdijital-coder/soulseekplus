@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.search.SearchRepositoryTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-11-11T21:18:30.062Z" hostname="runnervmwuk1x" time="0.055">
+  <properties/>
+  <testcase name="rerunGetsNewTokenAndClearsResults" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.004"/>
+  <testcase name="tabBecomesInactiveAfterTimeout" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.042"/>
+  <testcase name="responsesAreRoutedByTokenAndDeduplicated" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.001"/>
+  <testcase name="filterAppliesToExistingAndFutureHits" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.002"/>
+  <testcase name="closeTabCancelsTokenAndSelectsNeighbour" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.001"/>
+  <testcase name="tabNavigation" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.001"/>
+  <testcase name="groupModeAndClear" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.001"/>
+  <testcase name="newSearchCreatesSelectedTabAndStartsClientSearch" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.0"/>
+  <testcase name="wishlistScopeIsCoercedToNetwork" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.001"/>
+  <testcase name="quickFiltersToggle" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.001"/>
+  <testcase name="resultCapIsHonoured" classname="com.soulseekplus.core.search.SearchRepositoryTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
