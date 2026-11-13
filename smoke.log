@@ -1,0 +1,304 @@
++ APK=apk/app-release.apk
++ adb devices
+List of devices attached
+emulator-5554	device
+
++ ls -l /dev/kvm
+crw-rw-rw- 1 root kvm 10, 232 Nov 13 17:09 /dev/kvm
++ nproc
+4
++ uptime
+ 17:10:05 up 9 min,  0 users,  load average: 3.31, 1.45, 0.60
++ free -m
+               total        used        free      shared  buff/cache   available
+Mem:           15983        4931        3415          51        8031       11051
+Swap:           3071           0        3071
++ adb shell uptime
+ 17:10:05 up 0 min,  0 users,  load average: 7.68, 1.70, 0.56
++ adb shell top -b -n 1 -m 15
+Tasks: 307 total,  10 running, 297 sleeping,   0 stopped,   0 zombie
+  Mem:  3050428K total,  2901008K used,   149420K free,    28500K buffers
+ Swap:  2287816K total,        0K used,  2287816K free,  1644572K cached
+300%cpu 104%user  41%nice 159%sys 144%idle  15%iow   0%irq   7%sirq 119%host
+  PID USER         PR  NI VIRT  RES  SHR S[%CPU] %MEM     TIME+ ARGS
+  389 system       -3  -4  11G  29M  15M S 37.0   0.9   0:02.18 android.hardware.graphics.composer3-service.ranchu
+ 1863 u0_a156      20   0  14G 184M 121M S 29.6   6.1   0:00.53 com.google.android.apps.youtube.music
+ 1126 u0_a169      10 -10  13G 213M 139M R 18.5   7.1   0:01.12 com.google.android.apps.nexuslauncher
+ 1881 u0_a132      10 -10  14G 300M 192M S 14.8  10.0   0:01.03 com.google.android.googlequicksearchbox:search
+  359 system       20   0  10G  15M 9.2M S 14.8   0.4   0:00.14 android.hardware.graphics.allocator@3.0-service.ranchu
+ 1751 u0_a123      20   0  14G 158M  93M S 11.1   5.3   0:00.48 com.google.android.as
+  532 system       18  -2  15G 406M 285M S 11.1  13.6   0:17.65 system_server
+ 1933 u0_a139      20   0  14G 219M 150M S  7.4   7.3   0:01.12 com.google.android.youtube
+ 1607 u0_a143      10 -10  13G 217M 131M S  7.4   7.2   0:01.43 com.google.android.inputmethod.latin
+ 1517 u0_a128      20   0  13G 175M 113M R  7.4   5.8   0:00.42 com.google.android.gms
+  864 u0_a165      20   0  14G 247M 136M R  7.4   8.3   0:03.71 com.android.systemui
+  406 system       -3  -8  10G  40M  25M R  7.4   1.3   0:08.99 surfaceflinger
+ 3115 shell        20   0  10G 5.0M 4.2M R  3.7   0.1   0:00.02 top -b -n 1 -m 15
+ 2768 u0_a130      20   0  13G 131M  76M S  3.7   4.3   0:00.21 com.google.android.dialer
+ 2480 u0_a140      20   0  14G 152M  98M S  3.7   5.1   0:00.21 com.google.android.gm
++ adb shell getprop sys.boot_completed
+1
++ adb shell settings put global hide_error_dialogs 1
+++ seq 1 30
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=7.68
++ awk -v l=7.68 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ cut '-d ' -f1
+++ adb shell cat /proc/loadavg
++ load=11.31
++ awk -v l=11.31 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ cut '-d ' -f1
+++ adb shell cat /proc/loadavg
++ load=11.31
++ awk -v l=11.31 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=14.09
++ awk -v l=14.09 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=14.09
++ awk -v l=14.09 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ cut '-d ' -f1
+++ adb shell cat /proc/loadavg
++ load=14.09
++ awk -v l=14.09 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=18.33
++ awk -v l=18.33 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=18.33
++ awk -v l=18.33 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=17.34
++ awk -v l=17.34 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ cut '-d ' -f1
+++ adb shell cat /proc/loadavg
++ load=17.34
++ awk -v l=17.34 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=17.34
++ awk -v l=17.34 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ cut '-d ' -f1
+++ adb shell cat /proc/loadavg
++ load=16.11
++ awk -v l=16.11 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=16.11
++ awk -v l=16.11 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=16.82
++ awk -v l=16.82 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=16.82
++ awk -v l=16.82 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=15.95
++ awk -v l=15.95 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=15.95
++ awk -v l=15.95 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=15.95
++ awk -v l=15.95 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ cut '-d ' -f1
+++ adb shell cat /proc/loadavg
++ load=15.08
++ awk -v l=15.08 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=15.08
++ awk -v l=15.08 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=13.95
++ awk -v l=13.95 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=13.95
++ awk -v l=13.95 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ cut '-d ' -f1
+++ adb shell cat /proc/loadavg
++ load=13.95
++ awk -v l=13.95 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=13.15
++ awk -v l=13.15 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=13.15
++ awk -v l=13.15 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=12.26
++ awk -v l=12.26 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=12.26
++ awk -v l=12.26 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=12.26
++ awk -v l=12.26 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=12.08
++ awk -v l=12.08 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ for i in $(seq 1 30)
+++ adb shell cat /proc/loadavg
+++ cut '-d ' -f1
++ load=12.08
++ awk -v l=12.08 'BEGIN { exit !(l < 4.0) }'
++ sleep 2
++ adb shell uptime
+ 17:11:07 up 1 min,  0 users,  load average: 11.11, 4.59, 1.68
++ adb shell setprop log.tag.SlskPlus DEBUG
++ adb logcat -G 16M
++ nc -z 127.0.0.1 2242
+Connection to 127.0.0.1 2242 port [tcp/*] succeeded!
++ echo 'demo server reachable on host'
+demo server reachable on host
++ python3 tools/smoke.py apk/app-release.apk smoke-out --demo
+[01-phone-first-run.png] metinler: Welcome to Soulseek+ | Sign in with your Soulseek account to search, download and chat. | New here? Pick any free username and password; the account is created the first time you connect. | Username | Password | Show password | Connect | Server options
+  düzenlenebilir alan sayısı: 2
+  ~ 'slskplus_smoke' yazılamadı, yeniden deneniyor (1)
+  ~ 'slskplus_smoke' yazılamadı, yeniden deneniyor (2)
+  ~ 'slskplus_smoke' yazılamadı, yeniden deneniyor (3)
+  ~ 'smoke-pass' yazılamadı, yeniden deneniyor (1)
+  ~ 'smoke-pass' yazılamadı, yeniden deneniyor (2)
+  ~ 'smoke-pass' yazılamadı, yeniden deneniyor (3)
+[02-phone-account-filled.png] metinler: Welcome to Soulseek+ | Sign in with your Soulseek account to search, download and chat. | New here? Pick any free username and password; the account is created the first time you connect. | slskplus_smoke | •••••••••• | Show password | 10.0.2.2 | 2242 | Connect | Hide server options
+[03-phone-home.png] metinler: Search in: Network | Search for files, e.g. artist album | Search | Search the Soulseek network | Type a few words above. Results arrive from other users over the next seconds and can be grouped, filtered and downloaded. | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | Transfers | Wishlist | 1 | Chat | Chat, 1 unread | More
+[04-phone-search-results.png] metinler: Search in: Network | megadeth | Recent searches | Search | Close tab | 53 of 53 results from 3 users  ·  Folders | Loading | 1988 - So Far, So Good... So What! (demo rips) [MP3 320] | slow_lofi  ·  Megadeth  ·  9 files  ·  ≤ 320 kbps | 9.49 MiB | Free | 1990 - Rust in Peace [24-96 FLAC] | vinyl_archive  ·  Megadeth  ·  10 files  ·  ◆ Lossless | 932 MiB | 1992 - Countdown to Extinction [FLAC] | vinyl_archive  ·  Megadeth  ·  12 files  ·  ◆ Lossless | 321 MiB | 1986 - Peace Sells... but Who's Buying [MP3 320] | metal_cave  ·  Megadeth  ·  9 files  ·  ≤ 320 kbps | 86.5 MiB | 1994 - Youthanasia [MP3 V0] | metal_cave  ·  Megadeth  ·  13 files  ·  ≤ 267 kbps | 102 MiB | Filters | Repeat search | More options | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | Transfers | Wishlist | 1 | Chat | Chat, 1 unread | More
+[05-phone-search-filters.png] metinler: Search in: Network | megadeth | Recent searches | Search | Close tab | 53 of 53 results from 3 users  ·  Folders | Filters | Clear filters | Done | Free slots | Lossless | 320+ kbps | Hide locked | Include words | Exclude words | Types: flac, mp3, !wav | Countries: TR, !US | Min kbps | Max queue | Min MiB | Max MiB | Min KiB/s | Regex | Loading | 1988 - So Far, So Good... So What! (demo rips) [MP3 320] | slow_lofi  ·  Megadeth  ·  9 files  ·  ≤ 320 kbps | 9.49 MiB | Free | 1990 - Rust in Peace [24-96 FLAC] | vinyl_archive  ·  Megadeth  ·  10 files  ·  ◆ Lossless | 932 MiB | 1992 - Countdown to Extinction [FLAC] | vinyl_archive  ·  Megadeth  ·  12 files  ·  ◆ Lossless | 321 MiB | Repeat search | More options | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | Transfers | Wishlist | 1 | Chat | Chat, 1 unread | More
+[06-phone-search-group-open.png] metinler: Search in: Network | megadeth | Recent searches | Search | Close tab | 53 of 53 results from 3 users  ·  Folders | Loading | 1988 - So Far, So Good... So What! (demo rips) [MP3 320] | slow_lofi  ·  Megadeth  ·  9 files  ·  ≤ 320 kbps | 9.49 MiB | Free | 1990 - Rust in Peace [24-96 FLAC] | vinyl_archive  ·  Megadeth  ·  10 files  ·  ◆ Lossless | 932 MiB | 01 - Orbit Dust.flac | 24 bit / 96 kHz / 4608 kbps  ·  6:15 | 118 MiB | 02 - Velvet.flac | 24 bit / 96 kHz / 4608 kbps  ·  7:17 | 138 MiB | 03 - Harbor Hollow.flac | 24 bit / 96 kHz / 4608 kbps  ·  2:51 | 53.8 MiB | 04 - Velvet Ashes.flac | 24 bit / 96 kHz / 4608 kbps  ·  3:28 | 65.5 MiB | 05 - Orbit Winter.flac | 24 bit / 96 kHz / 4608 kbps  ·  6:29 | 122 MiB | 06 - Mirror.flac | 24 bit / 96 kHz / 4608 kbps  ·  5:43 | 108 MiB | 07 - Northern Hollow.flac | 24 bit / 96 kHz / 4608 kbps  ·  7:42 | 145 MiB | 08 - Dream Fever Tide.flac | 24 bit / 96 kHz / 4608 kbps  ·  6:21 | 120 MiB | Filters | Repeat search | More options | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | Transfers | Wishlist | 1 | Chat | Chat, 1 unread | More
+[07-phone-search-file-menu.png] metinler: Download | Ctrl+D | Download whole folder | Browse folder | Copy file name | Copy slsk:// link | Copy folder link | Expand all groups | Collapse all groups | Browse shares | User info | Send message | Add to buddies | Ban user | Ignore user | Copy username
+[08-phone-search-selection.png] metinler: Search in: Network | megadeth | Recent searches | Search | Close tab | 53 of 53 results from 3 users  ·  Folders | Loading | 1988 - So Far, So Good... So What! (demo rips) [MP3 320] | slow_lofi  ·  Megadeth  ·  9 files  ·  ≤ 320 kbps | 9.49 MiB | Free | 1990 - Rust in Peace [24-96 FLAC] | vinyl_archive  ·  Megadeth  ·  10 files  ·  ◆ Lossless | 932 MiB | 01 - Orbit Dust.flac | 24 bit / 96 kHz / 4608 kbps  ·  6:15 | 118 MiB | 02 - Velvet.flac | 24 bit / 96 kHz / 4608 kbps  ·  7:17 | 138 MiB | 03 - Harbor Hollow.flac | 24 bit / 96 kHz / 4608 kbps  ·  2:51 | 53.8 MiB | 04 - Velvet Ashes.flac | 24 bit / 96 kHz / 4608 kbps  ·  3:28 | 65.5 MiB | 05 - Orbit Winter.flac | 24 bit / 96 kHz / 4608 kbps  ·  6:29 | 122 MiB | 06 - Mirror.flac | 24 bit / 96 kHz / 4608 kbps  ·  5:43 | 108 MiB | 07 - Northern Hollow.flac | 24 bit / 96 kHz / 4608 kbps  ·  7:42 | 145 MiB | Clear selection | 1 selected | Download | Filters | Repeat search | More options | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | Transfers | Wishlist | 1 | Chat | Chat, 1 unread | More
+[09-phone-search-overflow.png] metinler: View options | Select
+[10-phone-search-view-options.png] metinler: View options | Esc | Group by | Folders | Users | Flat | Sort by | Speed ↓ | Slots | Size | Quality | File | User | Close
+[11-saf-picker.png] metinler: sdk_gphone64_x86_64 | Files on sdk_gphone64_x86_64 | List view | New folder | Sort by... | More options | Can’t use this folder | To protect your privacy, choose another folder | CREATE NEW FOLDER | Alarms | Android | Audiobooks | DCIM | Documents | Download | Movies | Music | Notifications | Pictures | Podcasts | Recordings | Ringtones | Preview the file ui.xml | ui.xml | USE THIS FOLDER
+[12-phone-settings-download-folder.png] metinler: Stay connected on mobile data but pause transfers. | Uploads | Upload slots | How many files can be sent at once. | 2 | Queue order | Round robin | First come, first served | Upload speed limit (KiB/s) | 0 means no limit. | 0 | Buddies go first | Buddies skip ahead in the upload queue. | Upload to buddies only | Everyone else is refused, even for public folders. | Queued files per user | 0 means unlimited. | 500 | Queued size per user (MiB) | Downloads | Download folder | Choose | Settings | Search or run a command | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | 1
+[13-phone-search-second-tab.png] metinler: Search in: Network | boards of canada | Recent searches | Search | megadeth | Close tab | 13 of 13 results from 1 users  ·  Folders | Loading | 1998 - Music Has the Right to Children [MP3 V0] | slow_lofi  ·  Boards of Canada  ·  13 files  ·  ≤ 266 kbps | 11.4 MiB | Free | Filters | Repeat search | More options | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | Transfers | Wishlist | 1 | Chat | Chat, 1 unread | More
+[14-phone-search-folder-menu.png] metinler: Download 13 files | Ctrl+D | Download whole folder | Browse folder | Copy folder link | Expand group | Expand all groups | Collapse all groups | Browse shares | User info | Send message | Add to buddies | Ban user | Ignore user | Copy username
+[15-phone-transfers-active.png] metinler: Downloads | Uploads | All | Active 1 | Waiting 11 | Finished 1 | Failed | 01 - Winter.mp3 | slow_lofi  ·  Transferring  ·  115 KiB/s  ·  0:06 | 8% | 803 KiB | 02 - Ashes Northern River.mp3 | slow_lofi  ·  Queued remotely | 1.13 MiB | 03 - Ashes Silent Crown.mp3 | slow_lofi  ·  Finished | 100% | 04 - Signal Mirror.mp3 | 677 KiB | 05 - Desert.mp3 | 681 KiB | 06 - Harbor Hollow.mp3 | 734 KiB | 07 - Crown.mp3 | 1.09 MiB | 08 - Fever.mp3 | 846 KiB | 09 - Tide Ashes.mp3 | 769 KiB | 10 - Iron Mirror Echoes.mp3 | 815 KiB | Transfers | Filter by file or user | View options | More options | slskplus_smoke | Download speed | 115 KiB/s | Upload speed | - | Port mapping failed | Search | 1 | Transfers, 1 active | Wishlist | Chat | Chat, 1 unread | More
+[16-phone-transfers-later.png] metinler: Downloads | Uploads | All | Active 1 | Waiting 10 | Finished 2 | Failed | 01 - Winter.mp3 | slow_lofi  ·  Finished | 100% | 803 KiB | 02 - Ashes Northern River.mp3 | slow_lofi  ·  Transferring  ·  97.4 KiB/s  ·  0:03 | 71% | 1.13 MiB | 03 - Ashes Silent Crown.mp3 | 04 - Signal Mirror.mp3 | slow_lofi  ·  Queued remotely | 677 KiB | 05 - Desert.mp3 | 681 KiB | 06 - Harbor Hollow.mp3 | 734 KiB | 07 - Crown.mp3 | 1.09 MiB | 08 - Fever.mp3 | 846 KiB | 09 - Tide Ashes.mp3 | 769 KiB | 10 - Iron Mirror Echoes.mp3 | 815 KiB | Transfers | Filter by file or user | View options | More options | slskplus_smoke | Download speed | 93.9 KiB/s | Upload speed | - | Port mapping failed | Search | 1 | Transfers, 1 active | Wishlist | Chat | Chat, 1 unread | More
+[17-phone-transfer-menu.png] metinler: Pause | Ctrl+P | Resume | Ctrl+R | Retry | Refresh queue position | Cancel | Remove from list | Play | Open with… | Copy file name | Copy slsk:// link | Browse folder | Browse shares | User info | Send message | Add to buddies
+[18-phone-chat.png] metinler: Rooms | No joined rooms | Private messages | vinyl_archive | 1 | Close conversation | Chat | Browse rooms | New message | Search or run a command | slskplus_smoke | Download speed | 95.7 KiB/s | Upload speed | - | Port mapping failed | Search | Transfers | Transfers, 1 active | Wishlist | Chat, 1 unread | More
+[19-phone-chat-private.png] metinler: vinyl_archive | Online | Browse shares | User info | Clear messages | Close conversation | 5:14 PM  vinyl_archive  Hi slskplus_smoke! I'm a demo peer. Search for "megadeth" or browse my shares. | Message, or type / for commands | Send | Back | Search or run a command | slskplus_smoke | Download speed | 102 KiB/s | Upload speed | - | Port mapping failed | Search | 1 | Transfers | Transfers, 1 active | Wishlist | Chat | More
+[20-phone-browse.png] metinler: jazz_corner · 17 files in 7 folders | Expand all groups | Collapse all groups | Refresh | jazz_corner | Browse | Search within these shares | ▾ Jazz | 17 | ▸ Bill Evans | 7 | ▸ John Coltrane | 5 | ▸ Miles Davis | Folder | Files | Search or run a command | slskplus_smoke | Download speed | 95.7 KiB/s | Upload speed | - | Port mapping failed | Search | 1 | Transfers | Transfers, 1 active | Wishlist | Chat | More
+[21-phone-wishlist.png] metinler: The server lets each item be checked every 12:00 | Add a search to watch | Add | Your wishlist is empty | Add a search above. Soulseek+ repeats it in the background and tells you when new results appear. | Wishlist | Search or run a command | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | Search | 1 | Transfers | Transfers, 1 active | Chat | More
+[22-phone-users.png] metinler: Buddies 0 · banned 0 · ignored 0 | Buddies | Groups | Banned | Ignored | Add a buddy by username | Add | No buddies yet | Buddies get priority upload slots and can see buddy-only shares. Add them here or from any user menu. | Users | Search or run a command | slskplus_smoke | Download speed | 94.0 KiB/s | Upload speed | - | Port mapping failed | Search | 1 | Transfers | Transfers, 1 active | Wishlist | Chat | More
+[23-phone-shares.png] metinler: Sharing 0 files in 0 folders | You are not sharing anything | Soulseek is built on sharing. Pick folders to offer them to others; you choose who can see each one. | Add folder | Who can see what | Everyone: all users see the folder. | Buddies: only users on your buddy list. | Group: only members of the chosen group. | Others see restricted folders as locked, and downloads are refused. Banned users never get anything. | Shares | Rescan all | Search or run a command | slskplus_smoke | Download speed | 97.5 KiB/s | Upload speed | - | Port mapping failed | Search | 1 | Transfers | Transfers, 1 active | Wishlist | Chat | More
+[24-phone-user-info.png] metinler: Refresh | Username | Look up | Look up a user | See someone's profile text, picture, upload slots and queue before you download from them. | User info | Search or run a command | slskplus_smoke | Download speed | 76.8 KiB/s | Upload speed | - | Port mapping failed | Search | 1 | Transfers | Transfers, 1 active | Wishlist | Chat | More
+[25-phone-about.png] metinler: Soulseek+ | A Soulseek client for Android | Version | 1.0.48 | Search, download, share and chat on the Soulseek peer-to-peer network, with a layout that works on phones, tablets and Samsung DeX. | License | Soulseek+ is free software under the GNU General Public License, version 3. You may use, study, share and change it under the terms of that license. There is no warranty. | Read the GPL-3.0 | Third-party material | This product includes IP2Location LITE data available from https://lite.ip2location.com | IP2Location LITE data is used to show country flags and is licensed under Creative Commons Attribution-ShareAlike 4.0. | IP2Location LITE | CC BY-SA 4.0 | The IBM Plex typefaces are used under the SIL Open Font License 1.1. | About | Search or run a command | slskplus_smoke | Download speed | - | Upload speed | Port mapping failed | Search | Transfers | Wishlist | Chat | More
+[26-tablet-search.png] metinler: Search | 13 of 13 results from 1 users | Filters | Repeat search | Network | boards of canada | Recent searches | megadeth | Close tab | Close all tabs | Free slots | Hide locked | Lossless | 320+ kbps | Folders | Users | Flat | Select | ▸ lofi\Boards of Canada\1998 - Music Has the Right to Children [MP3 V0]  ·  13 files | slow_lofi | 11.4 MiB | ≤ 266 kbps | 97.7 KiB/s | Free | File | User | Size | Quality | Time | Speed | Slots | Country | Soulseek+ | Session | Go | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Browse | User info | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[27-tablet-transfers.png] metinler: Transfers | Down - · Up - | Clear finished transfers | Downloads | Uploads | List | By user | By folder | Select | All | Active | Waiting | Finished (13) | Failed | Filter by file or user | 1998 - Music Has the Right to Children [MP3 V0]\01 - Winter.mp3 | slow_lofi | 803 KiB | 100% | - | Finished | 1998 - Music Has the Right to Children [MP3 V0]\02 - Ashes Northern River.mp3 | 1.13 MiB | 1998 - Music Has the Right to Children [MP3 V0]\03 - Ashes Silent Crown.mp3 | 1998 - Music Has the Right to Children [MP3 V0]\04 - Signal Mirror.mp3 | 677 KiB | 1998 - Music Has the Right to Children [MP3 V0]\05 - Desert.mp3 | 681 KiB | 1998 - Music Has the Right to Children [MP3 V0]\06 - Harbor Hollow.mp3 | 734 KiB | 1998 - Music Has the Right to Children [MP3 V0]\07 - Crown.mp3 | 1.09 MiB | 1998 - Music Has the Right to Children [MP3 V0]\08 - Fever.mp3 | 846 KiB | File | User | Size | Done | Speed | ETA | Status | Soulseek+ | Session | Go | Search | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Users | Browse | User info | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[28-tablet-wishlist.png] metinler: Wishlist | The server lets each item be checked every 12:00 | Add a search to watch | Add | Your wishlist is empty | Add a search above. Soulseek+ repeats it in the background and tells you when new results appear. | Soulseek+ | Session | Go | Search | Transfers | View | Help | Search the network | Ctrl+K | Chat | People | Users | Browse | User info | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[29-tablet-chat.png] metinler: Chat | Browse rooms | New message | Rooms | No joined rooms | Private messages | vinyl_archive | Online | Close conversation | Resize conversation list | Chat rooms and messages | Join a room to talk with others, or open a private conversation. Type /help in a conversation to see commands. | Soulseek+ | Session | Go | Search | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | People | Users | Browse | User info | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[30-tablet-users.png] metinler: Users | Buddies 0 · banned 0 · ignored 0 | Buddies | Groups | Banned | Ignored | Add a buddy by username | Add | No buddies yet | Buddies get priority upload slots and can see buddy-only shares. Add them here or from any user menu. | Soulseek+ | Session | Go | Search | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Browse | User info | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[31-tablet-browse.png] metinler: Browse | jazz_corner · 17 files in 7 folders | Expand all groups | Collapse all groups | Refresh | jazz_corner | Search within these shares | ▾ Jazz | 17 | ▸ Bill Evans | 7 | ▸ John Coltrane | 5 | ▸ Miles Davis | Folder | Files | Resize folder and file panes | Jazz | Include subfolders | No files in this folder | Soulseek+ | Session | Go | Search | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Users | User info | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[32-tablet-user-info.png] metinler: User info | Refresh | Username | Look up | Look up a user | See someone's profile text, picture, upload slots and queue before you download from them. | Soulseek+ | Session | Go | Search | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Users | Browse | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[33-tablet-shares.png] metinler: Shares | Sharing 0 files in 0 folders | Rescan all | Add folder | You are not sharing anything | Soulseek is built on sharing. Pick folders to offer them to others; you choose who can see each one. | Who can see what | Everyone: all users see the folder. | Buddies: only users on your buddy list. | Group: only members of the chosen group. | Others see restricted folders as locked, and downloads are refused. Banned users never get anything. | Soulseek+ | Session | Go | Search | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Users | Browse | User info | Sharing and info | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[34-tablet-about.png] metinler: About Soulseek+ | Soulseek+ | A Soulseek client for Android | Version | 1.0.48 | Search, download, share and chat on the Soulseek peer-to-peer network, with a layout that works on phones, tablets and Samsung DeX. | License | Soulseek+ is free software under the GNU General Public License, version 3. You may use, study, share and change it under the terms of that license. There is no warranty. | Read the GPL-3.0 | Third-party material | This product includes IP2Location LITE data available from https://lite.ip2location.com | IP2Location LITE data is used to show country flags and is licensed under Creative Commons Attribution-ShareAlike 4.0. | IP2Location LITE | CC BY-SA 4.0 | The IBM Plex typefaces are used under the SIL Open Font License 1.1. | Session | Go | Search | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Users | Browse | User info | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[35-tablet-settings.png] metinler: Settings | Upload slots | How many files can be sent at once. | 2 | Queue order | Round robin | First come, first served | Upload speed limit (KiB/s) | 0 means no limit. | 0 | Buddies go first | Buddies skip ahead in the upload queue. | Upload to buddies only | Everyone else is refused, even for public folders. | Queued files per user | 0 means unlimited. | 500 | Queued size per user (MiB) | Downloads | Download folder | Music | Choose | Download speed limit (KiB/s) | Soulseek+ | Session | Go | Search | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Users | Browse | User info | Sharing and info | Shares | About | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent | Port mapping failed
+[36-tablet-search-query.png] metinler: Search | 53 of 53 results from 3 users | Filters | Repeat search | Network | megadeth | Recent searches | Close tab | boards of canada | Close all tabs | Free slots | Hide locked | Lossless | 320+ kbps | Folders | Users | Flat | Select | Loading | ▸ lofi\Megadeth\1988 - So Far, So Good... So What! (demo rips) [MP3 320]  ·  9 files | slow_lofi | 9.49 MiB | ≤ 320 kbps | 97.7 KiB/s | Free | ▸ Music\Megadeth\1990 - Rust in Peace [24-96 FLAC]  ·  10 files | vinyl_archive | 932 MiB | ◆ ≤ 4608 kbps | ▸ Music\Megadeth\1992 - Countdown to Extinction [FLAC]  ·  12 files | 321 MiB | ◆ ≤ 1411 kbps | ▸ shared\Megadeth\1986 - Peace Sells... but Who's Buying [MP3 320]  ·  9 files | metal_cave | 86.5 MiB | ▸ shared\Megadeth\1994 - Youthanasia [MP3 V0]  ·  13 files | 102 MiB | ≤ 267 kbps | File | User | Size | Quality | Time | Speed | Slots | Country | Soulseek+ | Session | Go | Transfers | View | Help | Search the network | Ctrl+K | Wishlist | Chat | People | Browse | User info | Sharing and info | Shares | About | Settings | Collapse sidebar | slskplus_smoke | Download speed | - | Upload speed | 2 free, 0 queued | No search parent
+[37-tablet-slsk-link.png] metinler: Download this file? | Esc | 01 Track.flac from someuser. The user's folder is open behind this dialog. | Cancel | Download
+[38-tablet-tr-home.png] metinler: Arama | Ağ | Dosya ara, örn. sanatçı albüm | Son aramalar | Ara | Soulseek ağında arayın | Yukarıya birkaç sözcük yazın. Sonuçlar birkaç saniye içinde diğer kullanıcılardan gelir; gruplayabilir, süzebilir ve indirebilirsiniz. | Soulseek+ | Oturum | Git | Transferler | Görünüm | Yardım | Ağda ara | Ctrl+K | İstek listesi | Sohbet | Kişiler | Kullanıcılar | Göz at | Kullanıcı bilgisi | Paylaşım ve bilgi | Paylaşımlar | Hakkında | Ayarlar | Kenar çubuğunu daralt | slskplus_smoke | İndirme hızı | - | Yükleme hızı | 2 boş, 0 kuyrukta | Arama üst düğümü yok | Port eşleme başarısız
+[39-tablet-tr-transferler.png] metinler: Transferler | İndirme - · Yükleme - | Biten transferleri temizle | İndirmeler | Yüklemeler | Liste | Kullanıcıya göre | Klasöre göre | Seç | Hepsi | Etkin | Bekleyen | Biten (13) | Başarısız | Dosya ya da kullanıcıya göre süz | 1998 - Music Has the Right to Children [MP3 V0]\01 - Winter.mp3 | slow_lofi | 803 KiB | 100% | - | Tamamlandı | 1998 - Music Has the Right to Children [MP3 V0]\02 - Ashes Northern River.mp3 | 1.13 MiB | 1998 - Music Has the Right to Children [MP3 V0]\03 - Ashes Silent Crown.mp3 | 1998 - Music Has the Right to Children [MP3 V0]\04 - Signal Mirror.mp3 | 677 KiB | 1998 - Music Has the Right to Children [MP3 V0]\05 - Desert.mp3 | 681 KiB | 1998 - Music Has the Right to Children [MP3 V0]\06 - Harbor Hollow.mp3 | 734 KiB | 1998 - Music Has the Right to Children [MP3 V0]\07 - Crown.mp3 | 1.09 MiB | 1998 - Music Has the Right to Children [MP3 V0]\08 - Fever.mp3 | 846 KiB | Dosya | Kullanıcı | Boyut | Biten | Hız | Kalan | Durum | Soulseek+ | Oturum | Git | Arama | Görünüm | Yardım | Ağda ara | Ctrl+K | İstek listesi | Sohbet | Kişiler | Kullanıcılar | Göz at | Kullanıcı bilgisi | Paylaşım ve bilgi | Paylaşımlar | Hakkında | Ayarlar | Kenar çubuğunu daralt | slskplus_smoke | İndirme hızı | Yükleme hızı | 2 boş, 0 kuyrukta | Arama üst düğümü yok | Port eşleme başarısız
+[40-tablet-tr-ayarlar.png] metinler: Ayarlar | Hesap | slskplus_smoke olarak bağlı | slskplus_smoke | •••••••••• | Parolayı göster | 10.0.2.2 | 2242 | Kaydet ve yeniden bağlan | Açılışta bağlan | Uygulama açılınca otomatik giriş yap. | Ağ | Dinleme portu | Diğer kullanıcılar buraya bağlanır. Değişiklik sonraki bağlantıda uygulanır. | 2234 | Portu otomatik aç | Port eşleme başarısız | Yalnızca Wi-Fi'da transfer | Mobil veride bağlı kalır ama transferleri duraklatır. | Soulseek+ | Oturum | Git | Arama | Transferler | Görünüm | Yardım | Ağda ara | Ctrl+K | İstek listesi | Sohbet | Kişiler | Kullanıcılar | Göz at | Kullanıcı bilgisi | Paylaşım ve bilgi | Paylaşımlar | Hakkında | Kenar çubuğunu daralt | İndirme hızı | - | Yükleme hızı | 2 boş, 0 kuyrukta | Arama üst düğümü yok
+[41-phone-tr-home.png] metinler: Hesap | slskplus_smoke olarak bağlı | slskplus_smoke | •••••••••• | Parolayı göster | 10.0.2.2 | 2242 | Kaydet ve yeniden bağlan | Açılışta bağlan | Uygulama açılınca otomatik giriş yap. | Ağ | Dinleme portu | Diğer kullanıcılar buraya bağlanır. Değişiklik sonraki bağlantıda uygulanır. | 2234 | Portu otomatik aç | Port eşleme başarısız | Yalnızca Wi-Fi'da transfer | Mobil veride bağlı kalır ama transferleri duraklatır. | Ayarlar | Ara veya komut çalıştır | İndirme hızı | - | Yükleme hızı | Arama | Transferler | İstek listesi | Sohbet | Daha fazla
+SONUÇ: BAŞARILI
++ uptime
+ 17:21:57 up 20 min,  0 users,  load average: 0.87, 1.52, 1.20
++ adb shell top -b -n 1 -m 15
+Tasks: 288 total,   2 running, 286 sleeping,   0 stopped,   0 zombie
+  Mem:  3050428K total,  2733284K used,   317144K free,    67384K buffers
+ Swap:  2287816K total,   380416K used,  1907400K free,  1483876K cached
+300%cpu  50%user   4%nice  73%sys 108%idle   0%iow   0%irq   0%sirq  65%host
+  PID USER         PR  NI VIRT  RES  SHR S[%CPU] %MEM     TIME+ ARGS
+ 9815 u0_a192      10 -10  13G 165M 106M R 84.6   5.5   0:02.80 com.soulseekplus
+  389 system       -3 -10  11G 7.4M 6.5M S 19.2   0.2   0:29.06 android.hardware.graphics.composer3-service.ranchu
+  406 system       -3  -8  10G  19M  13M S 15.3   0.6   0:24.78 surfaceflinger
+  864 u0_a165      20   0  14G 212M 126M S  7.6   7.1   0:14.36 com.android.systemui
+  532 system       18  -2  15G 245M 162M S  7.6   8.2   0:56.94 system_server
+10088 shell        20   0  10G 4.9M 4.1M R  3.8   0.1   0:00.01 top -b -n 1 -m 15
+  365 system       20   0  10G 4.2M 4.0M S  3.8   0.1   0:05.11 android.hardware.sensors-service.multihal
+  359 system       20   0  10G 6.3M 5.6M S  3.8   0.2   0:00.76 android.hardware.graphics.allocator@3.0-service.ranchu
+   47 root         20   0    0    0    0 I  3.8   0.0   0:02.16 [kworker/2:1-virtio_vsock]
+   14 root         -2   0    0    0    0 I  3.8   0.0   0:00.81 [rcu_preempt]
+10025 u0_a128      20   0  13G  71M  47M S  0.0   2.3   0:00.02 com.google.process.gapps
+ 9333 root         20   0    0    0    0 I  0.0   0.0   0:00.39 [kworker/2:2-virtio_vsock]
+ 9185 u0_a149      20   0  29G 100M  77M S  0.0   3.3   0:00.10 com.android.chrome
+ 8320 root         20   0    0    0    0 I  0.0   0.0   0:00.09 [kworker/u6:1-phy1]
+ 7686 u0_a153      20   0  13G 127M 105M S  0.0   4.2   0:00.22 com.google.android.apps.docs
++ exit 0
