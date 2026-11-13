@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.soulseekplus.core.net.PeerNetworkTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2026-11-13T17:04:58.573Z" hostname="runnervmccnms" time="0.17">
+  <properties/>
+  <testcase name="ownLookupTimeoutIsAnIoError" classname="com.soulseekplus.core.net.PeerNetworkTest" time="0.057"/>
+  <testcase name="outerTimeoutIsNotTurnedIntoAnIoError" classname="com.soulseekplus.core.net.PeerNetworkTest" time="0.113"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
