@@ -59,6 +59,7 @@ import desktopkit.components.StatusBanner
 import desktopkit.components.DeskTextField
 import desktopkit.components.NumberField
 import desktopkit.components.DeskDialog
+import com.soulseekplus.ui.scrollableColumn
 
 @Composable
 fun SettingsScreen(
@@ -110,7 +111,7 @@ fun SettingsScreen(
     Column(modifier.fillMaxSize()) {
         PageHeader(stringResource(R.string.nav_settings))
         Column(
-            Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()),
+            Modifier.weight(1f).fillMaxWidth().scrollableColumn(),
             verticalArrangement = Arrangement.spacedBy(dimens.gapM),
         ) {
             // ------------------------------------------------------------ hesap
@@ -380,7 +381,7 @@ private fun AliasManagerDialog(aliases: Map<String, String>, onRemove: (String) 
                 Text(res.getString(R.string.chat_fb_no_aliases), style = DeskTheme.type.body, color = DeskTheme.colors.textSecondary)
             } else {
                 Column(
-                    Modifier.fillMaxWidth().padding(end = 4.dp).verticalScroll(rememberScrollState()),
+                    Modifier.fillMaxWidth().padding(end = 4.dp).scrollableColumn(),
                     verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS),
                 ) {
                     for ((name, expansion) in aliases.toSortedMap()) {

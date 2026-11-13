@@ -84,6 +84,8 @@ import androidx.compose.runtime.key
 import desktopkit.components.ListAppear
 import desktopkit.components.listAppear
 import desktopkit.components.rememberListAppear
+import com.soulseekplus.ui.scrollableColumn
+import desktopkit.components.verticalScrollbar
 
 /*
  * Telefon düzeni (WidthClass.Compact). Masaüstü düzeninden farkları:
@@ -367,7 +369,7 @@ private fun CompactFilterPanel(tab: SearchTabState, ui: TabUi, vm: SearchViewMod
             Modifier
                 .fillMaxWidth()
                 .heightIn(max = maxHeight)
-                .verticalScroll(rememberScrollState())
+                .scrollableColumn()
                 .padding(bottom = dimens.gapS),
             verticalArrangement = Arrangement.spacedBy(dimens.gapS),
         ) {
@@ -494,7 +496,7 @@ private fun CompactResultList(
 
     // Sonuçların ilk satırları gelince sırayla (anahtar ekranda); sonradan gelen, kaydırılan ya da açılan grubun satırları
     // olduğu yerdedir.
-    LazyColumn(modifier.fillMaxWidth(), state = listState) {
+    LazyColumn(modifier.fillMaxWidth().verticalScrollbar(listState), state = listState) {
         itemsIndexed(rows, key = { _, row -> row.key }) { index, row ->
             val menu = { buildMenu(row, ui, tab, vm, actions, userActions, res, expandByDefault) }
             Box(Modifier.listAppear(appear, index)) {

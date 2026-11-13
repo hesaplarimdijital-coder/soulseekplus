@@ -49,6 +49,7 @@ import desktopkit.components.StatusBanner
 import desktopkit.components.KeyValueRow
 import desktopkit.components.DeskCard
 import desktopkit.components.DeskTextField
+import com.soulseekplus.ui.scrollableColumn
 
 @Composable
 fun ProfileScreen(vm: ProfileViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
@@ -119,7 +120,7 @@ private fun LoadedProfile(state: ProfileState.Loaded, container: AppContainer, a
     Column(
         modifier
             .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
+            .scrollableColumn()
             .padding(horizontal = dimens.pagePadding, vertical = dimens.gapS),
         verticalArrangement = Arrangement.spacedBy(dimens.gapM),
     ) {

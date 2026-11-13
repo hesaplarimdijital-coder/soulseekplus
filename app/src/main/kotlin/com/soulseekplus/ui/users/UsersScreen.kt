@@ -52,6 +52,8 @@ import desktopkit.components.IconMenuButton
 import desktopkit.components.DeskCard
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
+import desktopkit.components.verticalScrollbar
+import androidx.compose.foundation.lazy.rememberLazyListState
 
 private enum class UsersTab { BUDDIES, GROUPS, BANNED, IGNORED }
 
@@ -305,8 +307,10 @@ private fun GroupsPane(container: AppContainer, groups: List<UserGroup>, presenc
                 description = res.getString(R.string.users_empty_groups_desc),
             )
         } else {
+            val groupsState = rememberLazyListState()
             LazyColumn(
-                Modifier.weight(1f).fillMaxWidth(),
+                Modifier.weight(1f).fillMaxWidth().verticalScrollbar(groupsState),
+                state = groupsState,
                 contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = dimens.pagePadding, vertical = dimens.gapS),
                 verticalArrangement = Arrangement.spacedBy(dimens.gapM),
             ) {

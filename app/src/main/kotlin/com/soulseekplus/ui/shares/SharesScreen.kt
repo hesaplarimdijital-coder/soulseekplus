@@ -58,6 +58,8 @@ import desktopkit.components.KeyValueRow
 import desktopkit.components.DeskCard
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
+import desktopkit.components.verticalScrollbar
+import androidx.compose.foundation.lazy.rememberLazyListState
 
 /** Düzenlenen ya da eklenen kök: [id] null ise yeni ekleniyor ([uri] dolu). */
 private data class RootDraft(val id: String?, val uri: Uri?, val alias: String, val level: ShareLevel, val group: String?)
@@ -111,8 +113,10 @@ fun SharesScreen(container: AppContainer, actions: AppActions, modifier: Modifie
                 },
             )
         }
+        val listState = rememberLazyListState()
         LazyColumn(
-            Modifier.weight(1f).fillMaxWidth(),
+            Modifier.weight(1f).fillMaxWidth().verticalScrollbar(listState),
+            state = listState,
             contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = dimens.pagePadding, vertical = dimens.gapS),
             verticalArrangement = Arrangement.spacedBy(dimens.gapM),
         ) {

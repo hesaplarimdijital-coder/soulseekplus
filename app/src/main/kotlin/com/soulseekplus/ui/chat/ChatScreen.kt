@@ -104,6 +104,8 @@ import desktopkit.components.DeskDialog
 import desktopkit.components.DeskChip
 import desktopkit.components.ChipRow
 import desktopkit.settings.DeskPreferences
+import com.soulseekplus.ui.scrollableColumn
+import desktopkit.components.verticalScrollbar
 
 private const val LINK_TAG = "slsk"
 
@@ -230,7 +232,12 @@ private fun ListPane(
 ) {
     val res = appResources()
     val dimens = DeskTheme.dimens
-    LazyColumn(modifier.fillMaxWidth(), contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = dimens.gapS)) {
+    val listState = rememberLazyListState()
+    LazyColumn(
+        modifier.fillMaxWidth().verticalScrollbar(listState),
+        state = listState,
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = dimens.gapS),
+    ) {
         item { SectionCaption(stringResource(R.string.chat_rooms), Modifier.padding(start = dimens.pagePadding, end = dimens.pagePadding, top = dimens.gapS)) }
         if (rooms.isEmpty()) {
             item {
@@ -476,7 +483,7 @@ private fun MessageList(messages: List<ChatMessage>, target: ChatTarget, contain
     }
     val palette = listOf(colors.accentText, colors.success, colors.warning, colors.brandSecondary)
     LazyColumn(
-        modifier,
+        modifier.verticalScrollbar(listState),
         state = listState,
         contentPadding = androidx.compose.foundation.layout.PaddingValues(horizontal = dimens.pagePadding, vertical = dimens.gapS),
         verticalArrangement = Arrangement.spacedBy(2.dp),
@@ -773,7 +780,7 @@ private fun HelpDialog(commands: List<com.soulseekplus.core.chat.CommandInfo>, o
         },
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
-            Column(Modifier.heightIn(max = 380.dp).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
+            Column(Modifier.heightIn(max = 380.dp).scrollableColumn(), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
                 for (c in commands) {
                     Column {
                         val aliases = if (c.aliases.isEmpty()) "" else "  (" + c.aliases.joinToString(", ") { "/$it" } + ")"
@@ -798,7 +805,7 @@ private fun AliasDialog(aliases: Map<String, String>, onDismiss: () -> Unit) {
         },
     ) {
         Column(verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapM)) {
-            Column(Modifier.heightIn(max = 320.dp).verticalScroll(rememberScrollState())) {
+            Column(Modifier.heightIn(max = 320.dp).scrollableColumn()) {
                 for ((name, expansion) in aliases.toSortedMap()) {
                     Text("/$name  →  $expansion", style = DeskTheme.type.mono, color = DeskTheme.colors.text)
                 }

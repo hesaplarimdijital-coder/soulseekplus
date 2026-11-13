@@ -67,6 +67,8 @@ import desktopkit.components.CountBadge
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
 import desktopkit.settings.DeskPreferences
+import desktopkit.components.verticalScrollbar
+import androidx.compose.foundation.lazy.rememberLazyListState
 
 @Composable
 fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppActions, prefs: DeskPreferences, modifier: Modifier = Modifier) {
@@ -155,7 +157,12 @@ private fun ItemList(items: List<WishlistItem>, selected: String?, vm: WishlistV
     val dimens = DeskTheme.dimens
     val colors = DeskTheme.colors
     var confirmRemove by rememberSaveable { mutableStateOf<String?>(null) }
-    LazyColumn(modifier.fillMaxWidth(), contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = dimens.gapS)) {
+    val listState = rememberLazyListState()
+    LazyColumn(
+        modifier.fillMaxWidth().verticalScrollbar(listState),
+        state = listState,
+        contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = dimens.gapS),
+    ) {
         item { SectionCaption(stringResource(R.string.wishlist_items)) }
         items(items, key = { it.query }) { item ->
             val interaction = remember { MutableInteractionSource() }

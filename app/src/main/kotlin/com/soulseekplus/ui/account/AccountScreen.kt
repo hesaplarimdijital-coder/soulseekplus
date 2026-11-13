@@ -32,6 +32,7 @@ import desktopkit.components.DeskButton
 import desktopkit.theme.DeskTheme
 import desktopkit.components.DeskCard
 import desktopkit.components.DeskTextField
+import com.soulseekplus.ui.scrollableColumn
 
 /**
  * Hesap alanları: kullanıcı adı, parola ve (isteğe bağlı) sunucu. Kaydedince ayarlar yazılır ve bağlantı yenilenir.
@@ -120,7 +121,7 @@ fun AccountScreen(container: AppContainer, onSaved: () -> Unit, modifier: Modifi
     val dimens = DeskTheme.dimens
     val colors = DeskTheme.colors
     Column(
-        modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(dimens.pagePadding),
+        modifier.fillMaxSize().scrollableColumn().padding(dimens.pagePadding),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {

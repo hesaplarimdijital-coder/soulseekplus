@@ -55,6 +55,8 @@ import desktopkit.components.DeskChip
 import desktopkit.components.DeskListRow
 import desktopkit.components.SelectionBar
 import desktopkit.components.ChipRow
+import desktopkit.components.verticalScrollbar
+import androidx.compose.foundation.lazy.rememberLazyListState
 
 /*
  * Telefon düzeni (WidthClass.Compact): yön seçici + kategori çipleri iki ince satırda; arama, gruplama, seçim ve
@@ -193,7 +195,8 @@ private fun CompactTransferList(vm: TransfersViewModel, container: AppContainer,
         vm.selected = if (row.key in vm.selected) vm.selected - row.key else vm.selected + row.key
     }
 
-    LazyColumn(modifier.fillMaxWidth()) {
+    val listState = rememberLazyListState()
+    LazyColumn(modifier.fillMaxWidth().verticalScrollbar(listState), state = listState) {
         items(rows, key = { it.key }) { row ->
             val menu = { buildTransferMenu(row, vm, res, context, actions, ua) }
             when (row) {

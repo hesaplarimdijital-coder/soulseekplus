@@ -28,6 +28,7 @@ import desktopkit.screens.PageHeader
 import desktopkit.theme.DeskTheme
 import desktopkit.components.KeyValueRow
 import desktopkit.components.DeskCard
+import com.soulseekplus.ui.scrollableColumn
 
 private const val IP2LOCATION_URL = "https://lite.ip2location.com"
 private const val GPL_URL = "https://www.gnu.org/licenses/gpl-3.0.html"
@@ -53,7 +54,7 @@ fun AboutScreen(modifier: Modifier = Modifier) {
     Column(modifier.fillMaxSize()) {
         PageHeader(stringResource(R.string.about_title))
         Column(
-            Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = dimens.pagePadding),
+            Modifier.weight(1f).fillMaxWidth().scrollableColumn().padding(horizontal = dimens.pagePadding),
             verticalArrangement = Arrangement.spacedBy(dimens.gapM),
         ) {
             DeskCard(Modifier.widthIn(max = 640.dp).fillMaxWidth(), contentPadding = PaddingValues(DeskTheme.dimens.gapL), verticalArrangement = Arrangement.spacedBy(DeskTheme.dimens.gapS)) {
