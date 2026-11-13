@@ -85,6 +85,7 @@ import desktopkit.components.DeskChip
 import desktopkit.components.DeskTab
 import desktopkit.components.ChipRow
 import desktopkit.components.TabStrip
+import androidx.compose.ui.text.style.TextOverflow
 
 private const val MIB = 1024L * 1024L
 
@@ -415,6 +416,7 @@ private class Col(
     val width: ColumnWidth,
     val alignEnd: Boolean = false,
     val mono: Boolean = false,
+    val ellipsis: TextOverflow = TextOverflow.Ellipsis,
     val cell: (ResultRow) -> String,
 )
 
@@ -433,7 +435,7 @@ private fun ResultTable(
     val rows = rememberRows(tab, ui, expandByDefault)
     val cols = remember(res, widthClass, tab.groupMode) { columnsFor(res, widthClass, tab.groupMode) }
     val tableColumns = remember(cols) {
-        cols.map { c -> TableColumn<ResultRow>(c.title, c.width, alignEnd = c.alignEnd, mono = c.mono) { row -> c.cell(row) } }
+        cols.map { c -> TableColumn<ResultRow>(c.title, c.width, alignEnd = c.alignEnd, mono = c.mono, ellipsis = c.ellipsis) { row -> c.cell(row) } }
     }
     val sortIndex = cols.indexOfFirst { it.column == ui.sort.column }
     val tableSort = if (sortIndex >= 0) TableSort(sortIndex, ui.sort.ascending) else null
@@ -487,7 +489,10 @@ private const val SYNC_ROW_LIMIT = 1500
 
 private fun columnsFor(res: android.content.res.Resources, width: WidthClass, mode: GroupMode): List<Col> {
     val slotFree = res.getString(R.string.search_slot_free)
-    val file = Col(ResultColumn.FILE, res.getString(R.string.col_file), ColumnWidth.Weight(1f)) { row -> fileCell(row, mode, res) }
+    // Dosya adı ve yol ortadan kısalır (kit 2.8.0): uzantı ve son klasör görünür kalır ("Kayıt_2026…tam_kayit.flac").
+    val file = Col(ResultColumn.FILE, res.getString(R.string.col_file), ColumnWidth.Weight(1f), ellipsis = TextOverflow.MiddleEllipsis) { row ->
+        fileCell(row, mode, res)
+    }
     val user = Col(ResultColumn.USER, res.getString(R.string.col_user), ColumnWidth.Fixed(120.dp)) { row ->
         when (row) {
             is GroupHeaderRow -> if (row.kind == GroupKind.FOLDER) row.username else res.getString(R.string.label_files_count, row.fileCount)

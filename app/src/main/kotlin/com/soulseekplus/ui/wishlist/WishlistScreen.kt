@@ -233,7 +233,12 @@ private fun ResultsPane(
     var sort by rememberSaveable(query) { mutableStateOf(0 to false) }
     val columns = remember(res, compact) {
         buildList {
-            add(TableColumn<SearchHit>(res.getString(R.string.col_file), ColumnWidth.Weight(2f)) { (if (it.isNew) "● " else "") + it.file.name })
+            // Dosya adı ortadan kısalır (kit 2.8.0): uzantı görünür kalır.
+            add(
+                TableColumn<SearchHit>(res.getString(R.string.col_file), ColumnWidth.Weight(2f), ellipsis = TextOverflow.MiddleEllipsis) {
+                    (if (it.isNew) "● " else "") + it.file.name
+                },
+            )
             add(TableColumn<SearchHit>(res.getString(R.string.col_user), ColumnWidth.Weight(1f)) { it.username })
             add(TableColumn<SearchHit>(res.getString(R.string.col_size), ColumnWidth.Fixed(84.dp), alignEnd = true, mono = true) { Formatting.size(it.file.size) })
             if (!compact) {

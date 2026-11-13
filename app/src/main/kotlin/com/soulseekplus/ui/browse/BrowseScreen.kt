@@ -48,6 +48,7 @@ import desktopkit.components.StatusBanner
 import desktopkit.components.DeskSearchField
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskChip
+import androidx.compose.ui.text.style.TextOverflow
 
 private data class TreeRow(val node: BrowseTree.Node, val depth: Int)
 
@@ -360,7 +361,8 @@ private fun sortRows(rows: List<FileRow>, column: Int, ascending: Boolean): List
 }
 
 private fun fileColumns(res: android.content.res.Resources, compact: Boolean, filtering: Boolean): List<TableColumn<FileRow>> {
-    val name = TableColumn<FileRow>(res.getString(R.string.col_file), ColumnWidth.Weight(1f)) { row ->
+    // Dosya adı ve yol ortadan kısalır (kit 2.8.0): uzantı ve son klasör görünür kalır ("Kayıt_2026…tam_kayit.flac").
+    val name = TableColumn<FileRow>(res.getString(R.string.col_file), ColumnWidth.Weight(1f), ellipsis = TextOverflow.MiddleEllipsis) { row ->
         val lock = if (row.locked) "🔒 " else ""
         if (filtering) lock + row.folderPath.substringAfterLast('\\') + "\\" + row.file.name else lock + row.file.name
     }

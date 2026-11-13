@@ -62,6 +62,7 @@ import desktopkit.appResources
 import desktopkit.components.DeskSearchField
 import desktopkit.components.DeskChip
 import desktopkit.components.ChipRow
+import androidx.compose.ui.text.style.TextOverflow
 
 /** Hesaplanmış görünüm: tablo satırları, kategori sayıları ve süzülmüş liste. */
 internal data class TransferView(
@@ -177,6 +178,7 @@ private class TCol(
     val alignEnd: Boolean = false,
     val mono: Boolean = false,
     val sortable: Boolean = true,
+    val ellipsis: TextOverflow = TextOverflow.Ellipsis,
     val cell: (TransferRow) -> String,
 )
 
@@ -190,7 +192,9 @@ private fun TransfersTable(vm: TransfersViewModel, container: AppContainer, acti
     val mode = vm.groupMode
     val cols = remember(res, widthClass, mode) { transferColumns(res, widthClass, mode) }
     val tableColumns = remember(cols) {
-        cols.map { c -> TableColumn<TransferRow>(c.title, c.width, alignEnd = c.alignEnd, mono = c.mono, sortable = c.sortable) { row -> c.cell(row) } }
+        cols.map { c ->
+            TableColumn<TransferRow>(c.title, c.width, alignEnd = c.alignEnd, mono = c.mono, sortable = c.sortable, ellipsis = c.ellipsis) { row -> c.cell(row) }
+        }
     }
     val sortIndex = cols.indexOfFirst { it.column == vm.sort.column }
 
@@ -315,7 +319,8 @@ private fun mimeFor(name: String): String {
 }
 
 private fun transferColumns(res: android.content.res.Resources, width: WidthClass, mode: TransferGroupMode): List<TCol> {
-    val file = TCol(TransferColumn.FILE, res.getString(R.string.col_file), ColumnWidth.Weight(1f)) { row ->
+    // Dosya adı ve yol ortadan kısalır (kit 2.8.0): uzantı ve son klasör görünür kalır ("Kayıt_2026…tam_kayit.flac").
+    val file = TCol(TransferColumn.FILE, res.getString(R.string.col_file), ColumnWidth.Weight(1f), ellipsis = TextOverflow.MiddleEllipsis) { row ->
         when (row) {
             is TransferGroupHeader -> {
                 val caret = if (row.expanded) "▾ " else "▸ "
@@ -384,7 +389,7 @@ private fun transferColumns(res: android.content.res.Resources, width: WidthClas
     }
 }
 
-private fun TCol.withWidth(width: ColumnWidth) = TCol(column, title, width, alignEnd, mono, sortable, cell)
+private fun TCol.withWidth(width: ColumnWidth) = TCol(column, title, width, alignEnd, mono, sortable, ellipsis, cell)
 
 // ---------------------------------------------------------------------- seçim çubuğu
 
