@@ -80,6 +80,8 @@ import desktopkit.components.ChipRow
 import desktopkit.components.TabStrip
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.runtime.key
+import desktopkit.components.ListAppear
 import desktopkit.components.listAppear
 import desktopkit.components.rememberListAppear
 
@@ -161,6 +163,11 @@ internal fun CompactSearchScreen(vm: SearchViewModel, container: AppContainer, a
             return@Column
         }
         val ui = vm.tabUi(tab.id)
+        // Telefonda sonuçlar sekme göründükten sonra gelince ilk satırları sırayla gelir (kit 2.8.0: satırlar yalnızca veri
+        // liste göründükten sonra gelince sırayla gelir). Anahtar bu aramanın sonuç alıp almadığı; yeniden aramada başlangıç
+        // zamanı değişir, sonuçlar yeniden gelir. Her sekme kendi ilk durumunu hatırlar: sonuçlarıyla açılan sekme (başka
+        // sekmeden geçince, ekrana dönünce) satırlarını hemen gösterir. Tablet ve DeX'te hiçbir şey kıpırdamaz.
+        val appear = key(tab.id) { rememberListAppear(tab.startedAtMillis, tab.allHits.isNotEmpty()) }
         CompactTabRow(tabs, tab.id, vm)
         CompactCaption(
             res.getString(R.string.search_summary, tab.visibleHits.size, tab.allHits.size, tab.userCount) +
@@ -195,7 +202,7 @@ internal fun CompactSearchScreen(vm: SearchViewModel, container: AppContainer, a
                 actionLabel = res.getString(R.string.search_rerun),
                 onAction = { vm.rerunSelectedTab() },
             )
-            else -> CompactResultList(tab, ui, prefs.expandGroups, vm, container, actions, Modifier.weight(1f))
+            else -> CompactResultList(tab, ui, prefs.expandGroups, vm, container, actions, appear, Modifier.weight(1f))
         }
 
         if (ui.selectMode || ui.selected.isNotEmpty()) {
@@ -467,6 +474,7 @@ private fun CompactResultList(
     vm: SearchViewModel,
     container: AppContainer,
     actions: AppActions,
+    appear: ListAppear,
     modifier: Modifier,
 ) {
     val res = appResources()
@@ -484,9 +492,8 @@ private fun CompactResultList(
         vm.setSelection(tabId, ui.selected + row.key)
     }
 
-    // Telefonda ilk satırlar sırayla gelir (kit 2.3.0): sonuçlar ilk göründüğünde ve başka sekmeye geçince; sonradan
-    // gelen, kaydırılan ya da açılan grubun satırları olduğu yerdedir. Tablet ve DeX'te hiçbir şey kıpırdamaz.
-    val appear = rememberListAppear(tabId)
+    // Sonuçların ilk satırları gelince sırayla (anahtar ekranda); sonradan gelen, kaydırılan ya da açılan grubun satırları
+    // olduğu yerdedir.
     LazyColumn(modifier.fillMaxWidth(), state = listState) {
         itemsIndexed(rows, key = { _, row -> row.key }) { index, row ->
             val menu = { buildMenu(row, ui, tab, vm, actions, userActions, res, expandByDefault) }

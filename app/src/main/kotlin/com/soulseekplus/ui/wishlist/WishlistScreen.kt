@@ -66,10 +66,6 @@ import desktopkit.components.DeskSwitch
 import desktopkit.components.CountBadge
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
-import androidx.compose.foundation.lazy.itemsIndexed
-import desktopkit.components.ListAppear
-import desktopkit.components.listAppear
-import desktopkit.components.rememberListAppear
 
 @Composable
 fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
@@ -87,9 +83,6 @@ fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppA
     LaunchedEffect(selected, selectedNew) {
         if (selected != null && selectedNew > 0) vm.repo.clearBadge(selected)
     }
-    // Telefonda listenin satırları sırayla gelir (kit 2.3.0); sonuçlardan listeye dönünce yeniden gelmesin diye
-    // burada alınır. Tablet ve DeX'te hiçbir şey kıpırdamaz.
-    val listAppear = rememberListAppear()
 
     Column(modifier.fillMaxSize()) {
         PageHeader(
@@ -125,7 +118,7 @@ fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppA
             )
             return@Column
         }
-        val list: @Composable (Modifier) -> Unit = { m -> ItemList(items, selected, vm, actions, listAppear, m) }
+        val list: @Composable (Modifier) -> Unit = { m -> ItemList(items, selected, vm, actions, m) }
         val detail: @Composable (Modifier) -> Unit = { m ->
             if (selected == null) {
                 MessageScreen(
@@ -155,21 +148,20 @@ fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppA
 }
 
 @Composable
-private fun ItemList(items: List<WishlistItem>, selected: String?, vm: WishlistViewModel, actions: AppActions, appear: ListAppear, modifier: Modifier) {
+private fun ItemList(items: List<WishlistItem>, selected: String?, vm: WishlistViewModel, actions: AppActions, modifier: Modifier) {
     val res = appResources()
     val dimens = DeskTheme.dimens
     val colors = DeskTheme.colors
     var confirmRemove by rememberSaveable { mutableStateOf<String?>(null) }
     LazyColumn(modifier.fillMaxWidth(), contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = dimens.gapS)) {
-        item { SectionCaption(stringResource(R.string.wishlist_items), Modifier.listAppear(appear, 0)) }
-        itemsIndexed(items, key = { _, item -> item.query }) { index, item ->
+        item { SectionCaption(stringResource(R.string.wishlist_items)) }
+        items(items, key = { it.query }) { item ->
             val interaction = remember { MutableInteractionSource() }
             val state = interaction.collectState()
             val shape = RoundedCornerShape(dimens.radiusControl)
             val isSelected = item.query == selected
             Row(
                 Modifier
-                    .listAppear(appear, 1 + index)
                     .fillMaxWidth()
                     .padding(horizontal = dimens.gapS, vertical = 1.dp)
                     .background(stateBackground(state, selected = isSelected), shape)

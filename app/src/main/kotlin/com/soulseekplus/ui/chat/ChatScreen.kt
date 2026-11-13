@@ -103,10 +103,6 @@ import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
 import desktopkit.components.DeskChip
 import desktopkit.components.ChipRow
-import androidx.compose.foundation.lazy.itemsIndexed
-import desktopkit.components.ListAppear
-import desktopkit.components.listAppear
-import desktopkit.components.rememberListAppear
 
 private const val LINK_TAG = "slsk"
 
@@ -133,9 +129,6 @@ fun ChatScreen(vm: ChatViewModel, container: AppContainer, actions: AppActions, 
     }
 
     var newChatDialog by rememberSaveable { mutableStateOf(false) }
-    // Telefonda listenin satırları sırayla gelir (kit 2.3.0); açık sohbetten listeye dönünce yeniden gelmesin diye
-    // burada alınır. Tablet ve DeX'te hiçbir şey kıpırdamaz.
-    val listAppear = rememberListAppear()
 
     Column(modifier.fillMaxSize()) {
         val showDetail = vm.showRoomList || target != null
@@ -203,12 +196,12 @@ fun ChatScreen(vm: ChatViewModel, container: AppContainer, actions: AppActions, 
             if (showDetail) {
                 detail(Modifier.weight(1f))
             } else {
-                ListPane(vm, rooms, privates, presence, listAppear, Modifier.weight(1f))
+                ListPane(vm, rooms, privates, presence, Modifier.weight(1f))
             }
         } else {
             HorizontalSplitPane(
                 state = rememberSplitState(272.dp),
-                start = { ListPane(vm, rooms, privates, presence, listAppear, Modifier.fillMaxSize()) },
+                start = { ListPane(vm, rooms, privates, presence, Modifier.fillMaxSize()) },
                 end = { detail(Modifier.fillMaxSize()) },
                 modifier = Modifier.weight(1f),
                 minStart = 200.dp,
@@ -231,35 +224,24 @@ private fun ListPane(
     rooms: Map<String, RoomState>,
     privates: Map<String, com.soulseekplus.core.model.PrivateConversation>,
     presence: Map<String, UserPresence>,
-    appear: ListAppear,
     modifier: Modifier,
 ) {
     val res = appResources()
     val dimens = DeskTheme.dimens
-    // Satırların ekrandaki sırası (başlıklar ve "yok" yazıları dahil): sırayla gelişin gecikmesi buna göre.
-    val roomList = rooms.values.toList()
-    val privateList = privates.values.toList()
-    val privateCaptionIndex = 1 + maxOf(roomList.size, 1)
     LazyColumn(modifier.fillMaxWidth(), contentPadding = androidx.compose.foundation.layout.PaddingValues(vertical = dimens.gapS)) {
-        item {
-            SectionCaption(
-                stringResource(R.string.chat_rooms),
-                Modifier.listAppear(appear, 0).padding(start = dimens.pagePadding, end = dimens.pagePadding, top = dimens.gapS),
-            )
-        }
+        item { SectionCaption(stringResource(R.string.chat_rooms), Modifier.padding(start = dimens.pagePadding, end = dimens.pagePadding, top = dimens.gapS)) }
         if (rooms.isEmpty()) {
             item {
                 Text(
                     stringResource(R.string.chat_no_rooms),
                     style = DeskTheme.type.caption,
                     color = DeskTheme.colors.textTertiary,
-                    modifier = Modifier.listAppear(appear, 1).padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs),
+                    modifier = Modifier.padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs),
                 )
             }
         }
-        itemsIndexed(roomList, key = { _, room -> "r:" + room.name }) { index, room ->
+        items(rooms.values.toList(), key = { "r:" + it.name }) { room ->
             ListRow(
-                modifier = Modifier.listAppear(appear, 1 + index),
                 selected = (vm.selected as? ChatTarget.Room)?.name == room.name,
                 icon = if (room.isPrivate) SoulIcons.LockClosed else SoulIcons.ChatRoom,
                 title = room.name,
@@ -270,26 +252,20 @@ private fun ListPane(
                 onClose = { vm.leaveRoom(room.name) },
             )
         }
-        item {
-            SectionCaption(
-                stringResource(R.string.chat_private),
-                Modifier.listAppear(appear, privateCaptionIndex).padding(start = dimens.pagePadding, end = dimens.pagePadding, top = dimens.gapS),
-            )
-        }
+        item { SectionCaption(stringResource(R.string.chat_private), Modifier.padding(start = dimens.pagePadding, end = dimens.pagePadding, top = dimens.gapS)) }
         if (privates.isEmpty()) {
             item {
                 Text(
                     stringResource(R.string.chat_no_private),
                     style = DeskTheme.type.caption,
                     color = DeskTheme.colors.textTertiary,
-                    modifier = Modifier.listAppear(appear, privateCaptionIndex + 1).padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs),
+                    modifier = Modifier.padding(horizontal = dimens.pagePadding, vertical = dimens.gapXs),
                 )
             }
         }
-        itemsIndexed(privateList, key = { _, chat -> "p:" + chat.username }) { index, chat ->
+        items(privates.values.toList(), key = { "p:" + it.username }) { chat ->
             val status = presence[chat.username]?.status
             ListRow(
-                modifier = Modifier.listAppear(appear, privateCaptionIndex + 1 + index),
                 selected = (vm.selected as? ChatTarget.Private)?.username == chat.username,
                 icon = SoulIcons.User,
                 title = chat.username,
@@ -318,7 +294,6 @@ private fun ListRow(
     onClick: () -> Unit,
     closeLabel: String,
     onClose: () -> Unit,
-    modifier: Modifier = Modifier,
     subtitleColor: Color = DeskTheme.colors.textTertiary,
 ) {
     val colors = DeskTheme.colors
@@ -327,7 +302,7 @@ private fun ListRow(
     val state = interaction.collectState()
     val shape = RoundedCornerShape(dimens.radiusControl)
     Row(
-        modifier
+        Modifier
             .fillMaxWidth()
             .padding(horizontal = dimens.gapS, vertical = 1.dp)
             .background(stateBackground(state, selected = selected), shape)
