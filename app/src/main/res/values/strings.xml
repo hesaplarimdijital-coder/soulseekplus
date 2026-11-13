@@ -287,6 +287,7 @@
     <string name="wishlist_empty_desc">Add a search above. Soulseek+ repeats it in the background and tells you when new results appear.</string>
     <string name="wishlist_pick_title">Pick a watched search</string>
     <string name="wishlist_pick_desc">Its results appear here. New ones are marked with a dot.</string>
+    <string name="wishlist_n_new_results">%1$d new results</string>
     <string name="wishlist_resize_panes">Resize wishlist list</string>
     <string name="wishlist_result_count">Results: %1$d</string>
     <string name="wishlist_clear_results">Clear results</string>

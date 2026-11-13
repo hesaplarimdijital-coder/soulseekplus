@@ -63,6 +63,7 @@ import desktopkit.components.DeskIcons
 import desktopkit.input.CommonShortcuts
 import desktopkit.input.ShortcutScope
 import desktopkit.settings.DeskPreferences
+import desktopkit.shell.NavIconBadge
 import desktopkit.settings.rememberDeskPreferences
 import desktopkit.shell.DesktopShell
 import desktopkit.shell.NavItem
@@ -287,11 +288,20 @@ private fun AppShell(
     val transferStats by container.client.transferStats.collectAsStateWithLifecycle()
     val wishlistNew by container.wishlist.totalNewHits.collectAsStateWithLifecycle()
     val chatUnread by container.chat.totalUnread.collectAsStateWithLifecycle()
+    val activeTransfers = transferStats.activeDownloads + transferStats.activeUploads
+    // Açık kenar çubuğunun yazılı rozetleri.
     val badges = buildMap<String, String> {
-        val active = transferStats.activeDownloads + transferStats.activeUploads
-        if (active > 0) put(Routes.TRANSFERS, active.toString())
+        if (activeTransfers > 0) put(Routes.TRANSFERS, activeTransfers.toString())
         if (wishlistNew > 0) put(Routes.WISHLIST, if (wishlistNew > 99) "99+" else wishlistNew.toString())
         if (chatUnread > 0) put(Routes.CHAT, if (chatUnread > 99) "99+" else chatUnread.toString())
+    }
+    // Aynı sayılar telefonun alt çubuğunda, rayda ve kapalı kenar çubuğunda simgenin köşesinde (kit 2.8.0); 99'dan sonra
+    // "99+" kitin. "Daha fazla"nın tuttuğu bir ekranın rozeti varsa "Daha fazla"da nokta olur. TalkBack girişin adından
+    // sonra açıklamayı okur ("Sohbet, 4 okunmamış").
+    val iconBadges = buildMap<String, NavIconBadge> {
+        if (activeTransfers > 0) put(Routes.TRANSFERS, NavIconBadge(activeTransfers, resources.getString(R.string.transfers_n_active, activeTransfers)))
+        if (wishlistNew > 0) put(Routes.WISHLIST, NavIconBadge(wishlistNew, resources.getString(R.string.wishlist_n_new_results, wishlistNew)))
+        if (chatUnread > 0) put(Routes.CHAT, NavIconBadge(chatUnread, resources.getString(R.string.chat_unread_subtitle, chatUnread)))
     }
 
     // Uygulamanın kısa mesajları kitin bildirimleriyle (MIGRATION.md 2. adım): telefonda alt çubuğun ve şeridin,
@@ -312,6 +322,7 @@ private fun AppShell(
         sidebarCollapsed = prefs.sidebarCollapsed,
         onSidebarCollapsedChange = prefs::updateSidebarCollapsed,
         badges = badges,
+        iconBadges = iconBadges,
         menus = menus,
         onSearch = { host.perform(CommonShortcuts.SEARCH) },
         searchHint = stringResource(R.string.search_hint_global),

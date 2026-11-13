@@ -287,6 +287,7 @@
     <string name="wishlist_empty_desc">Yukarıdan bir arama ekleyin. Soulseek+ onu arka planda tekrarlar ve yeni sonuçlar çıkınca haber verir.</string>
     <string name="wishlist_pick_title">İzlenen bir arama seçin</string>
     <string name="wishlist_pick_desc">Sonuçları burada görünür. Yeniler nokta ile işaretlenir.</string>
+    <string name="wishlist_n_new_results">%1$d yeni sonuç</string>
     <string name="wishlist_resize_panes">İstek listesi bölmesini yeniden boyutlandır</string>
     <string name="wishlist_result_count">Sonuç: %1$d</string>
     <string name="wishlist_clear_results">Sonuçları temizle</string>
