@@ -232,11 +232,20 @@ class Smoke:
             return self.tap_label(label, sidebar=True)
         w, h = self.screen()
         root = self.dump()
-        bottom = [n for n in self.nodes(root) if (n.get("text") or "") == label and self.bounds(n) and h * 0.85 < self.bounds(n)[1] < h]
+
+        def entry(n, names):
+            # desktop-kit 2.8.0: rozetli girişin metni rozetin sayısını da taşıyabilir ("4, Chat"), açıklaması rozeti okur
+            # ("Chat, 4 unread"); ad ikisinin de bir parçası.
+            text = (n.get("text") or "").strip()
+            desc = (n.get("content-desc") or "").strip()
+            parts = [s.strip() for s in text.split(",")]
+            return any(text == x or x in parts or desc == x or desc.startswith(x + ",") for x in names)
+
+        bottom = [n for n in self.nodes(root) if entry(n, [label]) and self.bounds(n) and h * 0.85 < self.bounds(n)[1] < h]
         if bottom:
             self.tap_node(bottom[0])
             return True
-        more = [n for n in self.nodes(root) if (n.get("text") or "") in ("More", "Daha fazla") and self.bounds(n) and h * 0.85 < self.bounds(n)[1] < h]
+        more = [n for n in self.nodes(root) if entry(n, ["More", "Daha fazla"]) and self.bounds(n) and h * 0.85 < self.bounds(n)[1] < h]
         if more:
             self.tap_node(more[0])
             return self.tap_label(label)
@@ -333,7 +342,8 @@ class Smoke:
                 if f is not None:
                     self.long_press_node(f)
                     self.snap("phone-search-selection")
-                    self.tap_any(["Close"], exact=True)
+                    # Kitin seçim çubuğunun kapatma düğmesi "Clear selection" (dk_selection_clear).
+                    self.tap_any(["Clear selection", "Close"], exact=True)
         # Görünüm seçenekleri (üst çubuk ⋮ → View options)
         if self.tap_any(["More options"], exact=True):
             self.snap("phone-search-overflow")
