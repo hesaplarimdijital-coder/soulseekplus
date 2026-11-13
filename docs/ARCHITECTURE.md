@@ -9,7 +9,7 @@ paralel çalışır; buradaki imzalar **değiştirilmez**. Sözleşme dışında
 | Modül | Tür | Kural |
 |---|---|---|
 | `:core` | saf Kotlin/JVM | `android.*`/`androidx.*` importu YASAK. Coroutines 1.6.4'te olmayan API kullanılmaz (yerel doğrulama derleyicisi). |
-| `:app` | Android (Compose, Room, SAF) | UI `desktop-kit` 2.4.0 üzerine kurulur (kitin MIGRATION.md rehberiyle geçildi). minSdk 34, compileSdk 37. |
+| `:app` | Android (Compose, Room, SAF) | UI `desktop-kit` 2.8.0 üzerine kurulur (kitin MIGRATION.md rehberiyle geçildi). minSdk 34, compileSdk 37. |
 
 Paket kökleri: `com.soulseekplus.core.*` ve `com.soulseekplus.*` (app).
 
