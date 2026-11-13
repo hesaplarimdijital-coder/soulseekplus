@@ -103,11 +103,12 @@ import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
 import desktopkit.components.DeskChip
 import desktopkit.components.ChipRow
+import desktopkit.settings.DeskPreferences
 
 private const val LINK_TAG = "slsk"
 
 @Composable
-fun ChatScreen(vm: ChatViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
+fun ChatScreen(vm: ChatViewModel, container: AppContainer, actions: AppActions, prefs: DeskPreferences, modifier: Modifier = Modifier) {
     val compact = currentWidthClass() == WidthClass.Compact
     val rooms by vm.repo.rooms.collectAsStateWithLifecycle()
     val privates by vm.repo.privateChats.collectAsStateWithLifecycle()
@@ -200,7 +201,8 @@ fun ChatScreen(vm: ChatViewModel, container: AppContainer, actions: AppActions, 
             }
         } else {
             HorizontalSplitPane(
-                state = rememberSplitState(272.dp),
+                // Bölücünün yeri saklanır (kit 2.8.0): kullanıcının bıraktığı yerde, her pencerede ve yeniden açınca.
+                state = rememberSplitState(272.dp, prefs, "chat"),
                 start = { ListPane(vm, rooms, privates, presence, Modifier.fillMaxSize()) },
                 end = { detail(Modifier.fillMaxSize()) },
                 modifier = Modifier.weight(1f),

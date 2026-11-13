@@ -66,9 +66,10 @@ import desktopkit.components.DeskSwitch
 import desktopkit.components.CountBadge
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskDialog
+import desktopkit.settings.DeskPreferences
 
 @Composable
-fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
+fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppActions, prefs: DeskPreferences, modifier: Modifier = Modifier) {
     val compact = currentWidthClass() == WidthClass.Compact
     val items by vm.repo.items.collectAsStateWithLifecycle()
     val results by vm.repo.results.collectAsStateWithLifecycle()
@@ -135,7 +136,8 @@ fun WishlistScreen(vm: WishlistViewModel, container: AppContainer, actions: AppA
             if (selected == null) list(Modifier.weight(1f)) else detail(Modifier.weight(1f))
         } else {
             HorizontalSplitPane(
-                state = rememberSplitState(320.dp),
+                // Bölücünün yeri saklanır (kit 2.8.0): kullanıcının bıraktığı yerde, her pencerede ve yeniden açınca.
+                state = rememberSplitState(320.dp, prefs, "wishlist"),
                 start = { list(Modifier.fillMaxSize()) },
                 end = { detail(Modifier.fillMaxSize()) },
                 modifier = Modifier.weight(1f),

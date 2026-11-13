@@ -49,6 +49,7 @@ import desktopkit.components.DeskSearchField
 import desktopkit.components.DeskTextField
 import desktopkit.components.DeskChip
 import androidx.compose.ui.text.style.TextOverflow
+import desktopkit.settings.DeskPreferences
 
 private data class TreeRow(val node: BrowseTree.Node, val depth: Int)
 
@@ -56,7 +57,7 @@ private data class FileRow(val file: SharedFile, val folderPath: String, val loc
 
 /** Kullanıcının paylaşımlarına göz atma: sol klasör ağacı, sağ dosya listesi (bölünmüş bölme). */
 @Composable
-fun BrowseScreen(vm: BrowseViewModel, container: AppContainer, actions: AppActions, modifier: Modifier = Modifier) {
+fun BrowseScreen(vm: BrowseViewModel, container: AppContainer, actions: AppActions, prefs: DeskPreferences, modifier: Modifier = Modifier) {
     val res = appResources()
     val dimens = DeskTheme.dimens
     val state = vm.state
@@ -119,13 +120,20 @@ fun BrowseScreen(vm: BrowseViewModel, container: AppContainer, actions: AppActio
                     onAction = { vm.reload() },
                 )
             }
-            is BrowseState.Loaded -> LoadedContent(vm, state, container, actions, Modifier.weight(1f))
+            is BrowseState.Loaded -> LoadedContent(vm, state, container, actions, prefs, Modifier.weight(1f))
         }
     }
 }
 
 @Composable
-private fun LoadedContent(vm: BrowseViewModel, state: BrowseState.Loaded, container: AppContainer, actions: AppActions, modifier: Modifier) {
+private fun LoadedContent(
+    vm: BrowseViewModel,
+    state: BrowseState.Loaded,
+    container: AppContainer,
+    actions: AppActions,
+    prefs: DeskPreferences,
+    modifier: Modifier,
+) {
     val res = appResources()
     val compact = currentWidthClass() == WidthClass.Compact
     val ua = rememberUserActions(container, actions)
@@ -153,7 +161,8 @@ private fun LoadedContent(vm: BrowseViewModel, state: BrowseState.Loaded, contai
         }
     } else {
         HorizontalSplitPane(
-            state = rememberSplitState(340.dp),
+            // Bölücünün yeri saklanır (kit 2.8.0): kullanıcının bıraktığı yerde, her pencerede ve yeniden açınca.
+            state = rememberSplitState(340.dp, prefs, "browse"),
             start = { TreePane(vm, state, ua, actions, Modifier.fillMaxSize()) },
             end = { FilesPane(vm, state, ua, actions, Modifier.fillMaxSize()) },
             modifier = modifier.fillMaxWidth(),

@@ -333,10 +333,10 @@ private fun AppShell(
             when (currentRoute) {
                 Routes.SEARCH -> SearchScreen(searchVm, container, actions)
                 Routes.TRANSFERS -> TransfersScreen(transfersVm, container, actions)
-                Routes.WISHLIST -> WishlistScreen(wishlistVm, container, actions)
-                Routes.CHAT -> ChatScreen(chatVm, container, actions)
+                Routes.WISHLIST -> WishlistScreen(wishlistVm, container, actions, prefs)
+                Routes.CHAT -> ChatScreen(chatVm, container, actions, prefs)
                 Routes.USERS -> UsersScreen(container, actions)
-                Routes.BROWSE -> BrowseScreen(browseVm, container, actions)
+                Routes.BROWSE -> BrowseScreen(browseVm, container, actions, prefs)
                 Routes.PROFILE -> ProfileScreen(profileVm, container, actions)
                 Routes.SHARES -> SharesScreen(container, actions)
                 Routes.ABOUT -> AboutScreen()
